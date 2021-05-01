@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DT_MARS-EXPLORE", "DT_MARS-EXPLORE\DT_MARS-EXPLORE.vcxproj", "{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}.Debug|x64.ActiveCfg = Debug|x64
+		{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}.Debug|x64.Build.0 = Debug|x64
+		{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}.Debug|x86.ActiveCfg = Debug|Win32
+		{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}.Debug|x86.Build.0 = Debug|Win32
+		{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}.Release|x64.ActiveCfg = Release|x64
+		{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}.Release|x64.Build.0 = Release|x64
+		{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}.Release|x86.ActiveCfg = Release|Win32
+		{A1E8670F-5BBE-44BF-B6B6-9D1B4DF6429C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {379F99FE-F22E-4B9E-9C75-CE4EBEDB3D42}
+	EndGlobalSection
+EndGlobal
