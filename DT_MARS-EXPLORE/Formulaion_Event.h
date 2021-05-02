@@ -1,5 +1,6 @@
 #pragma once
 #include "Event.h"
+#include"Mission.h"
 class Formulaion_Event :
     public Event
 {private:
@@ -15,6 +16,6 @@ public:
     void Set_MDUR(int Duration);
     void Set_SIG(int sig);
     //execute function that will create the missions  
-    void Execute();
+    Mission* Execute();
 };
 

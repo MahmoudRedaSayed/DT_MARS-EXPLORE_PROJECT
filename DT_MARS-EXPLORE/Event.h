@@ -1,11 +1,12 @@
 #pragma once
+#include"Mission.h"
 class Event
 {private:
 	int Event_Day;
 	int Mission_ID;
 public:
 //pure virtual function to the execute function to can be implamented in each drived class
-	virtual void Execute() = 0;
+	virtual Mission* Execute() = 0;
 	//getters because this data can not be accesse in the drived classes 
 	int Get_Mission_ID();
 	int Get_Event_Day();
