@@ -27,6 +27,15 @@
     <ClInclude Include="Promotion_Event.h">
       <Filter>EVENTS</Filter>
     </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>EVENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueADT.h">
+      <Filter>EVENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedQueue.h">
+      <Filter>EVENTS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Event.cpp">
@@ -40,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="Promotion_Event.cpp">
       <Filter>EVENTS</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

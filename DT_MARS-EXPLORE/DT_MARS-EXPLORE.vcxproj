@@ -142,12 +142,16 @@
     <ClInclude Include="Cancellation_Event.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Formulaion_Event.h" />
+    <ClInclude Include="LinkedQueue.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Promotion_Event.h" />
+    <ClInclude Include="QueueADT.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cancellation_Event.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Formulaion_Event.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Promotion_Event.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
