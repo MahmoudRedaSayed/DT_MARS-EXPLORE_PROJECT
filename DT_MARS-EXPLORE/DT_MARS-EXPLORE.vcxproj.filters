@@ -13,6 +13,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Missions">
+      <UniqueIdentifier>{c2ef7b5b-5de7-4548-9451-0213df67133e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Event.h">
@@ -25,6 +28,18 @@
       <Filter>EVENTS</Filter>
     </ClInclude>
     <ClInclude Include="Promotion_Event.h">
+      <Filter>EVENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="Mission.h">
+      <Filter>EVENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="Emergency_Mission.h">
+      <Filter>EVENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="Polar_Mission.h">
+      <Filter>EVENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="Mountainous_Mission.h">
       <Filter>EVENTS</Filter>
     </ClInclude>
   </ItemGroup>
@@ -40,6 +55,18 @@
     </ClCompile>
     <ClCompile Include="Promotion_Event.cpp">
       <Filter>EVENTS</Filter>
+    </ClCompile>
+    <ClCompile Include="Mission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Emergency_Mission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Polar_Mission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mountainous_Mission.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
