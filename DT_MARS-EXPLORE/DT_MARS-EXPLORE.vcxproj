@@ -144,6 +144,7 @@
     <ClInclude Include="Emergency_Rover.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Formulaion_Event.h" />
+    <ClInclude Include="MarsStation_Class.h" />
     <ClInclude Include="Mission.h" />
     <ClInclude Include="Mountainous_Mission.h" />
     <ClInclude Include="Mountaionous_Rover.h" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Emergency_Mission.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Formulaion_Event.cpp" />
+    <ClCompile Include="MarsStation_Class.cpp" />
     <ClCompile Include="Mission.cpp" />
     <ClCompile Include="Mountainous_Mission.cpp" />
     <ClCompile Include="Polar_Mission.cpp" />

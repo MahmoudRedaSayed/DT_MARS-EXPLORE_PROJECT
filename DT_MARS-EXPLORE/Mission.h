@@ -1,5 +1,6 @@
 #pragma once
 #include "Rover.h"
+#include <cmath>
 //? in generel , mission will be dynamically allocated to delete it when we need not when the program finish?
 class Mission
 {
@@ -20,8 +21,8 @@ public:
 	void Set_FD(int x);
 	void Set_ID(int x);*/
 	void Set_WD(int x);//?no need fot it?
-	void Set_ED(int x);//I think no need to this function as there is -Calculate_ED-
-	void Set_CD(int x);
+	//void Set_ED(int x);//I think no need to this function as there is -Calculate_ED-
+	int Calculate_CD();
 	void Set_Rptr(Rover* Rptr_x);
 	//Getters
 	const int Get_TLOC();

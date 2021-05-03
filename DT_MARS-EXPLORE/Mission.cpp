@@ -45,15 +45,16 @@ Mission::Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* R
 //}
 void Mission::Set_WD(int x)
 {
-
+	WD = x;
 }
-void Mission::Set_ED(int x)//I think no need to this function
+//void Mission::Set_ED(int x)//I think no need to this function
+//{
+//
+//}
+int Mission::Calculate_CD( )
 {
-
-}
-void Mission::Set_CD(int x)
-{
-
+	CD = FD+ ED + WD;
+	return CD;
 }
 
 void Mission::Set_Rptr(Rover* Rptr_x)
@@ -101,7 +102,8 @@ const int Mission::Get_ID()
 //Others
 int Mission::Calculate_ED()
 {
-	//ED =2*(TLOC/Rptr->Get_Speed) + MDUR;////Later as i need Rptr to be defined
+	
+	ED =2*((TLOC/Rptr->GetSpeed())/25) + MDUR;////Later as i need Rptr to be defined
 	//? should I make ED and CD double?or it is ok to make integer divion TLOC/Rptr? 
 	// ?or make (double)TLOC/Rptr then use a math built in library fun that bt2rab el result l el num el int ely b3do?ex 1.3->2 or 1.6->2....
 	return ED;//?should we just call Get_ED here? 

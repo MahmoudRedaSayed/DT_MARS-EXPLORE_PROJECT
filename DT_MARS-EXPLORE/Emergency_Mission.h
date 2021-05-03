@@ -5,6 +5,7 @@ class Emergency_Mission :
 {
 private:
     double Priority;//??should i make it double??
+    static int NumOfEMissions;
 public:
     Emergency_Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x);//?priority will not be a parameter as it calculated then?
     //Setters

@@ -3,6 +3,7 @@ Mountainous_Mission::Mountainous_Mission(int TLOC_x, int MDUR_x, int SIG_x, int 
 	:Mission(TLOC_x, MDUR_x, SIG_x, FD_x, ID_x)//?>=0 or > only?
 {
 	//Set_AutoP(AutoP_x);
+	NumOfMMissions++;
 }
 //Setters
 //void Mountainous_Mission::Set_AutoP(int x)
@@ -15,3 +16,4 @@ Mountainous_Mission::Mountainous_Mission(int TLOC_x, int MDUR_x, int SIG_x, int 
 //{
 //	return AutoP;
 //}
+ int Mountainous_Mission::NumOfMMissions = 0;
