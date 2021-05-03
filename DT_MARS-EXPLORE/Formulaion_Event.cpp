@@ -1,4 +1,8 @@
 #include "Formulaion_Event.h"
+#include"Mission.h"
+#include"Emergency_Mission.h"
+#include"Mountainous_Mission.h"
+#include"Polar_Mission.h"
 #include<iostream>
 using namespace std;
 
@@ -38,6 +42,27 @@ void Formulaion_Event::Set_SIG(int sig)
 	else cout << "Error:the signficance must be positive value" << endl;
 }
 
-void Formulaion_Event::Execute()
-{//need mission class
+Mission* Formulaion_Event::Execute()
+{//check which type will be created
+	Mission* PTR_MISSION;
+	if (Mission_Type == 'E')
+	{
+		//create emergency mission
+		Emergency_Mission Created_Mission(TLOC,MDUR,SIG, Get_Event_Day(), Get_Mission_ID());
+		PTR_MISSION = &Created_Mission;
+		return PTR_MISSION;
+	}
+	if (Mission_Type == 'P')
+	{
+		//create polar mission
+		Polar_Mission Created_Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
+		PTR_MISSION = &Created_Mission;
+		return PTR_MISSION;
+	}
+	if (Mission_Type == 'M')
+	{//create Mountainous mission
+		Mountainous_Mission Created_Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
+		PTR_MISSION = &Created_Mission;
+		return PTR_MISSION;
+	}
 }
