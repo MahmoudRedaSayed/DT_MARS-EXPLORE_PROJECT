@@ -2,6 +2,8 @@
 #include<iostream>
 using namespace std;
 
+//////////////////// Exception Handeling /////////////////////////
+
 Formulaion_Event::Formulaion_Event(char type, int Location, int Duration, int sig,int id,int ED)
 {
 	Set_Event_Day(ED);
