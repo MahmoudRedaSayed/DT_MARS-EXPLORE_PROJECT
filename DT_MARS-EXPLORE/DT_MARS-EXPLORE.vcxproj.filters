@@ -13,6 +13,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Rovers">
+      <UniqueIdentifier>{2c1dd2a7-e756-43c8-8080-84dbf921ca75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Event.h">
@@ -26,6 +29,18 @@
     </ClInclude>
     <ClInclude Include="Promotion_Event.h">
       <Filter>EVENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="Rover.h">
+      <Filter>Rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mountaionous_Rover.h">
+      <Filter>Rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="Polar_Rover.h">
+      <Filter>Rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="Emergency_Rover.h">
+      <Filter>Rovers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
