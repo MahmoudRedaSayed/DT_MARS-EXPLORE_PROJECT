@@ -17,3 +17,4 @@ Mountainous_Mission::Mountainous_Mission(int TLOC_x, int MDUR_x, int SIG_x, int 
 //	return AutoP;
 //}
  int Mountainous_Mission::NumOfMMissions = 0;
+ int Mountainous_Mission::NumOfAutoPMissions = 0;

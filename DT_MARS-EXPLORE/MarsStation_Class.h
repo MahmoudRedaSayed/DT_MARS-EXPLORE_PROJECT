@@ -41,6 +41,8 @@ private:
 
 	PriorityQueue<Emergency_Mission*> EMission;
 	PriorityQueue<Mission*> EXMission;
+
+	//LinkedQueue<>
 public:
 
 

@@ -6,6 +6,7 @@ class Mountainous_Mission :
 private:
    static const int AutoP;
    static int NumOfMMissions;
+   static int NumOfAutoPMissions;//?check if we need Promoted events also with AutoP??
 public:
     Mountainous_Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x);
 
