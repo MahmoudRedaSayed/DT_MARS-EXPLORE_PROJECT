@@ -20,7 +20,7 @@ public:
 	void Set_SIG(int x);
 	void Set_FD(int x);
 	void Set_ID(int x);*/
-	void Set_WD(int x);//?no need fot it?
+	void Calculate_WD(int CurrDay);//?no need fot it?
 	//void Set_ED(int x);//I think no need to this function as there is -Calculate_ED-
 	int Calculate_CD();
 	void Set_Rptr(Rover* Rptr_x);

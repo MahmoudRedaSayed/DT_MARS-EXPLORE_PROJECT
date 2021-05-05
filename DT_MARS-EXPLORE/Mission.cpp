@@ -43,9 +43,9 @@ Mission::Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* R
 //{
 //
 //}
-void Mission::Set_WD(int x)
+void Mission::Calculate_WD(int CurrDay)
 {
-	WD = x;
+	WD = CurrDay-FD;
 }
 //void Mission::Set_ED(int x)//I think no need to this function
 //{

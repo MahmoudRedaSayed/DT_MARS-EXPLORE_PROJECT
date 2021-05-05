@@ -42,8 +42,11 @@ private:
 	PriorityQueue<Emergency_Mission*> EMission;
 	PriorityQueue<Mission*> EXMission;
 
+	static int Day_count;
 	//LinkedQueue<>
 public:
+
+	void Assign_M_M();
 
 
 
