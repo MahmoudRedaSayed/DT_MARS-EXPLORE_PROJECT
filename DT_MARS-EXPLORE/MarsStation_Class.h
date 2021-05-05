@@ -49,8 +49,9 @@ public:
 	MarsStation_Class()
 	{};
 
-	void Assign_E_Missions();
+	void Assign_E_M();
 	void Assign_M_M();
+	void Assign_P_M();
 
 
 
