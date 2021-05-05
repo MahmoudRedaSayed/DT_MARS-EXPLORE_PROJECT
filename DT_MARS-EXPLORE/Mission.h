@@ -5,7 +5,8 @@
 class Mission
 {
 private:
-	const int TLOC, MDUR, SIG, FD, ID;// can we delete ED, CD as they calculated from another types??
+	//const int TLOC, MDUR, SIG, FD, ID;
+    int TLOC, MDUR, SIG, FD, ID;// can we delete ED, CD as they calculated from another types??
 	int WD, ED, CD;// should we delete it from parameter and make it as a counter , increasind ID by itself?
 	//int Num_Missions ;
 	Rover* Rptr;//it will not be const to handle the mission failed
@@ -20,16 +21,23 @@ public:
 	void Set_SIG(int x);
 	void Set_FD(int x);
 	void Set_ID(int x);*/
-	void Calculate_WD(int CurrDay);//?no need fot it?
+	int Calculate_WD(int CurrDay);//?no need fot it?
 	//void Set_ED(int x);//I think no need to this function as there is -Calculate_ED-
 	int Calculate_CD();
 	void Set_Rptr(Rover* Rptr_x);
 	//Getters
-	const int Get_TLOC();
+	 int Get_TLOC();
+	 int Get_MDUR();
+	 int Get_SIG();
+	 int Get_FD();
+	 int Get_ID();
+
+	/*const int Get_TLOC();
 	const int Get_MDUR();
 	const int Get_SIG();
 	const int Get_FD();
-	const int Get_ID();
+	const int Get_ID();*/
+
 	int Get_WD();
 	int Get_ED();
 	int Get_CD();

@@ -51,8 +51,9 @@ public:
 
 	void Assign_E_Missions();
 	void Assign_M_M();
+	void Auto_Promoting();
 
-
+	void Assign_All_Mission();
 
 };
 

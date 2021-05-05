@@ -1,5 +1,5 @@
 #include "Mission.h"
-Mission::Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* Rptr_x)
+Mission::Mission( int TLOC_x,  int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* Rptr_x)
 //N:we will not send WD ,ED ,CD as a parameters as theu will caculated later
 //?should i make those paramter const int ?
 //?should we delete int FD_x from the parameters?
@@ -43,9 +43,10 @@ Mission::Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* R
 //{
 //
 //}
-void Mission::Calculate_WD(int CurrDay)
+int Mission::Calculate_WD(int CurrDay)
 {
 	WD = CurrDay-FD;
+	return WD;
 }
 //void Mission::Set_ED(int x)//I think no need to this function
 //{
@@ -63,22 +64,41 @@ void Mission::Set_Rptr(Rover* Rptr_x)
 }
 
 //Getters
-const int Mission::Get_TLOC()
+ int Mission::Get_TLOC()
 {
 	return TLOC;
 }
-const int Mission::Get_MDUR()
+ int Mission::Get_MDUR()
 {
 	return MDUR;
 }
-const int Mission::Get_SIG()
+ int Mission::Get_SIG()
 {
 	return SIG;
 }
-const int Mission::Get_FD()
+ int Mission::Get_FD()
 {
 	return FD;
 }
+//
+//const int Mission::Get_TLOC()
+//{
+//	return TLOC;
+//}
+//const int Mission::Get_MDUR()
+//{
+//	return MDUR;
+//}
+//const int Mission::Get_SIG()
+//{
+//	return SIG;
+//}
+//const int Mission::Get_FD()
+//{
+//	return FD;
+//}
+
+
 int Mission::Get_WD()
 {
 	return WD;
