@@ -4,7 +4,7 @@
 //#define LINKED_QUEUE_
 
 #include "Node.h"
-#include "QueueADT.h"
+#include "PriorityQueueADT.h"
 #include <vector>
 using namespace std;
 

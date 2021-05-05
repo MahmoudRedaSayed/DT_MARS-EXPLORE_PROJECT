@@ -3,8 +3,8 @@
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
 
 /** @file QueueADT.h */
-#ifndef QUEUE_ADT_
-#define QUEUE_ADT_
+#ifndef PRIORITY_QUEUE_ADT_
+#define PRIORITY_QUEUE_ADT_
 
 template<class T>
 class PriorityQueueADT
