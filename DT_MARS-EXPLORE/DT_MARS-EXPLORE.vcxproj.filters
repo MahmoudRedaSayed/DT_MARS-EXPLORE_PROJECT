@@ -78,6 +78,9 @@
     <ClInclude Include="LinkedQueue.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="PriorityQueueADT.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Event.cpp">

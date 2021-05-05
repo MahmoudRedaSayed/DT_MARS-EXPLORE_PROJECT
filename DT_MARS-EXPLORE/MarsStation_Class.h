@@ -46,6 +46,10 @@ private:
 	//LinkedQueue<>
 public:
 
+	MarsStation_Class()
+	{};
+
+	void Assign_E_Missions();
 	void Assign_M_M();
 
 

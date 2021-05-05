@@ -153,6 +153,7 @@
     <ClInclude Include="Polar_Mission.h" />
     <ClInclude Include="Polar_Rover.h" />
     <ClInclude Include="PriorityQueue.h" />
+    <ClInclude Include="PriorityQueueADT.h" />
     <ClInclude Include="Promotion_Event.h" />
     <ClInclude Include="QueueADT.h" />
     <ClInclude Include="Rover.h" />
