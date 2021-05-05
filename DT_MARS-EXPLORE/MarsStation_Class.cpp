@@ -64,6 +64,7 @@ void MarsStation_Class::Assign_M_M()
 		//if()
 		M_Mission.dequeue(MMptr);
 		Available_MR.dequeue(ARptr);//??
+		ARptr->Increment_Mission_Count();
 		MMptr->Calculate_WD(Day_count);
 		MMptr->Set_Rptr(ARptr);
 		EXMission.enqueue(MMptr, MMptr->Calculate_CD());
@@ -73,6 +74,7 @@ void MarsStation_Class::Assign_M_M()
 	{
 		M_Mission.dequeue(MMptr);
 		Available_ER.dequeue(ARptr);//??
+		ARptr->Increment_Mission_Count();
 		MMptr->Calculate_WD(Day_count);
 		MMptr->Set_Rptr(ARptr);
 		EXMission.enqueue(MMptr, MMptr->Calculate_CD());
@@ -115,5 +117,65 @@ void MarsStation_Class::Auto_Promoting()
 
 
 }
+
+
+void MarsStation_Class::Check_MR_State(Mountaionous_Rover* CMRptr)
+{
+	//dynamicM_Rover_Count
+	if (CMRptr->GetMission_Count() == Mountaionous_Rover::GetM_Rover_Count())
+	{
+		Check_up_MR.enqueue(CMRptr);
+	}
+	else
+	{
+		Available_MR.enqueue(CMRptr);
+	}
+
+}
+//check rover satutes
+
+void MarsStation_Class::Check_ER_State(Emergency_Rover* CERptr)
+{
+	//dynamicM_Rover_Count
+	if (CERptr->GetMission_Count() == Emergency_Rover::GetE_Rover_Count())
+	{
+		Check_up_ER.enqueue(CERptr);
+	}
+	else
+	{
+		Available_ER.enqueue(CERptr);
+	}
+
+}
+
+void MarsStation_Class::Check_PR_State(Polar_Rover* CPRptr)
+{
+	//dynamicM_Rover_Count
+	if (CPRptr->GetMission_Count() == Polar_Rover::GetP_Rover_Count())
+	{
+		Check_up_PR.enqueue(CPRptr);
+	}
+	else
+	{
+		Available_PR.enqueue(CPRptr);
+	}
+
+}
+
+//void MarsStation_Class::Check_Up_to_Available_M()
+//{
+//	Mountaionous_Rover* MMptr;
+//	Check_up_MR.peek(MMptr);
+//	MMptr->
+//}
+//void Check_Up_to_Available_E();
+//void Check_Up_to_Available_P();
+
+
+
+
+
+
+
 
 int MarsStation_Class::Day_count = 0;

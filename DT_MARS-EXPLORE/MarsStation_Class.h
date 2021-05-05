@@ -56,5 +56,16 @@ public:
 
 	void Assign_All_Mission();
 
+
+	//void Check_R_State(Rover* CRptr);
+	void Check_MR_State(Mountaionous_Rover* CMRptr);
+	void Check_ER_State(Emergency_Rover* CERptr);
+	void Check_PR_State(Polar_Rover* CPRptr);
+
+	void Check_Up_to_Available_M();
+	void Check_Up_to_Available_E();
+	void Check_Up_to_Available_P();
+
+
 };
 
