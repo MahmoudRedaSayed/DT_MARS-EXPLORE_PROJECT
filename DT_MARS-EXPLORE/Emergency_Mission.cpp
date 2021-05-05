@@ -3,7 +3,7 @@ Emergency_Mission::Emergency_Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x
 	:Mission(TLOC_x, MDUR_x, SIG_x, FD_x, ID_x)
 {
 	NumOfEMissions++;
-	Priority = 0;
+	//Priority = 0;
 }
 //Setters
 //void Emergency_Mission::Set_Priority(double x)

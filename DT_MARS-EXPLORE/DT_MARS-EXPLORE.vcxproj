@@ -144,13 +144,17 @@
     <ClInclude Include="Emergency_Rover.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Formulaion_Event.h" />
+    <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="MarsStation_Class.h" />
     <ClInclude Include="Mission.h" />
     <ClInclude Include="Mountainous_Mission.h" />
     <ClInclude Include="Mountaionous_Rover.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Polar_Mission.h" />
     <ClInclude Include="Polar_Rover.h" />
+    <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="Promotion_Event.h" />
+    <ClInclude Include="QueueADT.h" />
     <ClInclude Include="Rover.h" />
   </ItemGroup>
   <ItemGroup>
