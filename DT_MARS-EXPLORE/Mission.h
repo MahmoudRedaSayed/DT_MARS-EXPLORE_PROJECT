@@ -6,9 +6,10 @@ class Mission
 {
 private:
 	//const int TLOC, MDUR, SIG, FD, ID;
-    int TLOC, MDUR, SIG, FD, ID;// can we delete ED, CD as they calculated from another types??
+    int TLOC, MDUR, SIG, FD;// can we delete ED, CD as they calculated from another types??
 	int WD, ED, CD;// should we delete it from parameter and make it as a counter , increasind ID by itself?
 	//int Num_Missions ;
+	const int ID;
 	Rover* Rptr;//it will not be const to handle the mission failed
 public:
 	//Const and Destr
@@ -16,11 +17,11 @@ public:
 	//Mission();//Later
 	//should i make all the funtion -Virtual- accept ID?
 	//Setters
-	/*void Set_TLOC(int x);
+	void Set_TLOC(int x);
 	void Set_MDUR(int x);
 	void Set_SIG(int x);
 	void Set_FD(int x);
-	void Set_ID(int x);*/
+	void Set_ID(int x);
 	int Calculate_WD(int CurrDay);//?no need fot it?
 	//void Set_ED(int x);//I think no need to this function as there is -Calculate_ED-
 	int Calculate_CD();
@@ -30,7 +31,7 @@ public:
 	 int Get_MDUR();
 	 int Get_SIG();
 	 int Get_FD();
-	 int Get_ID();
+	 const int Get_ID();
 
 	/*const int Get_TLOC();
 	const int Get_MDUR();

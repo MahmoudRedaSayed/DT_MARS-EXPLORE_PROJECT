@@ -39,8 +39,8 @@ private:
 	LinkedQueue<int> Completed_P_Mission_ID;
 	LinkedQueue<int> Completed_M_Mission_ID;
 
-	PriorityQueue<Emergency_Mission*> EMission;
-	PriorityQueue<Mission*> EXMission;
+	PriorityQueue<Emergency_Mission*> E_Mission;
+	PriorityQueue<Mission*> EX_Mission;
 
 	static int Day_count;
 	//LinkedQueue<>

@@ -22,27 +22,27 @@ Mission::Mission( int TLOC_x,  int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover*
 	CD = 0;
 	//i think the previous 3 lines are not important
 }
-//Setters
-//void Mission::Set_TLOC(int x)
-//{
-//
-//}
-//void Mission::Set_MDUR(int x)
-//{
-//
-//}
-//void Mission::Set_SIG(int x)
-//{
-//
-//}
-//void Mission::Set_FD(int x)
-//{
-//
-//}
-//void Mission::Set_ID(int x)
-//{
-//
-//}
+//Setters functions
+void Mission::Set_TLOC(int x)
+{
+	TLOC = x >= 0 ? x : 0;
+}
+void Mission::Set_MDUR(int x)
+{
+	MDUR = x >= 0 ? x : 0;
+}
+void Mission::Set_SIG(int x)
+{
+	SIG = x >= 0 ? x : 0;
+}
+void Mission::Set_FD(int x)
+{
+	FD = x >= 0 ? x : 0;
+}
+void Mission::Set_ID(int x)
+{
+	ID = x >= 0 ? x : 0;
+}
 int Mission::Calculate_WD(int CurrDay)
 {
 	WD = CurrDay-FD;

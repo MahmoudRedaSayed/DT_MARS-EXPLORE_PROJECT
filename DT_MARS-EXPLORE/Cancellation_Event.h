@@ -8,7 +8,7 @@ class Cancellation_Event :
 
 public:
     Cancellation_Event(int id,int ED);
-    void Execute();
+    void Execute(PriorityQueue<Emergency_Mission*>& Eme_Missions, LinkedQueue<Polar_Mission*>& Pol_Missions, LinkedQueue<Mountainous_Mission*>& Mou_Missions);
     ~Cancellation_Event();
 };
 

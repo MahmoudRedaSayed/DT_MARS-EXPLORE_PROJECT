@@ -1,5 +1,5 @@
 #include "Emergency_Mission.h"
-Emergency_Mission::Emergency_Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x)
+Emergency_Mission::Emergency_Mission(int TLOC_x = 0, int MDUR_x = 0, int SIG_x = 0, int FD_x = 0, int ID_x = 0)
 	:Mission(TLOC_x, MDUR_x, SIG_x, FD_x, ID_x)
 {
 	NumOfEMissions++;
@@ -15,6 +15,10 @@ Emergency_Mission::Emergency_Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x
 double Emergency_Mission::Get_Priority()
 {
 	return Priority;
+}
+void Emergency_Mission::Cal_Prirority()
+{
+	Priority = Get_SIG() * Get_TLOC() * Get_MDUR() / Get_FD();
 }
 //double Emergency_Mission::Calculate_priority()
 //{
