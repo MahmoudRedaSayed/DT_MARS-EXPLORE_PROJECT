@@ -7,20 +7,7 @@ enum Rover_Type {
 class Rover
 {
 private:
-	//static Data Members
-	 int ID_Count;			 //Count of Rovers & assigning each new rover latest ID count
-
-	 int P_Rover_Count;      //Polar. Rovers count for file output
-     int M_Rover_Count;     //Mount. Rovers count for file output
-	 int E_Rover_Count;    //Polar. Rovers count for file output
-
 	
-	 int Check_PR;      //The duration (in days) of checkups that a **Polar** rover needs 
-							 //to perform after completing N missions.
-	 int Check_MR;    //The duration (in days) of checkups that a **Mountaionous** rover needs 
-						   //to perform after completing N missions.
-	 int Check_ER;  //The duration (in days) of checkups that an **Emergency** rover rover needs 
-						 //to perform after completing N missions.
 	//Non-Static Data Members
 	Rover_Type Type;			// Rover Type
 	float speed;			   // Rover Speed read from input file _ assumed to be float not int to avoid truncation,
@@ -36,6 +23,20 @@ private:
 	//
 
 public:
+	//static Data Members
+	static int ID_Count;			 //Count of Rovers & assigning each new rover latest ID count
+
+	static int P_Rover_Count;      //Polar. Rovers count for file output
+	static int M_Rover_Count;     //Mount. Rovers count for file output
+	static int E_Rover_Count;    //Polar. Rovers count for file output
+
+
+	static int Check_PR;      //The duration (in days) of checkups that a **Polar** rover needs 
+							//to perform after completing N missions.
+	static int Check_MR;    //The duration (in days) of checkups that a **Mountaionous** rover needs 
+						  //to perform after completing N missions.
+	static int Check_ER;  //The duration (in days) of checkups that an **Emergency** rover rover needs 
+						//to perform after completing N missions.
 	//Constructor & Destructor
 	Rover(float Rover_Speed, Rover_Type T)
 		:ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0), IsAssigned(false)
@@ -61,14 +62,14 @@ public:
 	const int GetMission_Count() {return Mission_Count;}
 	//const bool GetIsInMaintenance() { return IsInMaintenance; }
 	//Static members getters
-    const int GetID_Count(){return ID_Count;}
+    /*const int GetID_Count(){return ID_Count;}
 
 	 const int GetP_Rover_Count() { return P_Rover_Count; }
      const int GetCheck_PR() { return Check_PR; }
 	 const int GetE_Rover_Count() { return E_Rover_Count; }
      const int GetCheck_ER() { return Check_ER; }
      const int GetM_Rover_Count() { return M_Rover_Count; }
-	 const int GetCheck_MR() { return Check_MR; }
+	 const int GetCheck_MR() { return Check_MR; }*/
 	//Setters
 	void SetIsAssigned(bool a) { IsAssigned = a; }
 	void SetIsInCheckup(bool c) { IsInCheckup = c; }
@@ -79,7 +80,7 @@ public:
 	 void SetCheck_MR(int c) { Check_MR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
 
 	 //samaa
-	 void Set_Day_out(int x) { Day_out = (x > 0 ? x : 1); }//?is yhat condition ok??
+	 void Set_Day_out(int x) { Day_out = (x > 0 ? x : 1); }//?is that condition ok??//Mamdouh:I think it's fine
 	 int Get_Day_out() { return Day_out; }
 	 //
 	
@@ -91,11 +92,11 @@ public:
 
 };
 //static members initializers
-//int Rover::ID_Count = 0;
-//int Rover::P_Rover_Count = 0;
-//int Rover::Check_PR = 5;
-//int Rover::E_Rover_Count = 0;
-//int Rover::Check_ER = 5;
-//int Rover::M_Rover_Count = 0;
-//int Rover::Check_MR = 5;
+int Rover::ID_Count = 0;
+int Rover::P_Rover_Count = 0;
+int Rover::Check_PR = 5;
+int Rover::E_Rover_Count = 0;
+int Rover::Check_ER = 5;
+int Rover::M_Rover_Count = 0;
+int Rover::Check_MR = 5;
 

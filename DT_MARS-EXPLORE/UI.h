@@ -7,6 +7,11 @@ enum Terminal_Mode {
 class UI
 {
 private:
+	Terminal_Mode Mode;
+public:
+	UI();
+	~UI();
 
+	//void SelectMode
 };
 

@@ -133,11 +133,11 @@ void MarsStation_Class::Auto_Promoting()
 void MarsStation_Class::Check_MR_State(Rover* CMRptr)
 {
 	//dynamicM_Rover_Count
-	if (CMRptr->GetMission_Count() == Rover::GetM_Rover_Count())
+	if (CMRptr->GetMission_Count() == Rover::M_Rover_Count)
 	{
 		Check_up_MR.enqueue(CMRptr);
 		//Rover::GetCheck_MR();
-		CMRptr->Set_Day_out(Rover::GetCheck_MR()+Day_count);
+		CMRptr->Set_Day_out(Rover::Check_MR+Day_count);
 	}
 	else
 	{
@@ -150,10 +150,10 @@ void MarsStation_Class::Check_MR_State(Rover* CMRptr)
 void MarsStation_Class::Check_ER_State(Rover* CERptr)
 {
 	//dynamicM_Rover_Count
-	if (CERptr->GetMission_Count() == Rover::GetE_Rover_Count())
+	if (CERptr->GetMission_Count() == Rover::E_Rover_Count)
 	{
 		Check_up_ER.enqueue(CERptr);
-		CERptr->Set_Day_out(Rover::GetCheck_ER() + Day_count);
+		CERptr->Set_Day_out(Rover::Check_ER + Day_count);
 	}
 	else
 	{
@@ -165,10 +165,10 @@ void MarsStation_Class::Check_ER_State(Rover* CERptr)
 void MarsStation_Class::Check_PR_State(Rover* CPRptr)
 {
 	//dynamicM_Rover_Count
-	if (CPRptr->GetMission_Count() == Rover::GetP_Rover_Count())
+	if (CPRptr->GetMission_Count() == Rover::P_Rover_Count)
 	{
 		Check_up_PR.enqueue(CPRptr);
-		CPRptr->Set_Day_out(Rover::GetCheck_PR() + Day_count);
+		CPRptr->Set_Day_out(Rover::Check_PR + Day_count);
 	}
 	else
 	{
