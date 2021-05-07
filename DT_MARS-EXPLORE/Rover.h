@@ -8,18 +8,18 @@ class Rover
 {
 private:
 	//static Data Members
-	static int ID_Count;			 //Count of Rovers & assigning each new rover latest ID count
+	 int ID_Count;			 //Count of Rovers & assigning each new rover latest ID count
 
-	static int P_Rover_Count;      //Polar. Rovers count for file output
-	static int M_Rover_Count;     //Mount. Rovers count for file output
-	static int E_Rover_Count;    //Polar. Rovers count for file output
+	 int P_Rover_Count;      //Polar. Rovers count for file output
+     int M_Rover_Count;     //Mount. Rovers count for file output
+	 int E_Rover_Count;    //Polar. Rovers count for file output
 
 	
-	static int Check_PR;      //The duration (in days) of checkups that a **Polar** rover needs 
+	 int Check_PR;      //The duration (in days) of checkups that a **Polar** rover needs 
 							 //to perform after completing N missions.
-	static int Check_MR;    //The duration (in days) of checkups that a **Mountaionous** rover needs 
+	 int Check_MR;    //The duration (in days) of checkups that a **Mountaionous** rover needs 
 						   //to perform after completing N missions.
-	static int Check_ER;  //The duration (in days) of checkups that an **Emergency** rover rover needs 
+	 int Check_ER;  //The duration (in days) of checkups that an **Emergency** rover rover needs 
 						 //to perform after completing N missions.
 	//Non-Static Data Members
 	Rover_Type Type;			// Rover Type
@@ -61,22 +61,22 @@ public:
 	const int GetMission_Count() {return Mission_Count;}
 	//const bool GetIsInMaintenance() { return IsInMaintenance; }
 	//Static members getters
-	static const int GetID_Count(){return ID_Count;}
+    const int GetID_Count(){return ID_Count;}
 
-	static const int GetP_Rover_Count() { return P_Rover_Count; }
-	static const int GetCheck_PR() { return Check_PR; }
-	static const int GetE_Rover_Count() { return E_Rover_Count; }
-	static const int GetCheck_ER() { return Check_ER; }
-	static const int GetM_Rover_Count() { return M_Rover_Count; }
-	static const int GetCheck_MR() { return Check_MR; }
+	 const int GetP_Rover_Count() { return P_Rover_Count; }
+     const int GetCheck_PR() { return Check_PR; }
+	 const int GetE_Rover_Count() { return E_Rover_Count; }
+     const int GetCheck_ER() { return Check_ER; }
+     const int GetM_Rover_Count() { return M_Rover_Count; }
+	 const int GetCheck_MR() { return Check_MR; }
 	//Setters
 	void SetIsAssigned(bool a) { IsAssigned = a; }
 	void SetIsInCheckup(bool c) { IsInCheckup = c; }
 	void Increment_Mission_Count() { Mission_Count++; }// if(0%4 == 0 && Mission_Count !=0)
 	//static Members Getters
-	 static void SetCheck_PR(int c) { Check_PR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
-	 static void SetCheck_ER(int c) { Check_ER = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
-	 static void SetCheck_MR(int c) { Check_MR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
+	 void SetCheck_PR(int c) { Check_PR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
+	 void SetCheck_ER(int c) { Check_ER = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
+	 void SetCheck_MR(int c) { Check_MR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
 
 	 //samaa
 	 void Set_Day_out(int x) { Day_out = (x > 0 ? x : 1); }//?is yhat condition ok??
@@ -91,11 +91,11 @@ public:
 
 };
 //static members initializers
-int Rover::ID_Count = 0;
-int Rover::P_Rover_Count = 0;
-int Rover::Check_PR = 5;
-int Rover::E_Rover_Count = 0;
-int Rover::Check_ER = 5;
-int Rover::M_Rover_Count = 0;
-int Rover::Check_MR = 5;
+//int Rover::ID_Count = 0;
+//int Rover::P_Rover_Count = 0;
+//int Rover::Check_PR = 5;
+//int Rover::E_Rover_Count = 0;
+//int Rover::Check_ER = 5;
+//int Rover::M_Rover_Count = 0;
+//int Rover::Check_MR = 5;
 

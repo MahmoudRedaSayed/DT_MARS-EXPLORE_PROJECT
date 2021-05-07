@@ -3,6 +3,7 @@
 #include"Formulaion_Event.h"
 #include"Cancellation_Event.h"
 #include"Promotion_Event.h"
+#include"Rover.h"
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -179,6 +180,7 @@ void MarsStation_Class::Check_PR_State(Rover* CPRptr)
 void MarsStation_Class::Program_Startup()
 {
 	string File_Name,Line, ed=" ", id=" ", tolc=" ", mdur=" ", sig=" ";
+	string* Speeds_Str;
 	char Type_Event, Type_Mission;
 	int Num_E_Rovers, Num_P_Rovers, Num_M_Rovers;
 	int Num_Rovers;
@@ -189,6 +191,8 @@ void MarsStation_Class::Program_Startup()
 	 int Auto_Promotion;
 	 int Num_Event;
 	 int j,ED,ID,TOLC,MDUR,SIG;
+	 Rover** Array_OF_Rovers;
+	 int* Speeds;
 	cout << "Please::enter the name of the file the you want to load it" << endl;
 	cin >> File_Name;
 	ifstream My_File;
@@ -196,15 +200,91 @@ void MarsStation_Class::Program_Startup()
 	if (My_File.is_open())                       //Check if the file is found or not
 	{
 		My_File>> Num_M_Rovers>>Num_P_Rovers>>Num_E_Rovers;
-		{ /*creating the rovers*/}
 		Num_Rovers = Num_E_Rovers + Num_P_Rovers + Num_M_Rovers;
-		//////////////////////Read the speed of the rover///////////////
+		Array_OF_Rovers = new Rover* [ Num_Rovers ];
+		Speeds = new int[Num_Rovers];
+		Speeds_Str = new string [Num_Rovers];
+		                         //////////////////////Read the speed of the rover///////////////
 		getline(My_File, Line);
+		int i = 0;
 		if (Line.size() == ((2 * Num_Rovers) - 1))        //The case of the different speeds
 		{
+			for (int j = 0; j < Num_Rovers; j++)         //To read the speeds 
+			{
+				while (Line[i] != ' ')
+				{
+					Speeds_Str[j][i] = Line[i];
+					i++;
+				}
+				Speeds[j] = stoi(Speeds_Str[j]);
+				while (Line[i] == ' ')
+				{
+					i++;
+				}
+			}
+			                   ///////////////////////////Creating the rovers////////////////////////////
+			int counter = 0;
+			for (int j = 0; j < Num_M_Rovers; j++)     
+			{
+				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Mountainous);
+				Available_Rover_List.enqueue(Array_OF_Rovers[j]);
+				counter++;
+			}
+			counter++;
+			for (int j = 0; j < Num_P_Rovers; j++)    
+			{
+				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Polar);
+				Available_Rover_List.enqueue(Array_OF_Rovers[j]);
+				counter++;
+			}
+			counter++;
+			for (int j = 0; j < Num_E_Rovers; j++)
+			{
+				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Emergency);
+				Available_Rover_List.enqueue(Array_OF_Rovers[j]);
+				counter++;
+			}
+			
 		}
 		else
-		{
+		{                          ////////////////the speed is const/////////////   
+			for (int j = 0; j < 3; j++)      
+			{
+				while (Line[i] != ' ')
+				{
+					Speeds_Str[j][i] = Line[i];
+					i++;
+				}
+				Speeds[j] = stoi(Speeds_Str[j]);
+				while (Line[i] == ' ')
+				{
+					i++;
+				}
+			}
+			int counter = 0;          //to the Array of rovers 
+			int counter1 = 0;          //to the Array of speeds
+			for (int j = 0; j < Num_M_Rovers; j++)
+			{
+				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Mountainous);
+				Available_Rover_List.enqueue(Array_OF_Rovers[j]);
+				counter++;
+			}
+			counter++;
+			counter1++;
+			for (int j = 0; j < Num_P_Rovers; j++)
+			{
+				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Polar);
+				Available_Rover_List.enqueue(Array_OF_Rovers[j]);
+				counter++;
+			}
+			counter++;
+			counter1++;
+			for (int j = 0; j < Num_E_Rovers; j++)
+			{
+				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Emergency);
+				Available_Rover_List.enqueue(Array_OF_Rovers[j]);
+				counter++;
+			}
 		}
 		My_File >> Missions_Before_Check_up >> Check_UP_M_Rover >> Check_UP_P_Rover >> Check_UP_E_Rover;
 		             ///////////////need to the the values to the rovers ///////////////
@@ -228,35 +308,86 @@ void MarsStation_Class::Program_Startup()
 				{
 					j++;
 				}
-				ed = Line[j];
+				for (int i = 0; i < Line.size(); i++)
+				{
+					if (Line[j] != ' ')
+					{
+						ed[i] = Line[j];
+						j++;
+					}
+					else
+					{
+						break;
+					}
+				}
 				ED = stoi(ed);
-				j++;
 				while (Line[j] == ' ')
 				{
 					j++;
 				}
-				id = Line[j];
+				for (int i = 0; i < Line.size(); i++)
+				{
+					if (Line[j] != ' ')
+					{
+						id[i] = Line[j];
+						j++;
+					}
+					else
+					{
+						break;
+					}
+				}
 				ID = stoi(id);
-				j++;
 				while (Line[j] == ' ')
 				{
 					j++;
 				}
-				tolc = Line[j];
+				for (int i = 0; i < Line.size(); i++)
+				{
+					if (Line[j] != ' ')
+					{
+						tolc[i] = Line[j];
+						j++;
+					}
+					else
+					{
+						break;
+					}
+				}
 				TOLC = stoi(tolc);
-				j++;
 				while (Line[j] == ' ')
 				{
 					j++;
 				}
-				mdur = Line[j];
+				for (int i = 0; i < Line.size(); i++)
+				{
+					if (Line[j] != ' ')
+					{
+						mdur[i] = Line[j];
+						j++;
+					}
+					else
+					{
+						break;
+					}
+				}
 				MDUR = stoi(mdur);
-				j++;
 				while (Line[j] == ' ')
 				{
 					j++;
 				}
-				sig = Line[j];
+				for (int i = 0; i < Line.size(); i++)
+				{
+					if (Line[j] != ' ')
+					{
+						sig[i] = Line[j];
+						j++;
+					}
+					else
+					{
+						break;
+					}
+				}
 				SIG = stoi(sig);
 			}
 			else if (Type_Event == 'P' || Type_Event == 'C')
@@ -266,14 +397,35 @@ void MarsStation_Class::Program_Startup()
 				{
 					j++;
 				}
-				ed = Line[j];
+				for (int i = 0; i < Line.size(); i++)
+				{
+					if (Line[j] != ' ')
+					{
+						ed[i] = Line[j];
+						j++;
+					}
+					else
+					{
+						break;
+					}
+				}
 				ED = stoi(ed);
-				j++;
 				while (Line[j] == ' ')
 				{
 					j++;
 				}
-				id = Line[j];
+				for (int i = 0; i < Line.size(); i++)
+				{
+					if (Line[j] != ' ')
+					{
+						id[i] = Line[j];
+						j++;
+					}
+					else
+					{
+						break;
+					}
+				}
 				ID = stoi(id);
 			}
 			                              //////////////Creating the events/////////////
@@ -297,9 +449,7 @@ void MarsStation_Class::Program_Startup()
 			}
 			ed = " ", id = " ", tolc = " ", mdur = " ", sig = " ";
 
-		}
-
-		                                   
+		}	                                   
 	}
 
 
