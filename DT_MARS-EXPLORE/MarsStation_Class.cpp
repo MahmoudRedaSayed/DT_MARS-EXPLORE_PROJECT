@@ -20,9 +20,9 @@ void MarsStation_Class::Assign_E_M()
 	else
 	{
 		Emergency_Mission* Emergence_mission;
-		Emergency_Rover* E_Rover;
-		Mountaionous_Rover* M_Rover;                //// pointer to rovers
-		Polar_Rover* P_Rover;
+		Rover* E_Rover;
+		Rover* M_Rover;                //// pointer to rovers
+		Rover* P_Rover;
 		while (E_Mission.dequeue(Emergence_mission)) 
 		{
 			if (Available_ER.dequeue(E_Rover))      ///// Check Emergency Rover list first
@@ -50,7 +50,7 @@ void MarsStation_Class::Assign_P_M()
 	else
 	{
 		Polar_Mission* Polar_mission;
-		Polar_Rover* P_Rover;
+		Rover* P_Rover;
 		while (P_Mission.dequeue(Polar_mission))
 		{
 			if (Available_PR.dequeue(P_Rover))      ///// Check Emergency Rover list first
@@ -129,10 +129,10 @@ void MarsStation_Class::Auto_Promoting()
 }
 
 
-void MarsStation_Class::Check_MR_State(Mountaionous_Rover* CMRptr)
+void MarsStation_Class::Check_MR_State(Rover* CMRptr)
 {
 	//dynamicM_Rover_Count
-	if (CMRptr->GetMission_Count() == Mountaionous_Rover::GetM_Rover_Count())
+	if (CMRptr->GetMission_Count() == Rover::GetM_Rover_Count())
 	{
 		Check_up_MR.enqueue(CMRptr);
 	}
@@ -144,10 +144,10 @@ void MarsStation_Class::Check_MR_State(Mountaionous_Rover* CMRptr)
 }
 //check rover satutes
 
-void MarsStation_Class::Check_ER_State(Emergency_Rover* CERptr)
+void MarsStation_Class::Check_ER_State(Rover* CERptr)
 {
 	//dynamicM_Rover_Count
-	if (CERptr->GetMission_Count() == Emergency_Rover::GetE_Rover_Count())
+	if (CERptr->GetMission_Count() == Rover::GetE_Rover_Count())
 	{
 		Check_up_ER.enqueue(CERptr);
 	}
@@ -158,10 +158,10 @@ void MarsStation_Class::Check_ER_State(Emergency_Rover* CERptr)
 
 }
 
-void MarsStation_Class::Check_PR_State(Polar_Rover* CPRptr)
+void MarsStation_Class::Check_PR_State(Rover* CPRptr)
 {
 	//dynamicM_Rover_Count
-	if (CPRptr->GetMission_Count() == Polar_Rover::GetP_Rover_Count())
+	if (CPRptr->GetMission_Count() == Rover::GetP_Rover_Count())
 	{
 		Check_up_PR.enqueue(CPRptr);
 	}
@@ -314,7 +314,7 @@ void MarsStation_Class::Program_Startup()
 
 //void MarsStation_Class::Check_Up_to_Available_M()
 //{
-//	Mountaionous_Rover* MMptr;
+//	Rover* MMptr;
 //	Check_up_MR.peek(MMptr);
 //	MMptr->
 //}

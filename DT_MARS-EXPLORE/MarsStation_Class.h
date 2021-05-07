@@ -10,9 +10,6 @@
 #include "Promotion_Event.h"
 
 #include "Rover.h"
-#include "Emergency_Rover.h"
-#include "Mountaionous_Rover.h"
-#include "Polar_Rover.h"
 
 #include"LinkedQueue.h"
 #include"PriorityQueue.h"
@@ -27,13 +24,13 @@ private:
 	LinkedQueue<Polar_Mission*> P_Mission;
 	LinkedQueue<Mountainous_Mission*> M_Mission;
 
-	LinkedQueue<Emergency_Rover*> Available_ER;
-	LinkedQueue<Mountaionous_Rover*> Available_MR;
-	LinkedQueue<Polar_Rover*> Available_PR;
+	LinkedQueue<Rover*> Available_ER;
+	LinkedQueue<Rover*> Available_MR;
+	LinkedQueue<Rover*> Available_PR;
 
-	LinkedQueue<Emergency_Rover*> Check_up_ER;
-	LinkedQueue<Mountaionous_Rover*> Check_up_MR;
-	LinkedQueue<Polar_Rover*> Check_up_PR;
+	LinkedQueue<Rover*> Check_up_ER;
+	LinkedQueue<Rover*> Check_up_MR;
+	LinkedQueue<Rover*> Check_up_PR;
 
 	LinkedQueue<int> Completed_E_Mission_ID;
 	LinkedQueue<int> Completed_P_Mission_ID;
@@ -62,9 +59,9 @@ public:
 
 
 	//void Check_R_State(Rover* CRptr);
-	void Check_MR_State(Mountaionous_Rover* CMRptr);
-	void Check_ER_State(Emergency_Rover* CERptr);
-	void Check_PR_State(Polar_Rover* CPRptr);
+	void Check_MR_State(Rover* CMRptr);
+	void Check_ER_State(Rover* CERptr);
+	void Check_PR_State(Rover* CPRptr);
 
 	void Check_Up_to_Available_M();
 	void Check_Up_to_Available_E();

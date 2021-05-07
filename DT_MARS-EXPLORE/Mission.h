@@ -9,7 +9,7 @@ private:
     int TLOC, MDUR, SIG, FD;// can we delete ED, CD as they calculated from another types??
 	int WD, ED, CD;// should we delete it from parameter and make it as a counter , increasind ID by itself?
 	//int Num_Missions ;
-	const int ID;
+	int ID;
 	Rover* Rptr;//it will not be const to handle the mission failed
 public:
 	//Const and Destr

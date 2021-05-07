@@ -42,15 +42,6 @@
     <ClInclude Include="Rover.h">
       <Filter>Rovers</Filter>
     </ClInclude>
-    <ClInclude Include="Mountaionous_Rover.h">
-      <Filter>Rovers</Filter>
-    </ClInclude>
-    <ClInclude Include="Polar_Rover.h">
-      <Filter>Rovers</Filter>
-    </ClInclude>
-    <ClInclude Include="Emergency_Rover.h">
-      <Filter>Rovers</Filter>
-    </ClInclude>
     <ClInclude Include="Emergency_Mission.h">
       <Filter>Missions</Filter>
     </ClInclude>
@@ -108,7 +99,7 @@
       <Filter>Missions</Filter>
     </ClCompile>
     <ClCompile Include="MarsStation_Class.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>MarsStation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
