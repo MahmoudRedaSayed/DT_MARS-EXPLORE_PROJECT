@@ -101,5 +101,8 @@
     <ClCompile Include="MarsStation_Class.cpp">
       <Filter>MarsStation</Filter>
     </ClCompile>
+    <ClCompile Include="Rover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

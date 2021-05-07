@@ -31,6 +31,10 @@ private:
 	int Mission_Count;    //no. of missions that rover had executed
 	//bool IsInMaintenance;//Is the rover undergoing Maintenance or not?
 					    //\Rovers\ need maintenance when ://To be discussed with team
+	//samaa
+	int Day_out;
+	//
+
 public:
 	//Constructor & Destructor
 	Rover(float Rover_Speed, Rover_Type T)
@@ -74,12 +78,17 @@ public:
 	 static void SetCheck_ER(int c) { Check_ER = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
 	 static void SetCheck_MR(int c) { Check_MR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
 
-
+	 //samaa
+	 void Set_Day_out(int x) { Day_out = (x > 0 ? x : 1); }//?is yhat condition ok??
+	 int Get_Day_out() { return Day_out; }
+	 //
+	
 	//void SetIsInMaintenance(bool m) { IsInMaintenance = m; }
 	//Move Rover to maintenance 
 	/*void Move_To_Maintenance() {
 		//To be discussed with team ISA
 	}*/
+
 };
 //static members initializers
 int Rover::ID_Count = 0;

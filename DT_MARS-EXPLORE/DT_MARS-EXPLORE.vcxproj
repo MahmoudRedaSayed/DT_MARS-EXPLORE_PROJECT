@@ -165,6 +165,7 @@
     <ClCompile Include="Mountainous_Mission.cpp" />
     <ClCompile Include="Polar_Mission.cpp" />
     <ClCompile Include="Promotion_Event.cpp" />
+    <ClCompile Include="Rover.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

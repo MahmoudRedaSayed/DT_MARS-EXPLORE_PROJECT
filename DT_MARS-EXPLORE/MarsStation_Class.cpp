@@ -135,6 +135,8 @@ void MarsStation_Class::Check_MR_State(Rover* CMRptr)
 	if (CMRptr->GetMission_Count() == Rover::GetM_Rover_Count())
 	{
 		Check_up_MR.enqueue(CMRptr);
+		//Rover::GetCheck_MR();
+		CMRptr->Set_Day_out(Rover::GetCheck_MR()+Day_count);
 	}
 	else
 	{
@@ -150,6 +152,7 @@ void MarsStation_Class::Check_ER_State(Rover* CERptr)
 	if (CERptr->GetMission_Count() == Rover::GetE_Rover_Count())
 	{
 		Check_up_ER.enqueue(CERptr);
+		CERptr->Set_Day_out(Rover::GetCheck_ER() + Day_count);
 	}
 	else
 	{
@@ -164,6 +167,7 @@ void MarsStation_Class::Check_PR_State(Rover* CPRptr)
 	if (CPRptr->GetMission_Count() == Rover::GetP_Rover_Count())
 	{
 		Check_up_PR.enqueue(CPRptr);
+		CPRptr->Set_Day_out(Rover::GetCheck_PR() + Day_count);
 	}
 	else
 	{
@@ -312,14 +316,41 @@ void MarsStation_Class::Program_Startup()
 
 }
 
-//void MarsStation_Class::Check_Up_to_Available_M()
-//{
-//	Rover* MMptr;
-//	Check_up_MR.peek(MMptr);
-//	MMptr->
-//}
-//void Check_Up_to_Available_E();
-//void Check_Up_to_Available_P();
+void MarsStation_Class::Check_Up_to_Available_M()
+{
+	Rover* MMptr;
+	Check_up_MR.peek(MMptr);
+	while (MMptr->Get_Day_out() == Day_count)
+	{
+		Check_up_MR.dequeue(MMptr);
+		Available_MR.enqueue(MMptr);
+		Check_up_MR.peek(MMptr);
+	}
+}
+void MarsStation_Class::Check_Up_to_Available_E()
+{
+	Rover* EMptr;
+	Check_up_ER.peek(EMptr);
+	while (EMptr->Get_Day_out() == Day_count)
+	{
+		Check_up_ER.dequeue(EMptr);
+		Available_ER.enqueue(EMptr);
+		Check_up_ER.peek(EMptr);
+	}
+
+}
+void MarsStation_Class::Check_Up_to_Available_P()
+{
+	Rover* PMptr;
+	Check_up_PR.peek(PMptr);
+	while (PMptr->Get_Day_out() == Day_count)
+	{
+		Check_up_PR.dequeue(PMptr);
+		Available_PR.enqueue(PMptr);
+		Check_up_PR.peek(PMptr);
+	}
+
+}
 
 
 
