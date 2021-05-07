@@ -1,5 +1,15 @@
 #include "MarsStation_Class.h"
-
+#include"Event.h"
+#include"Formulaion_Event.h"
+#include"Cancellation_Event.h"
+#include"Promotion_Event.h"
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
+MarsStation_Class::MarsStation_Class()
+{
+}
 //////////////// ASsign Emergency Missions using Priority Queue (Linked List) //////////////////////////
 void MarsStation_Class::Assign_E_M()
 {
@@ -159,6 +169,146 @@ void MarsStation_Class::Check_PR_State(Polar_Rover* CPRptr)
 	{
 		Available_PR.enqueue(CPRptr);
 	}
+
+}
+
+void MarsStation_Class::Program_Startup()
+{
+	string File_Name,Line, ed=" ", id=" ", tolc=" ", mdur=" ", sig=" ";
+	char Type_Event, Type_Mission;
+	int Num_E_Rovers, Num_P_Rovers, Num_M_Rovers;
+	int Num_Rovers;
+	 int Check_UP_E_Rover;
+	 int Check_UP_M_Rover;
+	 int Check_UP_P_Rover;
+	 int Missions_Before_Check_up;
+	 int Auto_Promotion;
+	 int Num_Event;
+	 int j,ED,ID,TOLC,MDUR,SIG;
+	cout << "Please::enter the name of the file the you want to load it" << endl;
+	cin >> File_Name;
+	ifstream My_File;
+	My_File.open("\Files\\"+File_Name+".txt");
+	if (My_File.is_open())                       //Check if the file is found or not
+	{
+		My_File>> Num_M_Rovers>>Num_P_Rovers>>Num_E_Rovers;
+		{ /*creating the rovers*/}
+		Num_Rovers = Num_E_Rovers + Num_P_Rovers + Num_M_Rovers;
+		//////////////////////Read the speed of the rover///////////////
+		getline(My_File, Line);
+		if (Line.size() == ((2 * Num_Rovers) - 1))        //The case of the different speeds
+		{
+		}
+		else
+		{
+		}
+		My_File >> Missions_Before_Check_up >> Check_UP_M_Rover >> Check_UP_P_Rover >> Check_UP_E_Rover;
+		             ///////////////need to the the values to the rovers ///////////////
+		My_File>>Auto_Promotion;                //The value of the auto promotion limit
+		My_File>>Num_Event;                       //The number of events
+		for (int i = 0; i < Num_Event; i++)         //Loop to fill the list of the events
+		{
+			j = 0;
+			getline(My_File, Line);                   //The line of the event data
+			Type_Event= Line[j];                        //type of the event formulation or promotion or cancellation  
+			if (Type_Event == 'F')
+			{
+				j++;
+				while (Line[j] == ' ')
+				{
+					j++;
+				}
+				Type_Mission = Line[j];                       //type of the mission Em or moun or polar
+				j++;
+				while (Line[j] == ' ')
+				{
+					j++;
+				}
+				ed = Line[j];
+				ED = stoi(ed);
+				j++;
+				while (Line[j] == ' ')
+				{
+					j++;
+				}
+				id = Line[j];
+				ID = stoi(id);
+				j++;
+				while (Line[j] == ' ')
+				{
+					j++;
+				}
+				tolc = Line[j];
+				TOLC = stoi(tolc);
+				j++;
+				while (Line[j] == ' ')
+				{
+					j++;
+				}
+				mdur = Line[j];
+				MDUR = stoi(mdur);
+				j++;
+				while (Line[j] == ' ')
+				{
+					j++;
+				}
+				sig = Line[j];
+				SIG = stoi(sig);
+			}
+			else if (Type_Event == 'P' || Type_Event == 'C')
+			{
+				j++;
+				while (Line[j] == ' ')
+				{
+					j++;
+				}
+				ed = Line[j];
+				ED = stoi(ed);
+				j++;
+				while (Line[j] == ' ')
+				{
+					j++;
+				}
+				id = Line[j];
+				ID = stoi(id);
+			}
+			                              //////////////Creating the events/////////////
+			if (Type_Event == 'P')
+			{
+				Promotion_Event Pro_Event(ID,ED);
+				Event* PTR_Event = &Pro_Event;
+				Events_List.enqueue(PTR_Event);
+			}
+			if (Type_Event == 'F')
+			{
+				Formulaion_Event For_Event(Type_Mission,TOLC,MDUR,SIG,ID,ED);
+				Event* PTR_Event = &For_Event;
+				Events_List.enqueue(PTR_Event);
+			}
+			if (Type_Event == 'C')
+			{
+				Cancellation_Event Can_Event(ID, ED);
+				Event* PTR_Event = &Can_Event;
+				Events_List.enqueue(PTR_Event);
+			}
+			ed = " ", id = " ", tolc = " ", mdur = " ", sig = " ";
+
+		}
+
+		                                   
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

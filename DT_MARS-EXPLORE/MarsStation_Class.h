@@ -42,12 +42,16 @@ private:
 	PriorityQueue<Emergency_Mission*> E_Mission;
 	PriorityQueue<Mission*> EX_Mission;
 
+	LinkedQueue<Event*> Events_List ;
+
 	static int Day_count;
+	
+	
 	//LinkedQueue<>
 public:
 
-	MarsStation_Class()
-	{};
+	MarsStation_Class();
+	
 
 	void Assign_E_M();
 	void Assign_M_M();
@@ -65,6 +69,8 @@ public:
 	void Check_Up_to_Available_M();
 	void Check_Up_to_Available_E();
 	void Check_Up_to_Available_P();
+	///////////////////////////The function the will read the data from the file////////////////////
+	void Program_Startup();
 
 
 };

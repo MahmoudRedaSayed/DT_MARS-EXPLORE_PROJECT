@@ -9,7 +9,7 @@ Promotion_Event::Promotion_Event(int id, int ED)
 Promotion_Event::~Promotion_Event()
 {
 }
-
+////////////excaption handling if the id is not found//////////
 void Promotion_Event::Execute(PriorityQueue<Emergency_Mission*>& Eme_Missions, LinkedQueue<Polar_Mission*>& Pol_Missions, LinkedQueue<Mountainous_Mission*>& Mou_Missions)
 {
 	Mountainous_Mission* ITERATOR=NULL;
