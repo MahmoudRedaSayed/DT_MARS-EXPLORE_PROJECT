@@ -13,6 +13,19 @@ MarsStation_Class::MarsStation_Class()
 {
 }
 //////////////// ASsign Emergency Missions using Priority Queue (Linked List) //////////////////////////
+void MarsStation_Class::Execute()
+{
+	Event* event;
+	while (Events_List.peek(event))
+	{
+		if (event->Get_Event_Day() == Day_count)
+		{
+			Events_List.dequeue(event);
+			event->Execute(E_Mission, P_Mission, M_Mission);
+		}
+	}
+}
+
 void MarsStation_Class::Assign_E_M()
 {
 	if (Available_ER.isEmpty() && Available_PR.isEmpty() && Available_MR.isEmpty())
@@ -41,7 +54,7 @@ void MarsStation_Class::Assign_E_M()
 				Emergence_mission->Set_Rptr(P_Rover);
 			}
 			Emergence_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
-			EX_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_CD());
+			Emergency_EX_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_CD_Priority());
 		}
 	}
 }
@@ -60,7 +73,7 @@ void MarsStation_Class::Assign_P_M()
 				Polar_mission->Set_Rptr(P_Rover);
 			}
 			Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
-			EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD());
+			Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
 		}
 	}
 }
@@ -79,7 +92,7 @@ void MarsStation_Class::Assign_M_M()
 		ARptr->Increment_Mission_Count();
 		MMptr->Calculate_WD(Day_count);
 		MMptr->Set_Rptr(ARptr);
-		EX_Mission.enqueue(MMptr, MMptr->Calculate_CD());
+		Mountainous_EX_Mission.enqueue(MMptr, MMptr->Calculate_CD_Priority());
 
 	}
 	while (!M_Mission.isEmpty() && !Available_ER.isEmpty())
@@ -89,7 +102,7 @@ void MarsStation_Class::Assign_M_M()
 		ARptr->Increment_Mission_Count();
 		MMptr->Calculate_WD(Day_count);
 		MMptr->Set_Rptr(ARptr);
-		EX_Mission.enqueue(MMptr, MMptr->Calculate_CD());
+		Mountainous_EX_Mission.enqueue(MMptr, MMptr->Calculate_CD_Priority());
 
 	}
 
@@ -99,10 +112,92 @@ void MarsStation_Class::Assign_M_M()
 
 void MarsStation_Class::Assign_All_Mission()
 {
-	Auto_Promoting();/////?is it will be like that at the first before any assign???
 	Assign_E_M();
 	Assign_M_M();
 	Assign_P_M();
+	Auto_Promoting();/////?is it will be like that at the first before any assign???
+}
+
+void MarsStation_Class::Emergency_EX_Mission_to_completed()
+{
+	Emergency_Mission* Emergence_mission;
+	while (Emergency_EX_Mission.peek(Emergence_mission))
+	{
+		if (Emergence_mission->Get_CD() == Day_count)
+		{
+			Emergency_EX_Mission.dequeue(Emergence_mission);
+			Temp_CD_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_ED_Priority());
+			Completed_E_Mission_ID.enqueue(Emergence_mission->Get_ID());
+			Rover* rover = Emergence_mission->Get_Rptr();
+			if (rover->GetType() == Emergency)
+			{
+				Check_ER_State(rover);
+			}
+			else if (rover->GetType() == Mountainous)
+			{
+				Check_MR_State(rover);
+			}
+			else
+			{
+				Check_PR_State(rover);
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+void MarsStation_Class::Mountainous_EX_Mission_to_completed()
+{
+	Mountainous_Mission* Mountainous_mission;
+	while (Mountainous_EX_Mission.peek(Mountainous_mission))
+	{
+		if (Mountainous_mission->Get_CD() == Day_count)
+		{
+			Mountainous_EX_Mission.dequeue(Mountainous_mission);
+			Temp_CD_Mission.enqueue(Mountainous_mission, Mountainous_mission->Calculate_ED_Priority());
+			Completed_M_Mission_ID.enqueue(Mountainous_mission->Get_ID());
+			Rover* rover = Mountainous_mission->Get_Rptr();
+			if (rover->GetType() == Mountainous)
+			{
+				Check_MR_State(rover);
+			}
+			else 
+			{
+				Check_ER_State(rover);
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+void MarsStation_Class::Polar_EX_Mission_to_completed()
+{
+	Polar_Mission* Polar_mission;
+	while (Polar_EX_Mission.peek(Polar_mission))
+	{
+		if (Polar_mission->Get_CD() == Day_count)
+		{
+			Polar_EX_Mission.dequeue(Polar_mission);
+			Temp_CD_Mission.enqueue(Polar_mission, Polar_mission->Calculate_ED_Priority());
+			Completed_E_Mission_ID.enqueue(Polar_mission->Get_ID());
+			Check_PR_State(Polar_mission->Get_Rptr());
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+///////////////////////////////////////////////////////////////
+void MarsStation_Class::InExecution_to_Completed()
+{
+	Emergency_EX_Mission_to_completed();
+	Mountainous_EX_Mission_to_completed();
+	Polar_EX_Mission_to_completed();
 }
 
 void MarsStation_Class::Auto_Promoting()
@@ -507,11 +602,12 @@ void MarsStation_Class::Check_Up_to_Available_P()
 	}
 
 }
-
-
-
-
-
+bool MarsStation_Class::isFinished()
+{
+	return (Events_List.isEmpty()&& P_Mission.isEmpty()&& M_Mission.isEmpty()&&
+		E_Mission.isEmpty()&& Emergency_EX_Mission.isEmpty()&& Mountainous_EX_Mission.isEmpty()&&
+		Polar_EX_Mission.isEmpty()&& Temp_CD_Mission.isEmpty());
+}
 
 
 

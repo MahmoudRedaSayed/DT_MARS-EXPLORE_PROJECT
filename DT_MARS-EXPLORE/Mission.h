@@ -25,6 +25,8 @@ public:
 	int Calculate_WD(int CurrDay);//?no need fot it?
 	//void Set_ED(int x);//I think no need to this function as there is -Calculate_ED-
 	int Calculate_CD();
+	double Calculate_CD_Priority();
+	double Calculate_ED_Priority();
 	void Set_Rptr(Rover* Rptr_x);
 	//Getters
 	 int Get_TLOC();

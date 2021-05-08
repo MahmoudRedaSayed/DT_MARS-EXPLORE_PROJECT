@@ -54,8 +54,19 @@ int Mission::Calculate_WD(int CurrDay)
 //}
 int Mission::Calculate_CD( )
 {
+
 	CD = FD+ ED + WD;
 	return CD;
+}
+double Mission::Calculate_CD_Priority()
+{
+	Calculate_CD();
+	return 1 / CD;
+}
+double Mission::Calculate_ED_Priority()
+{
+	Calculate_ED();
+	return 1 / ED;
 }
 
 void Mission::Set_Rptr(Rover* Rptr_x)
