@@ -6,3 +6,4 @@ int Rover::E_Rover_Count = 0;
 int Rover::Check_ER = 5;
 int Rover::M_Rover_Count = 0;
 int Rover::Check_MR = 5;
+int Rover::Missions_Before_Check_Up=0;

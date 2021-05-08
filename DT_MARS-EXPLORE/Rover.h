@@ -25,6 +25,7 @@ private:
 public:
 	//static Data Members
 	static int ID_Count;			 //Count of Rovers & assigning each new rover latest ID count
+	static int Missions_Before_Check_Up;
 
 	static int P_Rover_Count;      //Polar. Rovers count for file output
 	static int M_Rover_Count;     //Mount. Rovers count for file output

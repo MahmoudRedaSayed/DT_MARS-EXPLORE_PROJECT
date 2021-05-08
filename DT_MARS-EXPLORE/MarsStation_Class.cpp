@@ -209,14 +209,24 @@ void MarsStation_Class::Program_Startup()
 		getline(My_File, Line);                             //To avoid the reminder of the line
 		getline(My_File, Line);
 		int i = 0;
-		if (Line.size() == ((2 * Num_Rovers) - 1))        //The case of the different speeds
+		int Spaces = 0;
+		for (int k = 0; k < Line.size(); k++)
 		{
-			for (int j = 0; j < Num_Rovers; j++)         //To read the speeds 
+			if (Line[k] == ' ')
+				Spaces++;
+		}
+		                                 //////////////////// Bounas case///////////////////
+		                              ///////////////////reading the speeds///////////////////// 
+		if (Spaces== Num_Rovers)        //The case of the different speeds
+		{
+			for (int j = 0; j < Num_Rovers; j++)         
 			{
 				while (Line[i] != ' ')
 				{
-					Speeds_Str[j][i] = Line[i];
+					int k = 0;
+					Speeds_Str[j][k] = Line[i];
 					i++;
+					k++;
 				}
 				Speeds[j] = stoi(Speeds_Str[j]);
 				while (Line[i] == ' ')
@@ -226,24 +236,23 @@ void MarsStation_Class::Program_Startup()
 			}
 			                   ///////////////////////////Creating the rovers////////////////////////////
 			int counter = 0;
-			for (int j = 0; j < Num_M_Rovers; j++)     
+			int j = 0;
+			for (int i = 0; i < Num_M_Rovers; i++)     
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Mountainous);
-				Available_M_Rover_List.enqueue(Array_OF_Rovers[j]);
+				Available_M_Rover_List.enqueue(Array_OF_Rovers[counter]);
 				counter++;
 			}
-			counter++;
-			for (int j = 0; j < Num_P_Rovers; j++)    
+			for (int i = 0; i < Num_P_Rovers; i++)    
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Polar);
-				Available_P_Rover_List.enqueue(Array_OF_Rovers[j]);
+				Available_P_Rover_List.enqueue(Array_OF_Rovers[counter]);
 				counter++;
 			}
-			counter++;
-			for (int j = 0; j < Num_E_Rovers; j++)
+			for (int i = 0; i < Num_E_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Emergency);
-				Available_E_Rover_List.enqueue(Array_OF_Rovers[j]);
+				Available_E_Rover_List.enqueue(Array_OF_Rovers[counter]);
 				counter++;
 			}
 			
@@ -267,29 +276,25 @@ void MarsStation_Class::Program_Startup()
 			}
 			int counter = 0;          //to the Array of rovers 
 			int counter1 = 0;          //to the Array of speeds
-			int j = 0;
 			for (int i=0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Mountainous);
-				Available_M_Rover_List.enqueue(Array_OF_Rovers[j]);
+				Available_M_Rover_List.enqueue(Array_OF_Rovers[counter]);
 				counter++;
-				j++;
 			}
 			counter1++;
 			for (int i = 0; i < Num_P_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Polar);
-				Available_P_Rover_List.enqueue(Array_OF_Rovers[j]);
+				Available_P_Rover_List.enqueue(Array_OF_Rovers[counter]);
 				counter++;
-				j++;
 			}
 			counter1++;
 			for (int i = 0; i < Num_E_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Emergency);
-				Available_E_Rover_List.enqueue(Array_OF_Rovers[j]);
+				Available_E_Rover_List.enqueue(Array_OF_Rovers[counter]);
 				counter++;
-				j++;
 			}
 		}
 		My_File >> Missions_Before_Check_up >> Check_UP_M_Rover >> Check_UP_P_Rover >> Check_UP_E_Rover;
@@ -300,6 +305,7 @@ void MarsStation_Class::Program_Startup()
 		Rover::Check_ER = Check_UP_E_Rover;
 		Rover::M_Rover_Count = Num_M_Rovers;
 		Rover::Check_MR = Check_UP_M_Rover;
+		Rover::Missions_Before_Check_Up = Missions_Before_Check_up;
 		           
 		My_File>>Auto_Promotion_in;                //The value of the auto promotion limit
 		Mountainous_Mission::AutoP = Auto_Promotion_in;
