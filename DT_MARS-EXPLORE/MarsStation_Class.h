@@ -40,7 +40,9 @@ private:
 	PriorityQueue<Mission*> EX_Mission;
 
 	LinkedQueue<Event*> Events_List ;
-	LinkedQueue<Rover*> Available_Rover_List;
+	LinkedQueue<Rover*> Available_M_Rover_List;
+	LinkedQueue<Rover*> Available_P_Rover_List;
+	LinkedQueue<Rover*> Available_E_Rover_List;
 
 	static int Day_count;
 	

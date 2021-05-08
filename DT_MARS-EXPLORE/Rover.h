@@ -42,13 +42,13 @@ public:
 		:ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0), IsAssigned(false)
 		, Mission_Count(0), Type(T)
 		, IsInCheckup(false) 
-	{
-		if (T == Mountainous)
+	{//no need to it look at the input file
+		/*if (T == Mountainous)
 			M_Rover_Count++;
 		else if (T == Emergency)
 			E_Rover_Count++;
 		else if (T == Polar)
-			P_Rover_Count++;
+			P_Rover_Count++;*/
 	}
 	//Let Default speed for rover is 3 km/hour (Although we may not need this condition :D )
 	//just added in case of invalid input
