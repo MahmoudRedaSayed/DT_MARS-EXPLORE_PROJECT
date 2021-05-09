@@ -7,7 +7,7 @@ private:
     double Priority;//??should i make it double??
     
 public:
-    Emergency_Mission(int TLOC_x=0, int MDUR_x=0, int SIG_x=0, int FD_x=0, int ID_x=0);//?priority will not be a parameter as it calculated then?
+    Emergency_Mission(double TLOC_x=0, int MDUR_x=0, int SIG_x=0, int FD_x=0, int ID_x=0);//?priority will not be a parameter as it calculated then?
     //Setters
     //void Set_Priority(double x);
 

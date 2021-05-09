@@ -1,6 +1,11 @@
 #include "Event.h"
 #include<iostream>
 using namespace std;
+Event::Event()
+{
+     Event_Day=0;
+     Mission_ID=0;
+}
 int Event::Get_Mission_ID()
 {
     return Mission_ID;

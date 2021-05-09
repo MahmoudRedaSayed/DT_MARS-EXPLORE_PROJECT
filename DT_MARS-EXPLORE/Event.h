@@ -9,6 +9,8 @@ class Event
 	int Event_Day;
 	int Mission_ID;
 public:
+	//////////////////// constructor to initializing the data member to avoid the warnings////////////////
+	Event();
 //pure virtual function to the execute function to can be implamented in each drived class
 	virtual void Execute(PriorityQueue<Emergency_Mission*>& Eme_Missions,LinkedQueue<Polar_Mission*>& Pol_Missions , LinkedQueue<Mountainous_Mission*>& Mou_Missions) = 0;
 	//getters because this data can not be accesse in the drived classes 

@@ -1,5 +1,5 @@
 #include "Mission.h"
-Mission::Mission( int TLOC_x,  int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* Rptr_x)
+Mission::Mission( double TLOC_x,  int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* Rptr_x)
 //N:we will not send WD ,ED ,CD as a parameters as theu will caculated later
 //?should i make those paramter const int ?
 //?should we delete int FD_x from the parameters?

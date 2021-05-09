@@ -6,7 +6,7 @@ class Mountainous_Mission :
 private:
 
    public:
-    Mountainous_Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x);
+    Mountainous_Mission(double TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x);
     //////////////??shuold those static be Private??////////////////////
     static int AutoP;//?should i make it const??
     static int NumOfMMissions;

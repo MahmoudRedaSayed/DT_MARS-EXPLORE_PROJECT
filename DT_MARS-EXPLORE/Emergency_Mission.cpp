@@ -1,5 +1,5 @@
 #include "Emergency_Mission.h"
-Emergency_Mission::Emergency_Mission(int TLOC_x , int MDUR_x , int SIG_x , int FD_x , int ID_x )
+Emergency_Mission::Emergency_Mission(double TLOC_x , int MDUR_x , int SIG_x , int FD_x , int ID_x )
 	:Mission(TLOC_x, MDUR_x, SIG_x, FD_x, ID_x)
 {
 	NumOfEMissions++;

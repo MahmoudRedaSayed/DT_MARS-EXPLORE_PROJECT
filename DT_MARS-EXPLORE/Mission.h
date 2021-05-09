@@ -13,7 +13,7 @@ private:
 	Rover* Rptr;//it will not be const to handle the mission failed
 public:
 	//Const and Destr
-	Mission(int TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* Rptr_x = nullptr);//?should i delete Rover Rptr=null from the parameter??	
+	Mission(double TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x, Rover* Rptr_x = nullptr);//?should i delete Rover Rptr=null from the parameter??	
 	//Mission();//Later
 	//should i make all the funtion -Virtual- accept ID?
 	//Setters
