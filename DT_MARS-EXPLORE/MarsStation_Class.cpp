@@ -9,8 +9,11 @@
 #include<fstream>
 #include<string>
 using namespace std;
+int  MarsStation_Class::files_Count = 0;//#files to be created for output(#user operations), needs discussion with team
+
 MarsStation_Class::MarsStation_Class()
 {
+	files_Count++;
 }
 //////////////// ASsign Emergency Missions using Priority Queue (Linked List) //////////////////////////
 void MarsStation_Class::Execute()
@@ -38,7 +41,7 @@ void MarsStation_Class::Assign_E_M()
 		Rover* E_Rover;
 		Rover* M_Rover;                //// pointer to rovers
 		Rover* P_Rover;
-		while (E_Mission.dequeue(Emergence_mission)) 
+		while (E_Mission.dequeue(Emergence_mission))
 		{
 			if (Available_ER.dequeue(E_Rover))      ///// Check Emergency Rover list first
 			{
@@ -84,7 +87,7 @@ void MarsStation_Class::Assign_M_M()
 	Mountainous_Mission* MMptr;
 	Rover* ARptr;
 	//M_Mission.peek(MMptr)
-	while (!M_Mission.isEmpty()&& !Available_MR.isEmpty())
+	while (!M_Mission.isEmpty() && !Available_MR.isEmpty())
 	{
 		//if()
 		M_Mission.dequeue(MMptr);
@@ -163,7 +166,7 @@ void MarsStation_Class::Mountainous_EX_Mission_to_completed()
 			{
 				Check_MR_State(rover);
 			}
-			else 
+			else
 			{
 				Check_ER_State(rover);
 			}
@@ -198,6 +201,7 @@ void MarsStation_Class::InExecution_to_Completed()
 	Emergency_EX_Mission_to_completed();
 	Mountainous_EX_Mission_to_completed();
 	Polar_EX_Mission_to_completed();
+	//Mamdouh : maybe here you can call out2? remember you shall send a queue of sorted completed missions ;) 
 }
 
 void MarsStation_Class::Auto_Promoting()
@@ -208,7 +212,7 @@ void MarsStation_Class::Auto_Promoting()
 	while (!M_Mission.isEmpty())
 	{
 		M_Mission.peek(MMptr);
-		if (MMptr->Calculate_WD(Day_count)== Mountainous_Mission::AutoP)
+		if (MMptr->Calculate_WD(Day_count) == Mountainous_Mission::AutoP)
 		{
 			M_Mission.dequeue(MMptr);
 			EMptr = new Emergency_Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID());
@@ -233,7 +237,7 @@ void MarsStation_Class::Check_MR_State(Rover* CMRptr)
 	{
 		Check_up_MR.enqueue(CMRptr);
 		//Rover::GetCheck_MR();
-		CMRptr->Set_Day_out(Rover::Check_MR+Day_count);
+		CMRptr->Set_Day_out(Rover::Check_MR + Day_count);
 	}
 	else
 	{
@@ -275,32 +279,32 @@ void MarsStation_Class::Check_PR_State(Rover* CPRptr)
 
 void MarsStation_Class::Program_Startup()
 {
-	string File_Name,Line, ed=" ", id=" ", tolc=" ", mdur=" ", sig=" ";
+	string File_Name, Line, ed = " ", id = " ", tolc = " ", mdur = " ", sig = " ";
 	string* Speeds_Str;
 	char Type_Event, Type_Mission;
 	int Num_E_Rovers, Num_P_Rovers, Num_M_Rovers;
 	int Num_Rovers;
-	 int Check_UP_E_Rover;
-	 int Check_UP_M_Rover;
-	 int Check_UP_P_Rover;
-	 int Missions_Before_Check_up;
-	 int Num_Event;
-	 int Auto_Promotion_in;
-	 int j,ED,ID,TOLC,MDUR,SIG;
-	 Rover** Array_OF_Rovers;
-	 int* Speeds;
+	int Check_UP_E_Rover;
+	int Check_UP_M_Rover;
+	int Check_UP_P_Rover;
+	int Missions_Before_Check_up;
+	int Num_Event;
+	int Auto_Promotion_in;
+	int j, ED, ID, TOLC, MDUR, SIG;
+	Rover** Array_OF_Rovers;
+	int* Speeds;
 	cout << "Please::enter the name of the file the you want to load it" << endl;
 	cin >> File_Name;
 	ifstream My_File;
-	My_File.open("\Files\\"+File_Name +".txt");
+	My_File.open("\Files\\" + File_Name + ".txt");
 	if (My_File.is_open())                       //Check if the file is found or not
 	{
-		My_File>> Num_M_Rovers>>Num_P_Rovers>>Num_E_Rovers;
+		My_File >> Num_M_Rovers >> Num_P_Rovers >> Num_E_Rovers;
 		Num_Rovers = Num_E_Rovers + Num_P_Rovers + Num_M_Rovers;
-		Array_OF_Rovers = new Rover* [ Num_Rovers ];
+		Array_OF_Rovers = new Rover * [Num_Rovers];
 		Speeds = new int[Num_Rovers];
-		Speeds_Str = new string [Num_Rovers];
-		                         //////////////////////Read the speed of the rover///////////////
+		Speeds_Str = new string[Num_Rovers];
+		//////////////////////Read the speed of the rover///////////////
 		getline(My_File, Line);                             //To avoid the reminder of the line
 		getline(My_File, Line);
 		int i = 0;
@@ -310,11 +314,11 @@ void MarsStation_Class::Program_Startup()
 			if (Line[k] == ' ')
 				Spaces++;
 		}
-		                                 //////////////////// Bounas case///////////////////
-		                              ///////////////////reading the speeds///////////////////// 
-		if (Spaces== Num_Rovers)        //The case of the different speeds
+		//////////////////// Bounas case///////////////////
+	 ///////////////////reading the speeds///////////////////// 
+		if (Spaces == Num_Rovers)        //The case of the different speeds
 		{
-			for (int j = 0; j < Num_Rovers; j++)         
+			for (int j = 0; j < Num_Rovers; j++)
 			{
 				while (Line[i] != ' ')
 				{
@@ -329,16 +333,16 @@ void MarsStation_Class::Program_Startup()
 					i++;
 				}
 			}
-			                   ///////////////////////////Creating the rovers////////////////////////////
+			///////////////////////////Creating the rovers////////////////////////////
 			int counter = 0;
 			int j = 0;
-			for (int i = 0; i < Num_M_Rovers; i++)     
+			for (int i = 0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Mountainous);
 				Available_M_Rover_List.enqueue(Array_OF_Rovers[counter]);
 				counter++;
 			}
-			for (int i = 0; i < Num_P_Rovers; i++)    
+			for (int i = 0; i < Num_P_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Polar);
 				Available_P_Rover_List.enqueue(Array_OF_Rovers[counter]);
@@ -350,11 +354,11 @@ void MarsStation_Class::Program_Startup()
 				Available_E_Rover_List.enqueue(Array_OF_Rovers[counter]);
 				counter++;
 			}
-			
+
 		}
 		else
 		{                          ////////////////the speed is const/////////////   
-			for (int j = 0; j < 3; j++)      
+			for (int j = 0; j < 3; j++)
 			{
 				while (Line[i] != ' ')
 				{
@@ -371,7 +375,7 @@ void MarsStation_Class::Program_Startup()
 			}
 			int counter = 0;          //to the Array of rovers 
 			int counter1 = 0;          //to the Array of speeds
-			for (int i=0; i < Num_M_Rovers; i++)
+			for (int i = 0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Mountainous);
 				Available_M_Rover_List.enqueue(Array_OF_Rovers[counter]);
@@ -393,7 +397,7 @@ void MarsStation_Class::Program_Startup()
 			}
 		}
 		My_File >> Missions_Before_Check_up >> Check_UP_M_Rover >> Check_UP_P_Rover >> Check_UP_E_Rover;
-		               ///////////////////////select the static data to the rovers ///////////////////////
+		///////////////////////select the static data to the rovers ///////////////////////
 		Rover::P_Rover_Count = Num_P_Rovers;
 		Rover::Check_PR = Check_UP_P_Rover;
 		Rover::E_Rover_Count = Num_E_Rovers;
@@ -401,17 +405,17 @@ void MarsStation_Class::Program_Startup()
 		Rover::M_Rover_Count = Num_M_Rovers;
 		Rover::Check_MR = Check_UP_M_Rover;
 		Rover::Missions_Before_Check_Up = Missions_Before_Check_up;
-		           
-		My_File>>Auto_Promotion_in;                //The value of the auto promotion limit
+
+		My_File >> Auto_Promotion_in;                //The value of the auto promotion limit
 		Mountainous_Mission::AutoP = Auto_Promotion_in;
-		My_File>>Num_Event;                       //The number of events
-		Event** PTR_Event = new Event*[Num_Event];
+		My_File >> Num_Event;                       //The number of events
+		Event** PTR_Event = new Event * [Num_Event];
 		getline(My_File, Line);                    //To avoid the reminder of the line
 		for (int i = 0; i < Num_Event; i++)         //Loop to fill the list of the events
 		{
 			j = 0;
 			getline(My_File, Line);                   //The line of the event data
-			Type_Event= Line[j];                        //type of the event formulation or promotion or cancellation  
+			Type_Event = Line[j];                        //type of the event formulation or promotion or cancellation  
 			if (Type_Event == 'F')
 			{
 				j++;
@@ -429,7 +433,7 @@ void MarsStation_Class::Program_Startup()
 				{
 					if (Line[j] != ' ')
 					{
-						ed+= Line[j];
+						ed += Line[j];
 						j++;
 					}
 					else
@@ -446,7 +450,7 @@ void MarsStation_Class::Program_Startup()
 				{
 					if (Line[j] != ' ')
 					{
-						id+= Line[j];
+						id += Line[j];
 						j++;
 					}
 					else
@@ -463,7 +467,7 @@ void MarsStation_Class::Program_Startup()
 				{
 					if (Line[j] != ' ')
 					{
-						tolc+= Line[j];
+						tolc += Line[j];
 						j++;
 					}
 					else
@@ -480,7 +484,7 @@ void MarsStation_Class::Program_Startup()
 				{
 					if (Line[j] != ' ')
 					{
-						mdur+= Line[j];
+						mdur += Line[j];
 						j++;
 					}
 					else
@@ -493,11 +497,11 @@ void MarsStation_Class::Program_Startup()
 				{
 					j++;
 				}
-				for (int i = 0; i < Line.size()&&j< Line.size(); i++)
+				for (int i = 0; i < Line.size() && j < Line.size(); i++)
 				{
 					if (Line[j] != ' ')
 					{
-						sig+= Line[j];
+						sig += Line[j];
 						j++;
 					}
 					else
@@ -518,7 +522,7 @@ void MarsStation_Class::Program_Startup()
 				{
 					if (Line[j] != ' ')
 					{
-						ed+= Line[j];
+						ed += Line[j];
 						j++;
 					}
 					else
@@ -535,7 +539,7 @@ void MarsStation_Class::Program_Startup()
 				{
 					if (Line[j] != ' ')
 					{
-						id+= Line[j];
+						id += Line[j];
 						j++;
 					}
 					else
@@ -545,7 +549,7 @@ void MarsStation_Class::Program_Startup()
 				}
 				ID = stoi(id);
 			}
-			                              //////////////Creating the events/////////////
+			//////////////Creating the events/////////////
 			if (Type_Event == 'P')
 			{
 				PTR_Event[i] = new Promotion_Event(ID, ED);
@@ -563,7 +567,7 @@ void MarsStation_Class::Program_Startup()
 			}
 			ed = " ", id = " ", tolc = " ", mdur = " ", sig = " ";
 
-		}	                                   
+		}
 	}
 }
 
@@ -604,11 +608,57 @@ void MarsStation_Class::Check_Up_to_Available_P()
 }
 bool MarsStation_Class::isFinished()
 {
-	return (Events_List.isEmpty()&& P_Mission.isEmpty()&& M_Mission.isEmpty()&&
-		E_Mission.isEmpty()&& Emergency_EX_Mission.isEmpty()&& Mountainous_EX_Mission.isEmpty()&&
-		Polar_EX_Mission.isEmpty()&& Temp_CD_Mission.isEmpty());
+	return (Events_List.isEmpty() && P_Mission.isEmpty() && M_Mission.isEmpty() &&
+		E_Mission.isEmpty() && Emergency_EX_Mission.isEmpty() && Mountainous_EX_Mission.isEmpty() &&
+		Polar_EX_Mission.isEmpty() && Temp_CD_Mission.isEmpty());
 }
 
+void MarsStation_Class::Out1()
+{
+	ofstream outF;//variable to deal with output file , declared here for multiple functions
+
+	if (files_Count == 1)
+		outF.open("Station Statistics.txt", ios::out);
+
+	outF << "CD\t ID\t FD\t WD\t ED\n";
+	outF.close();
+}
+
+void MarsStation_Class::Out2(PriorityQueue<Mission*>& CM)
+{
+	ofstream outF;//variable to deal with output file , declared here for multiple functions
+
+	outF.open("Station Statistics.txt", ios::app);
+
+	Mission* dummy_mission;
+	while (CM.dequeue(dummy_mission))
+	{
+		outF << dummy_mission->Get_CD() << "\t" << dummy_mission->Get_ID() << "\t"
+			<< dummy_mission->Get_FD() << "\t" << dummy_mission->Get_WD() << "\t"
+			<< dummy_mission->Calculate_ED() << "\n";
+		delete dummy_mission;
+	}
+}
+
+void MarsStation_Class::Out3()
+{
+	ofstream outF;//variable to deal with output file , declared here for multiple functions
+
+	outF.open("Station Statistics.txt", ios::app);
+
+	outF << "………………………………………………\n………………………………………………\n"
+		<< "Missions:" << Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
+	outF << " [M: " << Mountainous_Mission::NumOfMMissions << ", P: " << Polar_Mission::NumOfPMissions
+		<< ", E: " << Emergency_Mission::NumOfEMissions << "]\n";
+	outF << "Rovers:" << Rover::E_Rover_Count + Rover::P_Rover_Count + Rover::M_Rover_Count
+		<< " \t[M: " << Rover::M_Rover_Count << ", P: " << Rover::P_Rover_Count << ", E: "
+		<< Rover::E_Rover_Count << "]\n";
+	outF << "Avg Wait = "/*<< */ << ", Avg Exec"/*<<*/ << endl;
+	outF << "Auto-promoted: " <</* <<*/"%\n";
+
+	outF.close();
+
+}
 
 
 int MarsStation_Class::Day_count = 0;

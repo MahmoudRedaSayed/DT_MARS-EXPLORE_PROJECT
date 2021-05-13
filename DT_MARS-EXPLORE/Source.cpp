@@ -4,6 +4,7 @@ int main()
 
 	MarsStation_Class object;
 	object.Program_Startup();
+	object.Out1();
 	while (!object.isFinished())
 	{
 		object.Execute();
@@ -12,5 +13,5 @@ int main()
 		/////////// printting functions & outputfile read /////////
 		object.increment_day();
 	}
-
+	object.Out3();
 }

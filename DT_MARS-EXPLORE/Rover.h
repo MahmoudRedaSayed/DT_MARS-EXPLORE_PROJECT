@@ -55,12 +55,12 @@ public:
 	//just added in case of invalid input
 	~Rover() {}
 	//Getters
-	const Rover_Type GetType() { return Type; }
-	const int GetID() { return ID; }
-	const float GetSpeed() { return speed; }
-	const bool GetIsAssigned() { return IsAssigned; }
-	const bool GetIsInCheckup() { return IsInCheckup;}
-	const int GetMission_Count() {return Mission_Count;}
+	Rover_Type GetType() const { return Type; }
+	int GetID()const { return ID; }
+	float GetSpeed()const { return speed; }
+	bool GetIsAssigned()const { return IsAssigned; }
+	bool GetIsInCheckup()const { return IsInCheckup;}
+	int GetMission_Count()const {return Mission_Count;}
 	//const bool GetIsInMaintenance() { return IsInMaintenance; }
 	//Static members getters
     /*const int GetID_Count(){return ID_Count;}

@@ -154,6 +154,7 @@
     <ClInclude Include="Promotion_Event.h" />
     <ClInclude Include="QueueADT.h" />
     <ClInclude Include="Rover.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cancellation_Event.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Promotion_Event.cpp" />
     <ClCompile Include="Rover.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

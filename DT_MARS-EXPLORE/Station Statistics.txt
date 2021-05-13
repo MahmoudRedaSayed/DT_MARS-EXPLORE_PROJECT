@@ -1,0 +1,7 @@
+CD	 ID	 FD	 WD	 ED
+………………………………………………
+………………………………………………
+Missions:0 [M: 0, P: 0, E: 0]
+Rovers:0 	[M: 0, P: 0, E: 0]
+Avg Wait = , Avg Exec
+Auto-promoted: %

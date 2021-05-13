@@ -54,9 +54,6 @@
     <ClInclude Include="Polar_Mission.h">
       <Filter>Missions</Filter>
     </ClInclude>
-    <ClInclude Include="MarsStation_Class.h">
-      <Filter>EVENTS</Filter>
-    </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -71,6 +68,12 @@
     </ClInclude>
     <ClInclude Include="PriorityQueueADT.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>EVENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="MarsStation_Class.h">
+      <Filter>MarsStation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,11 +104,14 @@
     <ClCompile Include="MarsStation_Class.cpp">
       <Filter>MarsStation</Filter>
     </ClCompile>
-    <ClCompile Include="Rover.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rover.cpp">
+      <Filter>Rovers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

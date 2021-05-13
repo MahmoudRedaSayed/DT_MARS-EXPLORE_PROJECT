@@ -25,6 +25,8 @@ private:
 	string P_ID;
 	string E_ID;
 
+	static int files_Count;//#files to be created for output(#user operations), needs discussion with team
+
 	LinkedQueue<Polar_Mission*> P_Mission;
 	LinkedQueue<Mountainous_Mission*> M_Mission;
 
@@ -55,8 +57,11 @@ private:
 	LinkedQueue<Rover*> Available_E_Rover_List;
 
 	static int Day_count;
+	//variable for waiting sum & execution sum
+	//count of waiting missions & 
 	
-	
+
+
 	//LinkedQueue<>
 public:
 
@@ -92,6 +97,10 @@ public:
 	void Program_Startup();
 	//////// Check is All mission is finished /////////////
 	bool isFinished();
-
+	//------------------[out Functions]-------------------
+	//PS:may/will be modified later
+	void Out1();//prints first line of out file
+	void Out2(PriorityQueue<Mission*> &M);//prints each completed missions's info
+	void Out3();//prints rest of statistics , //static counts of missions & rovers ,WDcount,#counter who?(waited missions || all mission)
 };
 
