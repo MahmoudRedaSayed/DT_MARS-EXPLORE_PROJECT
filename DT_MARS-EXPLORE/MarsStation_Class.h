@@ -84,7 +84,7 @@ public:
 	void Polar_EX_Mission_to_completed();
 
 
-	void General_Check_R_State(Rover* CRptr,LinkedQueue<Rover*>& Check_up_list, LinkedQueue<Rover*>& Available_list, int Count, int Duration);
+	void General_Check_R_State(Rover* CRptr,LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration);
 	///
 	/*void Check_MR_State(Rover* CMRptr);
 	void Check_ER_State(Rover* CERptr);
@@ -94,7 +94,7 @@ public:
 	void Check_Up_to_Available_E();
 	void Check_Up_to_Available_P();*/
 	///
-	void General_Check_Up_to_Available(LinkedQueue<Rover*>& Check_up_list, LinkedQueue<Rover*>& Available_list);
+	void General_Check_Up_to_Available(LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list);
 	void Check_Up_to_Available_All();
 
 	///////////////////////////The function the will read the data from the file////////////////////
