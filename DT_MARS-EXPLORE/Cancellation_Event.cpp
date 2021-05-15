@@ -6,10 +6,10 @@ Cancellation_Event::Cancellation_Event(int id, int ED)
 	Set_Mission_ID(id);
 }
 ////////////excaption handling if the id is not found//////////
-void Cancellation_Event::Execute(PriorityQueue<Emergency_Mission*>& Eme_Missions, LinkedQueue<Polar_Mission*>& Pol_Missions, LinkedQueue<Mountainous_Mission*>& Mou_Missions)
+void Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
 {
-	Mountainous_Mission* ITERATOR = NULL;
-	Mountainous_Mission* TOP=NULL;
+	Mission* ITERATOR = NULL;
+	Mission* TOP=NULL;
 	Mou_Missions.peek(TOP);
 	while (ITERATOR != TOP)
 	{

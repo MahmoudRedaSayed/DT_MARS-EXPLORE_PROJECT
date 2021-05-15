@@ -1,5 +1,10 @@
 #pragma once
-enum Rover_Type {
+//enum Rover_Type {
+//	Emergency,
+//	Mountainous,
+//	Polar
+//};
+enum Type_G {
 	Emergency,
 	Mountainous,
 	Polar
@@ -9,7 +14,7 @@ class Rover
 private:
 	
 	//Non-Static Data Members
-	Rover_Type Type;			// Rover Type
+	Type_G Type;			// Rover Type
 	float speed;			   // Rover Speed read from input file _ assumed to be float not int to avoid truncation,
 					          //in maintenance Condition that makes speed = 0.5 previous speed 
 	const int ID;            //Rover ID , assigned from latest ID_Count
@@ -39,7 +44,7 @@ public:
 	static int Check_ER;  //The duration (in days) of checkups that an **Emergency** rover rover needs 
 						//to perform after completing N missions.
 	//Constructor & Destructor
-	Rover(float Rover_Speed, Rover_Type T)
+	Rover(float Rover_Speed, Type_G T)
 		:ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0), IsAssigned(false)
 		, Mission_Count(0), Type(T)
 		, IsInCheckup(false) 
@@ -55,7 +60,7 @@ public:
 	//just added in case of invalid input
 	~Rover() {}
 	//Getters
-	Rover_Type GetType() const { return Type; }
+	Type_G GetType() const { return Type; }
 	int GetID()const { return ID; }
 	float GetSpeed()const { return speed; }
 	bool GetIsAssigned()const { return IsAssigned; }

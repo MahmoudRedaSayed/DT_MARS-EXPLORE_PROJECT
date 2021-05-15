@@ -44,12 +44,12 @@ void Formulaion_Event::Set_SIG(int sig)
 	else cout << "Error:the signficance must be positive value" << endl;
 }
 
-void Formulaion_Event::Execute(PriorityQueue<Emergency_Mission*>& Eme_Missions, LinkedQueue<Polar_Mission*>& Pol_Missions, LinkedQueue<Mountainous_Mission*>& Mou_Missions)
+void Formulaion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
 {//check which type will be created
 	if (Mission_Type == 'E')
 	{
 		//create emergency mission
-		Emergency_Mission* PTR_MISSION = new Emergency_Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
+		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
 			
 		Eme_Missions.enqueue(PTR_MISSION, PTR_MISSION->Get_Priority());
 		return;
@@ -57,13 +57,13 @@ void Formulaion_Event::Execute(PriorityQueue<Emergency_Mission*>& Eme_Missions, 
 	if (Mission_Type == 'P')
 	{
 		//create polar mission
-		Polar_Mission* PTR_MISSION = new Polar_Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
+		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
 		Pol_Missions.enqueue(PTR_MISSION);
 		return;
 	}
 	if (Mission_Type == 'M')
 	{//create Mountainous mission
-		Mountainous_Mission* PTR_MISSION = new Mountainous_Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
+		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
 		Mou_Missions.enqueue(PTR_MISSION);
 		return;
 	}

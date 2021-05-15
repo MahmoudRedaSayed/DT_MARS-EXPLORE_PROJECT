@@ -51,7 +51,7 @@ void MarsStation_Class::Assign_E_M()
 	}
 	else
 	{
-		Emergency_Mission* Emergence_mission;
+		Mission* Emergence_mission;
 		Rover* E_Rover;
 		Rover* M_Rover;                //// pointer to rovers
 		Rover* P_Rover;
@@ -80,7 +80,7 @@ void MarsStation_Class::Assign_P_M()
 		return;
 	else
 	{
-		Polar_Mission* Polar_mission;
+		Mission* Polar_mission;
 		Rover* P_Rover;
 		while (P_Mission.dequeue(Polar_mission))
 		{
@@ -97,7 +97,7 @@ void MarsStation_Class::Assign_P_M()
 void MarsStation_Class::Assign_M_M()
 {
 	//23ml auto promoted b3d el assign el 3ady?
-	Mountainous_Mission* MMptr;
+	Mission* MMptr;
 	Rover* ARptr;
 	//M_Mission.peek(MMptr)
 	while (!M_Mission.isEmpty() && !Available_MR.isEmpty())
@@ -136,7 +136,7 @@ void MarsStation_Class::Assign_All_Mission()
 
 void MarsStation_Class::Emergency_EX_Mission_to_completed()
 {
-	Emergency_Mission* Emergence_mission;
+	Mission* Emergence_mission;
 	while (Emergency_EX_Mission.peek(Emergence_mission))
 	{
 		if (Emergence_mission->Get_CD() == Day_count)
@@ -172,7 +172,7 @@ void MarsStation_Class::Emergency_EX_Mission_to_completed()
 }
 void MarsStation_Class::Mountainous_EX_Mission_to_completed()
 {
-	Mountainous_Mission* Mountainous_mission;
+	Mission* Mountainous_mission;
 	while (Mountainous_EX_Mission.peek(Mountainous_mission))
 	{
 		if (Mountainous_mission->Get_CD() == Day_count)
@@ -203,19 +203,19 @@ void MarsStation_Class::Mountainous_EX_Mission_to_completed()
 }
 void MarsStation_Class::Polar_EX_Mission_to_completed()
 {
-	Polar_Mission* Polar_mission;
-	while (Polar_EX_Mission.peek(Polar_mission))
+	Mission* polar_mission;
+	while (Polar_EX_Mission.peek(polar_mission))
 	{
-		if (Polar_mission->Get_CD() == Day_count)
+		if (polar_mission->Get_CD() == Day_count)
 		{
-			Polar_EX_Mission.dequeue(Polar_mission);
-			Temp_CD_Mission.enqueue(Polar_mission, Polar_mission->Calculate_ED_Priority());
-			Completed_E_Mission_ID.enqueue(Polar_mission->Get_ID());
+			Polar_EX_Mission.dequeue(polar_mission);
+			Temp_CD_Mission.enqueue(polar_mission, polar_mission->Calculate_ED_Priority());
+			Completed_E_Mission_ID.enqueue(polar_mission->Get_ID());
 			// string should take ID //
-			P_ID.append(to_string(Polar_mission->Get_ID()));
+			P_ID.append(to_string(polar_mission->Get_ID()));
 			P_ID.append(to_string(','));
 			//Check_PR_State(Polar_mission->Get_Rptr());
-			General_Check_R_State(Polar_mission->Get_Rptr(), Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
+			General_Check_R_State(polar_mission->Get_Rptr(), Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
 		}
 		else
 		{
@@ -234,19 +234,19 @@ void MarsStation_Class::InExecution_to_Completed()
 
 void MarsStation_Class::Auto_Promoting()
 {
-	Mountainous_Mission* MMptr;
-	Emergency_Mission* EMptr;
+	Mission* MMptr;
+	Mission* EMptr;
 
 	while (!M_Mission.isEmpty())
 	{
 		M_Mission.peek(MMptr);
-		if (MMptr->Calculate_WD(Day_count) == Mountainous_Mission::AutoP)
+		if (MMptr->Calculate_WD(Day_count) == Mission::AutoP)
 		{
 			M_Mission.dequeue(MMptr);
-			EMptr = new Emergency_Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID());
+			EMptr = new Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID());
 			E_Mission.enqueue(EMptr, EMptr->Get_Priority());
-			Mountainous_Mission::NumOfAutoPMissions++;
-			Mountainous_Mission::NumOfMMissions--;
+			Mission::NumOfAutoPMissions++;
+			Mission::NumOfMMissions--;
 			//D.F to add NumOfAutoPMissions with NumOfMMissions to get num of totall m mission to calculat el nsba el m2wya for ayto promoting in output file
 			delete MMptr;//?delete in general and null errors......
 		}
@@ -467,7 +467,7 @@ void MarsStation_Class::Program_Startup()
 		Rover::Missions_Before_Check_Up = Missions_Before_Check_up;
 
 		My_File >> Auto_Promotion_in;                //The value of the auto promotion limit
-		Mountainous_Mission::AutoP = Auto_Promotion_in;
+		Mission::AutoP = Auto_Promotion_in;
 		My_File >> Num_Event;                       //The number of events
 		Event** PTR_Event = new Event * [Num_Event];
 		getline(My_File, Line);                    //To avoid the reminder of the line
@@ -743,18 +743,20 @@ void MarsStation_Class::Out2()
 void MarsStation_Class::Out3()
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
+	int MounSumTotal = Mission::NumOfMMissions + Mission::NumOfAutoPMissions;
+	int Msum = Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;
 
 	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
 
-	outF << "………………………………………………\n………………………………………………\n"
-		<< "Missions:" << Msum;
-	outF << "\t[M: " << Mountainous_Mission::NumOfMMissions << ", P: " << Polar_Mission::NumOfPMissions
-		<< ", E: " << Emergency_Mission::NumOfEMissions << "]\n";
+	outF << ".............................................\n.............................................\n"
+		<< "Missions:" << Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;
+	outF << "\t[M: " << Mission::NumOfMMissions << ", P: " << Mission::NumOfPMissions
+		<< ", E: " << Mission::NumOfEMissions << "]\n";
 	outF << "Rovers:" << Rover::E_Rover_Count + Rover::P_Rover_Count + Rover::M_Rover_Count
 		<< " \t[M: " << Rover::M_Rover_Count << ", P: " << Rover::P_Rover_Count << ", E: "
 		<< Rover::E_Rover_Count << "]\n";
 	outF << "Avg Wait = " << (float)WD_SUM / Msum << ", Avg Exec" << (float)ED_SUM / Msum << endl;
-	outF << "Auto-promoted: " << ((float)Mountainous_Mission::NumOfAutoPMissions / MounSumTotal) * 100 << "%\n";
+	outF << "Auto-promoted: " << ((float)Mission::NumOfAutoPMissions / MounSumTotal) * 100 << "%\n";
 
 	outF.close();
 
