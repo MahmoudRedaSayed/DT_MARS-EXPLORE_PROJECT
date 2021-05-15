@@ -607,6 +607,12 @@ void MarsStation_Class::Check_Up_to_Available_P()
 	}
 
 }
+void MarsStation_Class::Check_Up_to_Available_All()
+{
+	 Check_Up_to_Available_M();
+	 Check_Up_to_Available_E();
+	 Check_Up_to_Available_P();
+}
 bool MarsStation_Class::isFinished()
 {
 	return (Events_List.isEmpty() && P_Mission.isEmpty() && M_Mission.isEmpty() &&
