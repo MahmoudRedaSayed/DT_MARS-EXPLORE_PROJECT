@@ -14,7 +14,6 @@ void Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 {
 	Mission* ITERATOR=NULL;
 	Mission* TOP=NULL;
-	Mission* Promoted_Mission = new Mission();
 	Mou_Missions.peek(TOP);
 	while (ITERATOR != TOP)
 	{
@@ -29,13 +28,10 @@ void Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 	//Setting the data to the new mission rather than use a copy constructor
 	if (ITERATOR) 
 	{
-		Promoted_Mission->Set_FD(ITERATOR->Get_FD());
-		Promoted_Mission->Set_ID(ITERATOR->Get_ID());
-		Promoted_Mission->Set_MDUR(ITERATOR->Get_MDUR());
-		Promoted_Mission->Set_TLOC(ITERATOR->Get_TLOC());
-		Promoted_Mission->Set_TLOC(ITERATOR->Get_TLOC());
-		Promoted_Mission->Cal_Prirority();
+		Mission* Promoted_Mission = new Mission(ITERATOR->Get_TLOC(),ITERATOR->Get_MDUR(), ITERATOR ->Get_SIG(),ITERATOR->Get_FD(), ITERATOR->Get_ID(), Emergency);
 		delete ITERATOR;
-		Eme_Missions.enqueue(Promoted_Mission, Promoted_Mission->Get_Priority()); //Add the Mission to the emergency missions queue 
+		Eme_Missions.enqueue(Promoted_Mission, Promoted_Mission->Calculate_priority()); //Add the Mission to the emergency missions queue 
+		Mission::NumOfEMissions++;
+		Mission::NumOfMMissions--;
 	}
 }

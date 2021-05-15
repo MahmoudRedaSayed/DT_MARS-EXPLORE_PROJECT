@@ -49,22 +49,25 @@ void Formulaion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueu
 	if (Mission_Type == 'E')
 	{
 		//create emergency mission
-		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
+		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID(), Emergency);
 			
 		Eme_Missions.enqueue(PTR_MISSION, PTR_MISSION->Get_Priority());
+		Mission::NumOfEMissions++;
 		return;
 	}
 	if (Mission_Type == 'P')
 	{
 		//create polar mission
-		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
+		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID(), Polar);
 		Pol_Missions.enqueue(PTR_MISSION);
+		Mission::NumOfPMissions++;
 		return;
 	}
 	if (Mission_Type == 'M')
 	{//create Mountainous mission
-		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID());
+		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID(), Mountainous);
 		Mou_Missions.enqueue(PTR_MISSION);
+		Mission::NumOfMMissions++;
 		return;
 	}
 }

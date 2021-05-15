@@ -243,7 +243,7 @@ void MarsStation_Class::Auto_Promoting()
 		if (MMptr->Calculate_WD(Day_count) == Mission::AutoP)
 		{
 			M_Mission.dequeue(MMptr);
-			EMptr = new Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID());
+			EMptr = new Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID(), Emergency);
 			E_Mission.enqueue(EMptr, EMptr->Get_Priority());
 			Mission::NumOfAutoPMissions++;
 			Mission::NumOfMMissions--;
