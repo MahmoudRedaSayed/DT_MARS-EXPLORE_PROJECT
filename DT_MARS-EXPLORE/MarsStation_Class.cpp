@@ -242,7 +242,7 @@ void MarsStation_Class::Check_MR_State(Rover* CMRptr)
 	}
 	else
 	{
-		Available_MR.enqueue(CMRptr);
+		Available_MR.enqueue(CMRptr, CMRptr->GetSpeed());
 	}
 
 }
@@ -258,7 +258,7 @@ void MarsStation_Class::Check_ER_State(Rover* CERptr)
 	}
 	else
 	{
-		Available_ER.enqueue(CERptr);
+		Available_ER.enqueue(CERptr, CERptr->GetSpeed());
 	}
 
 }
@@ -273,7 +273,7 @@ void MarsStation_Class::Check_PR_State(Rover* CPRptr)
 	}
 	else
 	{
-		Available_PR.enqueue(CPRptr);
+		Available_PR.enqueue(CPRptr, CPRptr->GetSpeed());
 	}
 
 }
@@ -340,19 +340,19 @@ void MarsStation_Class::Program_Startup()
 			for (int i = 0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Mountainous);
-				Available_M_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_MR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 			for (int i = 0; i < Num_P_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Polar);
-				Available_P_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_PR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 			for (int i = 0; i < Num_E_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Emergency);
-				Available_E_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_ER.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 
@@ -379,21 +379,21 @@ void MarsStation_Class::Program_Startup()
 			for (int i = 0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Mountainous);
-				Available_M_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_MR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 			counter1++;
 			for (int i = 0; i < Num_P_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Polar);
-				Available_P_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_PR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 			counter1++;
 			for (int i = 0; i < Num_E_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Emergency);
-				Available_E_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_ER.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 		}
@@ -579,7 +579,7 @@ void MarsStation_Class::Check_Up_to_Available_M()
 	while (MMptr->Get_Day_out() == Day_count)
 	{
 		Check_up_MR.dequeue(MMptr);
-		Available_MR.enqueue(MMptr);
+		Available_MR.enqueue(MMptr, MMptr->GetSpeed());
 		Check_up_MR.peek(MMptr);
 	}
 }
@@ -590,7 +590,7 @@ void MarsStation_Class::Check_Up_to_Available_E()
 	while (EMptr->Get_Day_out() == Day_count)
 	{
 		Check_up_ER.dequeue(EMptr);
-		Available_ER.enqueue(EMptr);
+		Available_ER.enqueue(EMptr, EMptr->GetSpeed());
 		Check_up_ER.peek(EMptr);
 	}
 
@@ -602,7 +602,7 @@ void MarsStation_Class::Check_Up_to_Available_P()
 	while (PMptr->Get_Day_out() == Day_count)
 	{
 		Check_up_PR.dequeue(PMptr);
-		Available_PR.enqueue(PMptr);
+		Available_PR.enqueue(PMptr, PMptr->GetSpeed());
 		Check_up_PR.peek(PMptr);
 	}
 
