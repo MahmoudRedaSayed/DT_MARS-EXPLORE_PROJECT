@@ -54,7 +54,7 @@ int Mission::Calculate_WD(int CurrDay)
 //}
 int Mission::Calculate_CD( )
 {
-
+	Calculate_ED();
 	CD = FD+ ED + WD;
 	return CD;
 }
