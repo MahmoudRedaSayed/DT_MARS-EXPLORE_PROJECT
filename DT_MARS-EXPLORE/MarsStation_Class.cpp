@@ -17,13 +17,13 @@ int MarsStation_Class::Get_Day_count()
 }
 
 MarsStation_Class::MarsStation_Class()
-	:WD_SUM(0)
+	:WD_SUM(0), ED_SUM(0)
 {
 	files_Count++;
 }
 void MarsStation_Class::increment_day()
 {
-		Day_count++;
+	Day_count++;
 }
 //////////////// ASsign Emergency Missions using Priority Queue (Linked List) //////////////////////////
 void MarsStation_Class::Execute()
@@ -240,7 +240,7 @@ void MarsStation_Class::Auto_Promoting()
 }
 
 
-void MarsStation_Class::General_Check_R_State(Rover* CRptr, LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list,int Count , int Duration)
+void MarsStation_Class::General_Check_R_State(Rover* CRptr, LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration)
 {
 	if (CRptr->GetMission_Count() == Count)
 	{
@@ -678,10 +678,10 @@ void MarsStation_Class::Check_Up_to_Available_All()
 	// Check_Up_to_Available_E();
 	// Check_Up_to_Available_P();
 	 /// 
-	 General_Check_Up_to_Available(Check_up_MR, Available_MR);
-	 General_Check_Up_to_Available(Check_up_ER, Available_ER);
-	 General_Check_Up_to_Available(Check_up_PR, Available_PR);
-	 ////
+	General_Check_Up_to_Available(Check_up_MR, Available_MR);
+	General_Check_Up_to_Available(Check_up_ER, Available_ER);
+	General_Check_Up_to_Available(Check_up_PR, Available_PR);
+	////
 }
 bool MarsStation_Class::isFinished()
 {
@@ -692,46 +692,48 @@ bool MarsStation_Class::isFinished()
 
 void MarsStation_Class::Out1()
 {
-	ofstream outF;//variable to deal with output file , declared here for multiple functions
+	ofstream outF;
 	if (files_Count == 1)
-		outF.open("Station Statistics"+to_string(files_Count)+".txt", ios::out);
+		outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::out);
 
 	outF << "CD\t ID\t FD\t WD\t ED\n";
 	outF.close();
 }
 
-void MarsStation_Class::Out2(PriorityQueue<Mission*>& CM)
+void MarsStation_Class::Out2()
 {
-	ofstream outF;//variable to deal with output file , declared here for multiple functions
+	ofstream outF;
 
 	outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::app);
-	
+
 	Mission* dummy_mission;
-	while (CM.dequeue(dummy_mission))
+	while (Temp_CD_Mission.dequeue(dummy_mission))
 	{
 		outF << dummy_mission->Get_CD() << "\t" << dummy_mission->Get_ID() << "\t"
 			<< dummy_mission->Get_FD() << "\t" << dummy_mission->Get_WD() << "\t"
 			<< dummy_mission->Calculate_ED() << "\n";
-
+		WD_SUM += dummy_mission->Get_WD();
+		ED_SUM += dummy_mission->Get_ED();
 		delete dummy_mission;
 	}
 }
 
 void MarsStation_Class::Out3()
 {
-	ofstream outF;//variable to deal with output file , declared here for multiple functions
-
+	ofstream outF;
+	int MounSumTotal = Mountainous_Mission::NumOfMMissions + Mountainous_Mission::NumOfAutoPMissions;
+	int Msum = Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
 	outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::app);
 
 	outF << "………………………………………………\n………………………………………………\n"
-		<< "Missions:" << Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
-	outF << " [M: " << Mountainous_Mission::NumOfMMissions << ", P: " << Polar_Mission::NumOfPMissions
+		<< "Missions:" << Msum;
+	outF << "\t[M: " << Mountainous_Mission::NumOfMMissions << ", P: " << Polar_Mission::NumOfPMissions
 		<< ", E: " << Emergency_Mission::NumOfEMissions << "]\n";
 	outF << "Rovers:" << Rover::E_Rover_Count + Rover::P_Rover_Count + Rover::M_Rover_Count
 		<< " \t[M: " << Rover::M_Rover_Count << ", P: " << Rover::P_Rover_Count << ", E: "
 		<< Rover::E_Rover_Count << "]\n";
-	outF << "Avg Wait = "/*<< */ << ", Avg Exec"/*<<*/ << endl;
-	outF << "Auto-promoted: " <</* <<*/"%\n";
+	outF << "Avg Wait = " << (float)WD_SUM / Msum << ", Avg Exec" << (float)ED_SUM / Msum << endl;
+	outF << "Auto-promoted: " << ((float)Mountainous_Mission::NumOfAutoPMissions / MounSumTotal) * 100 << "%\n";
 
 	outF.close();
 

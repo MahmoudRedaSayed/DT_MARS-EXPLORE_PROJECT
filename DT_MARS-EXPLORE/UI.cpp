@@ -19,6 +19,7 @@ UI::~UI()
 
 void UI::SelectMode()
 {
+	
 	cout << "\n<<<<<<<< Please select simulation mode >>>>>>>>\n" <<
 		"1-Interactive Mode  (produces output file including simulation statistics, monitors & prints daily statistics during simulation on terminal window, you can increase simulation days manually!) \n" <<
 		"2-Step-By-Step Mode (same as interactive , but increases days automatically)! \n" <<

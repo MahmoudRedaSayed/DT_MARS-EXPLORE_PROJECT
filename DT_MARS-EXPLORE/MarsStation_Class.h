@@ -55,7 +55,8 @@ private:
 	LinkedQueue<Event*> Events_List ;
 
 	static int Day_count;
-	int WD_SUM;//variable for waiting sum & execution sum
+	int WD_SUM;//variable for waiting sum
+	int ED_SUM;// & execution sum
 	//count of waiting missions & 
 	
 
@@ -104,7 +105,7 @@ public:
 	//------------------[out Functions]-------------------
 	//PS:may/will be modified later
 	void Out1();//prints first line of out file
-	void Out2(PriorityQueue<Mission*> &M);//prints each completed missions's info
+	void Out2();//prints each completed missions's info
 	void Out3();//prints rest of statistics , //static counts of missions & rovers ,WDcount,#counter who?(waited missions || all mission)
 };
 
