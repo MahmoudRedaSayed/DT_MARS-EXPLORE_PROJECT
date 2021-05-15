@@ -25,6 +25,7 @@ private:
 	string P_ID;
 	string E_ID;
 
+
 	static int files_Count;//#files to be created for output(#user operations), needs discussion with team
 
 	LinkedQueue<Polar_Mission*> P_Mission;
@@ -57,7 +58,7 @@ private:
 	LinkedQueue<Rover*> Available_E_Rover_List;
 
 	static int Day_count;
-	//variable for waiting sum & execution sum
+	int WD_SUM;//variable for waiting sum & execution sum
 	//count of waiting missions & 
 	
 

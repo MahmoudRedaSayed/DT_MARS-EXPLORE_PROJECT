@@ -9,9 +9,10 @@
 #include<fstream>
 #include<string>
 using namespace std;
-int  MarsStation_Class::files_Count = 0;//#files to be created for output(#user operations), needs discussion with team
+int  MarsStation_Class::files_Count = 1;//#files to be created for output(#user operations), needs discussion with team
 
 MarsStation_Class::MarsStation_Class()
+	:WD_SUM(0)
 {
 	files_Count++;
 }
@@ -616,9 +617,8 @@ bool MarsStation_Class::isFinished()
 void MarsStation_Class::Out1()
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
-
 	if (files_Count == 1)
-		outF.open("Station Statistics.txt", ios::out);
+		outF.open("Station Statistics"+to_string(files_Count)+".txt", ios::out);
 
 	outF << "CD\t ID\t FD\t WD\t ED\n";
 	outF.close();
@@ -628,14 +628,15 @@ void MarsStation_Class::Out2(PriorityQueue<Mission*>& CM)
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
 
-	outF.open("Station Statistics.txt", ios::app);
-
+	outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::app);
+	
 	Mission* dummy_mission;
 	while (CM.dequeue(dummy_mission))
 	{
 		outF << dummy_mission->Get_CD() << "\t" << dummy_mission->Get_ID() << "\t"
 			<< dummy_mission->Get_FD() << "\t" << dummy_mission->Get_WD() << "\t"
 			<< dummy_mission->Calculate_ED() << "\n";
+
 		delete dummy_mission;
 	}
 }
@@ -644,7 +645,7 @@ void MarsStation_Class::Out3()
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
 
-	outF.open("Station Statistics.txt", ios::app);
+	outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::app);
 
 	outF << "………………………………………………\n………………………………………………\n"
 		<< "Missions:" << Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
