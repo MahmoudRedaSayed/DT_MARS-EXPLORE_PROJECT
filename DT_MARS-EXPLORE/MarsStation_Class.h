@@ -93,6 +93,7 @@ public:
 	void Check_Up_to_Available_M();
 	void Check_Up_to_Available_E();
 	void Check_Up_to_Available_P();
+	void Check_Up_to_Available_All();
 	///////////////////////////The function the will read the data from the file////////////////////
 	void Program_Startup();
 	//////// Check is All mission is finished /////////////
