@@ -62,12 +62,13 @@ private:
 
 	//LinkedQueue<>
 public:
+	static int Get_Day_count();
 
 	MarsStation_Class();
-	static void increment_day()
-	{
+	static void increment_day();
+	/*{
 		Day_count++;
-	}
+	}*/
 	///////// Execute Events /////////
 	void Execute();
 	//////// assignment operations Functions /////////
@@ -83,15 +84,19 @@ public:
 	void Polar_EX_Mission_to_completed();
 
 
-	//void Check_R_State(Rover* CRptr);
-	void Check_MR_State(Rover* CMRptr);
+	void General_Check_R_State(Rover* CRptr,LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration);
+	///
+	/*void Check_MR_State(Rover* CMRptr);
 	void Check_ER_State(Rover* CERptr);
-	void Check_PR_State(Rover* CPRptr);
-
-	void Check_Up_to_Available_M();
+	void Check_PR_State(Rover* CPRptr);*/
+	///
+	/*void Check_Up_to_Available_M();
 	void Check_Up_to_Available_E();
-	void Check_Up_to_Available_P();
+	void Check_Up_to_Available_P();*/
+	///
+	void General_Check_Up_to_Available(LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list);
 	void Check_Up_to_Available_All();
+
 	///////////////////////////The function the will read the data from the file////////////////////
 	void Program_Startup();
 	//////// Check is All mission is finished /////////////
