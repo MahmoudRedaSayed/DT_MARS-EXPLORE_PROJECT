@@ -4,7 +4,7 @@ int main()
 
 	MarsStation_Class object;
 	object.Program_Startup();
-	//object.Out1(); to be called in mars station
+	object.Out1();// to be called in mars station
 	while (!object.isFinished())
 	{
 		object.Execute();
@@ -14,5 +14,5 @@ int main()
 		/////////// printting functions & outputfile read /////////
 		object.increment_day();
 	}
-	//object.Out3();
+	object.Out3();
 }
