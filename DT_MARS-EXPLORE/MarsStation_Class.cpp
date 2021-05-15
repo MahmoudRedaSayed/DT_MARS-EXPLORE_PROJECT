@@ -1,4 +1,4 @@
-#include "MarsStation_Class.h"
+ï»¿#include "MarsStation_Class.h"
 #include"Event.h"
 #include"Formulaion_Event.h"
 #include"Cancellation_Event.h"
@@ -9,7 +9,7 @@
 #include<fstream>
 #include<string>
 using namespace std;
-int  MarsStation_Class::files_Count = 1;//#files to be created for output(#user operations), needs discussion with team
+int  MarsStation_Class::files_Count = 0;//#files to be created for output(#user operations), needs discussion with team
 
 int MarsStation_Class::Get_Day_count()
 {
@@ -36,6 +36,10 @@ void MarsStation_Class::Execute()
 			Events_List.dequeue(event);
 			event->Execute(E_Mission, P_Mission, M_Mission);
 		}
+		else
+		{
+			break;
+		}
 	}
 }
 
@@ -61,9 +65,8 @@ void MarsStation_Class::Assign_E_M()
 			{
 				Emergence_mission->Set_Rptr(M_Rover);
 			}
-			else                                     ///// Check Polar Rover list Last
+			else if(Available_PR.dequeue(P_Rover))                                    ///// Check Polar Rover list Last
 			{
-				Available_PR.dequeue(P_Rover);
 				Emergence_mission->Set_Rptr(P_Rover);
 			}
 			Emergence_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
@@ -141,18 +144,24 @@ void MarsStation_Class::Emergency_EX_Mission_to_completed()
 			Emergency_EX_Mission.dequeue(Emergence_mission);
 			Temp_CD_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_ED_Priority());
 			Completed_E_Mission_ID.enqueue(Emergence_mission->Get_ID());
+			// string should take ID //
+			E_ID.append(to_string(Emergence_mission->Get_ID()));
+			E_ID.append(to_string(','));
 			Rover* rover = Emergence_mission->Get_Rptr();
 			if (rover->GetType() == Emergency)
 			{
-				Check_ER_State(rover);
+				General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::E_Rover_Count, Rover::Check_ER);
+				//Check_ER_State(rover);
 			}
 			else if (rover->GetType() == Mountainous)
 			{
-				Check_MR_State(rover);
+				General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
+				//Check_MR_State(rover);
 			}
 			else
 			{
-				Check_PR_State(rover);
+				General_Check_R_State(rover, Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
+				//Check_PR_State(rover);
 			}
 		}
 		else
@@ -171,14 +180,19 @@ void MarsStation_Class::Mountainous_EX_Mission_to_completed()
 			Mountainous_EX_Mission.dequeue(Mountainous_mission);
 			Temp_CD_Mission.enqueue(Mountainous_mission, Mountainous_mission->Calculate_ED_Priority());
 			Completed_M_Mission_ID.enqueue(Mountainous_mission->Get_ID());
+			// string should take ID //
+			M_ID.append(to_string(Mountainous_mission->Get_ID()));
+			M_ID.append(to_string(','));
 			Rover* rover = Mountainous_mission->Get_Rptr();
 			if (rover->GetType() == Mountainous)
 			{
-				Check_MR_State(rover);
+				General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::E_Rover_Count, Rover::Check_ER);
+				//Check_MR_State(rover);
 			}
 			else
 			{
-				Check_ER_State(rover);
+				General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
+				//Check_ER_State(rover);
 			}
 		}
 		else
@@ -197,7 +211,11 @@ void MarsStation_Class::Polar_EX_Mission_to_completed()
 			Polar_EX_Mission.dequeue(Polar_mission);
 			Temp_CD_Mission.enqueue(Polar_mission, Polar_mission->Calculate_ED_Priority());
 			Completed_E_Mission_ID.enqueue(Polar_mission->Get_ID());
-			Check_PR_State(Polar_mission->Get_Rptr());
+			// string should take ID //
+			P_ID.append(to_string(Polar_mission->Get_ID()));
+			P_ID.append(to_string(','));
+			//Check_PR_State(Polar_mission->Get_Rptr());
+			General_Check_R_State(Polar_mission->Get_Rptr(), Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
 		}
 		else
 		{
@@ -611,13 +629,18 @@ void MarsStation_Class::Program_Startup()
 
 		}
 	}
+
 }
 
 
 void MarsStation_Class::General_Check_Up_to_Available(LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list)
 {
-	Rover* Gptr;
+	Rover* Gptr = nullptr;
 	Check_up_list.peek(Gptr);
+	if (!Gptr)
+	{
+		return;
+	}
 	while (Gptr->Get_Day_out() == MarsStation_Class::Day_count)
 	{
 		Check_up_list.dequeue(Gptr);
@@ -687,14 +710,13 @@ bool MarsStation_Class::isFinished()
 {
 	return (Events_List.isEmpty() && P_Mission.isEmpty() && M_Mission.isEmpty() &&
 		E_Mission.isEmpty() && Emergency_EX_Mission.isEmpty() && Mountainous_EX_Mission.isEmpty() &&
-		Polar_EX_Mission.isEmpty() && Temp_CD_Mission.isEmpty());
+		Polar_EX_Mission.isEmpty() /*&& Temp_CD_Mission.isEmpty()*/);
 }
 
 void MarsStation_Class::Out1()
 {
-	ofstream outF;
-	if (files_Count == 1)
-		outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::out);
+	ofstream outF;//variable to deal with output file , declared here for multiple functions
+		outF.open("\Output\\Station Statistics"+to_string(files_Count)+".txt", ios::out);
 
 	outF << "CD\t ID\t FD\t WD\t ED\n";
 	outF.close();
@@ -704,8 +726,8 @@ void MarsStation_Class::Out2()
 {
 	ofstream outF;
 
-	outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::app);
-
+	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
+	
 	Mission* dummy_mission;
 	while (Temp_CD_Mission.dequeue(dummy_mission))
 	{
@@ -720,12 +742,11 @@ void MarsStation_Class::Out2()
 
 void MarsStation_Class::Out3()
 {
-	ofstream outF;
-	int MounSumTotal = Mountainous_Mission::NumOfMMissions + Mountainous_Mission::NumOfAutoPMissions;
-	int Msum = Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
-	outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::app);
+	ofstream outF;//variable to deal with output file , declared here for multiple functions
 
-	outF << "………………………………………………\n………………………………………………\n"
+	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
+
+	outF << "â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦\nâ€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦\n"
 		<< "Missions:" << Msum;
 	outF << "\t[M: " << Mountainous_Mission::NumOfMMissions << ", P: " << Polar_Mission::NumOfPMissions
 		<< ", E: " << Emergency_Mission::NumOfEMissions << "]\n";
@@ -740,4 +761,4 @@ void MarsStation_Class::Out3()
 }
 
 
-int MarsStation_Class::Day_count = 0;
+int MarsStation_Class::Day_count = 1;
