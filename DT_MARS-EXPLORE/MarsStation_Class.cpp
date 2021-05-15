@@ -87,9 +87,14 @@ void MarsStation_Class::Assign_P_M()
 			if (Available_PR.dequeue(P_Rover))      ///// Check Emergency Rover list first
 			{
 				Polar_mission->Set_Rptr(P_Rover);
+				Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
+				Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
 			}
-			Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
-			Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
+			else
+			{
+				break;
+			}
+		
 		}
 	}
 }
@@ -710,7 +715,7 @@ bool MarsStation_Class::isFinished()
 {
 	return (Events_List.isEmpty() && P_Mission.isEmpty() && M_Mission.isEmpty() &&
 		E_Mission.isEmpty() && Emergency_EX_Mission.isEmpty() && Mountainous_EX_Mission.isEmpty() &&
-		Polar_EX_Mission.isEmpty() /*&& Temp_CD_Mission.isEmpty()*/);
+		Polar_EX_Mission.isEmpty() && Temp_CD_Mission.isEmpty());
 }
 
 void MarsStation_Class::Out1()
