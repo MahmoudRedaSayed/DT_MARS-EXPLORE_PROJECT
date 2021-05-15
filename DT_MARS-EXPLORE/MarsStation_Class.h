@@ -25,14 +25,15 @@ private:
 	string P_ID;
 	string E_ID;
 
+
 	static int files_Count;//#files to be created for output(#user operations), needs discussion with team
 
 	LinkedQueue<Polar_Mission*> P_Mission;
 	LinkedQueue<Mountainous_Mission*> M_Mission;
 
-	LinkedQueue<Rover*> Available_ER;
-	LinkedQueue<Rover*> Available_MR;
-	LinkedQueue<Rover*> Available_PR;
+	PriorityQueue<Rover*> Available_ER;
+	PriorityQueue<Rover*> Available_MR;
+	PriorityQueue<Rover*> Available_PR;
 
 	LinkedQueue<Rover*> Check_up_ER;
 	LinkedQueue<Rover*> Check_up_MR;
@@ -52,12 +53,9 @@ private:
 	PriorityQueue<Mission*> Temp_CD_Mission;
 
 	LinkedQueue<Event*> Events_List ;
-	LinkedQueue<Rover*> Available_M_Rover_List;
-	LinkedQueue<Rover*> Available_P_Rover_List;
-	LinkedQueue<Rover*> Available_E_Rover_List;
 
 	static int Day_count;
-	//variable for waiting sum & execution sum
+	int WD_SUM;//variable for waiting sum & execution sum
 	//count of waiting missions & 
 	
 

@@ -9,7 +9,7 @@
 #include<fstream>
 #include<string>
 using namespace std;
-int  MarsStation_Class::files_Count = 0;//#files to be created for output(#user operations), needs discussion with team
+int  MarsStation_Class::files_Count = 1;//#files to be created for output(#user operations), needs discussion with team
 
 int MarsStation_Class::Get_Day_count()
 {
@@ -17,6 +17,7 @@ int MarsStation_Class::Get_Day_count()
 }
 
 MarsStation_Class::MarsStation_Class()
+	:WD_SUM(0)
 {
 	files_Count++;
 }
@@ -249,7 +250,7 @@ void MarsStation_Class::General_Check_R_State(Rover* CRptr, LinkedQueue<Rover*>&
 	}
 	else
 	{
-		Available_list.enqueue(CRptr);
+		Available_MR.enqueue(CMRptr, CMRptr->GetSpeed());
 	}
 	//General_Check_R_State(mountain Rover * CRptr, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
 
@@ -302,6 +303,21 @@ void MarsStation_Class::General_Check_R_State(Rover* CRptr, LinkedQueue<Rover*>&
 //
 //}
 
+
+void MarsStation_Class::Check_PR_State(Rover* CPRptr)
+{
+	//dynamicM_Rover_Count
+	if (CPRptr->GetMission_Count() == Rover::P_Rover_Count)
+	{
+		Check_up_PR.enqueue(CPRptr);
+		CPRptr->Set_Day_out(Rover::Check_PR + Day_count);
+	}
+	else
+	{
+		Available_PR.enqueue(CPRptr, CPRptr->GetSpeed());
+	}
+
+}
 
 void MarsStation_Class::Program_Startup()
 {
@@ -365,19 +381,19 @@ void MarsStation_Class::Program_Startup()
 			for (int i = 0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Mountainous);
-				Available_M_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_MR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 			for (int i = 0; i < Num_P_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Polar);
-				Available_P_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_PR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 			for (int i = 0; i < Num_E_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Emergency);
-				Available_E_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_ER.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 
@@ -404,21 +420,21 @@ void MarsStation_Class::Program_Startup()
 			for (int i = 0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Mountainous);
-				Available_M_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_MR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 			counter1++;
 			for (int i = 0; i < Num_P_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Polar);
-				Available_P_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_PR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 			counter1++;
 			for (int i = 0; i < Num_E_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Emergency);
-				Available_E_Rover_List.enqueue(Array_OF_Rovers[counter]);
+				Available_ER.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
 		}
@@ -604,11 +620,21 @@ void MarsStation_Class::General_Check_Up_to_Available(LinkedQueue<Rover*>& Check
 	Check_up_list.peek(Gptr);
 	while (Gptr->Get_Day_out() == MarsStation_Class::Day_count)
 	{
-		Check_up_list.dequeue(Gptr);
-		Available_list.enqueue(Gptr);
-		Check_up_list.peek(Gptr);
+		Check_up_MR.dequeue(MMptr);
+		Available_MR.enqueue(MMptr, MMptr->GetSpeed());
+		Check_up_MR.peek(MMptr);
 	}
 }
+void MarsStation_Class::Check_Up_to_Available_E()
+{
+	Rover* EMptr;
+	Check_up_ER.peek(EMptr);
+	while (EMptr->Get_Day_out() == Day_count)
+	{
+		Check_up_ER.dequeue(EMptr);
+		Available_ER.enqueue(EMptr, EMptr->GetSpeed());
+		Check_up_ER.peek(EMptr);
+	}
 
 //void MarsStation_Class::Check_Up_to_Available_M()
 //{
@@ -667,9 +693,8 @@ bool MarsStation_Class::isFinished()
 void MarsStation_Class::Out1()
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
-
 	if (files_Count == 1)
-		outF.open("Station Statistics.txt", ios::out);
+		outF.open("Station Statistics"+to_string(files_Count)+".txt", ios::out);
 
 	outF << "CD\t ID\t FD\t WD\t ED\n";
 	outF.close();
@@ -679,14 +704,15 @@ void MarsStation_Class::Out2(PriorityQueue<Mission*>& CM)
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
 
-	outF.open("Station Statistics.txt", ios::app);
-
+	outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::app);
+	
 	Mission* dummy_mission;
 	while (CM.dequeue(dummy_mission))
 	{
 		outF << dummy_mission->Get_CD() << "\t" << dummy_mission->Get_ID() << "\t"
 			<< dummy_mission->Get_FD() << "\t" << dummy_mission->Get_WD() << "\t"
 			<< dummy_mission->Calculate_ED() << "\n";
+
 		delete dummy_mission;
 	}
 }
@@ -695,7 +721,7 @@ void MarsStation_Class::Out3()
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
 
-	outF.open("Station Statistics.txt", ios::app);
+	outF.open("Station Statistics" + to_string(files_Count) + ".txt", ios::app);
 
 	outF << "………………………………………………\n………………………………………………\n"
 		<< "Missions:" << Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
