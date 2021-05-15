@@ -1,7 +1,7 @@
 #pragma once
-enum Terminal_Mode {
-	Interactive,
-	Step_By_Step,
+enum class Terminal_Mode {
+	Interactive ,
+	Step_By_Step ,
 	Silent
 };
 class UI
@@ -11,7 +11,7 @@ private:
 public:
 	UI();
 	~UI();
-
-	//void SelectMode
+	//shall make function to recieve input file name ___ talk to 7oda
+	void SelectMode();
 };
 
