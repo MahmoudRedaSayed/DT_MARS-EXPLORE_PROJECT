@@ -13,6 +13,7 @@
 #include<string.h>
 #include"LinkedQueue.h"
 #include"PriorityQueue.h"
+#include "UI.h"
 
 #include<iostream>
 using namespace std;
@@ -27,6 +28,7 @@ private:
 
 
 	static int files_Count;//#files to be created for output(#user operations), needs discussion with team
+	UI ui;
 
 	LinkedQueue<Mission*> P_Mission;
 	LinkedQueue<Mission*> M_Mission;

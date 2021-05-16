@@ -412,8 +412,9 @@ void MarsStation_Class::Program_Startup()
 	int j, ED, ID, TOLC, MDUR, SIG;
 	Rover** Array_OF_Rovers;
 	int* Speeds;
-	cout << "Please::enter the name of the file the you want to load it" << endl;
-	cin >> File_Name;
+	/*cout << "Please::enter the name of the file the you want to load it" << endl;
+	cin >> File_Name;*/
+	File_Name = ui.read_input_file_name();
 	ifstream My_File;
 	My_File.open("\Files\\" + File_Name + ".txt");
 	if (My_File.is_open())                       //Check if the file is found or not
