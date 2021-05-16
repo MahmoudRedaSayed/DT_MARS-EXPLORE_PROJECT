@@ -1,8 +1,8 @@
 #pragma once
 #include"Mission.h"
-#include"Emergency_Mission.h"
-#include"Mountainous_Mission.h"
-#include"Polar_Mission.h"
+//#include"Mission.h"
+//#include"Mission.h"
+//#include"Mission.h"
 
 #include "Event.h"
 #include "Formulaion_Event.h"
@@ -28,8 +28,8 @@ private:
 
 	static int files_Count;//#files to be created for output(#user operations), needs discussion with team
 
-	LinkedQueue<Polar_Mission*> P_Mission;
-	LinkedQueue<Mountainous_Mission*> M_Mission;
+	LinkedQueue<Mission*> P_Mission;
+	LinkedQueue<Mission*> M_Mission;
 
 	PriorityQueue<Rover*> Available_ER;
 	PriorityQueue<Rover*> Available_MR;
@@ -43,12 +43,12 @@ private:
 	LinkedQueue<int> Completed_P_Mission_ID;
 	LinkedQueue<int> Completed_M_Mission_ID;
 
-	PriorityQueue<Emergency_Mission*> E_Mission;
+	PriorityQueue<Mission*> E_Mission;
 	//PriorityQueue<Mission*> EX_Mission;
 	///////////////// 3 separate lists ////////////////
-	PriorityQueue<Emergency_Mission*> Emergency_EX_Mission;
-	PriorityQueue<Mountainous_Mission*> Mountainous_EX_Mission;
-	PriorityQueue<Polar_Mission*> Polar_EX_Mission;
+	PriorityQueue<Mission*> Emergency_EX_Mission;
+	PriorityQueue<Mission*> Mountainous_EX_Mission;
+	PriorityQueue<Mission*> Polar_EX_Mission;
 
 	PriorityQueue<Mission*> Temp_CD_Mission;
 
@@ -80,9 +80,10 @@ public:
 	void Assign_All_Mission();
 	//////// Move from in execution to completed to available again //////////
 	void InExecution_to_Completed();
-	void Emergency_EX_Mission_to_completed();
-	void Mountainous_EX_Mission_to_completed();
-	void Polar_EX_Mission_to_completed();
+
+	//void Emergency_EX_Mission_to_completed();
+	//void Mountainous_EX_Mission_to_completed();
+	//void Polar_EX_Mission_to_completed();
 
 
 	void General_Check_R_State(Rover* CRptr,LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration);
@@ -96,6 +97,7 @@ public:
 	void Check_Up_to_Available_P();*/
 	///
 	void General_Check_Up_to_Available(LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list);
+	void General_InEXecution_to_Completed(PriorityQueue<Mission*>& Execution_list, string &List_ID);
 	void Check_Up_to_Available_All();
 
 	///////////////////////////The function the will read the data from the file////////////////////
