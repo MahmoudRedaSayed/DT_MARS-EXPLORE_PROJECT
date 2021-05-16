@@ -810,13 +810,13 @@ void MarsStation_Class::Out3()
 	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
 
 	outF << ".............................................\n.............................................\n"
-		<< "Missions:" << Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
-	outF << "\t[M: " << Mountainous_Mission::NumOfMMissions << ", P: " << Polar_Mission::NumOfPMissions
-		<< ", E: " << Emergency_Mission::NumOfEMissions << "]\n";
+		<< "Missions:" << Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;
+	outF << "\t[M: " << Mission::NumOfMMissions << ", P: " << Mission::NumOfPMissions
+		<< ", E: " << Mission::NumOfEMissions << "]\n";
 	outF << "Rovers:" << Rover::E_Rover_Count + Rover::P_Rover_Count + Rover::M_Rover_Count
 		<< " \t[M: " << Rover::M_Rover_Count << ", P: " << Rover::P_Rover_Count << ", E: "
 		<< Rover::E_Rover_Count << "]\n";
-	outF << "Avg Wait = " << (float)WD_SUM / Msum << ", Avg Exec" << (float)ED_SUM / Msum << endl;
+	outF << "Avg Wait = " << (float)WD_SUM / Msum << ", Avg Exec = " << (float)ED_SUM / Msum << endl;
 	outF << "Auto-promoted: " << ((float)Mission::NumOfAutoPMissions / MounSumTotal) * 100 << "%\n";
 
 	outF.close();
