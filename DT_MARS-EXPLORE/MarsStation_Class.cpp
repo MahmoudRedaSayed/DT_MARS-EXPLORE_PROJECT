@@ -65,7 +65,7 @@ void MarsStation_Class::Assign_E_M()
 			{
 				Emergence_mission->Set_Rptr(M_Rover);
 			}
-			else if(Available_PR.dequeue(P_Rover))                                    ///// Check Polar Rover list Last
+			else if (Available_PR.dequeue(P_Rover))                                    ///// Check Polar Rover list Last
 			{
 				Emergence_mission->Set_Rptr(P_Rover);
 			}
@@ -87,9 +87,11 @@ void MarsStation_Class::Assign_P_M()
 			if (Available_PR.dequeue(P_Rover))      ///// Check Emergency Rover list first
 			{
 				Polar_mission->Set_Rptr(P_Rover);
+				Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
+				Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
 			}
-			Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
-			Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
+			else
+				break;
 		}
 	}
 }
@@ -715,10 +717,12 @@ bool MarsStation_Class::isFinished()
 
 void MarsStation_Class::Out1()
 {
-	ofstream outF;//variable to deal with output file , declared here for multiple functions
-		outF.open("\Output\\Station Statistics"+to_string(files_Count)+".txt", ios::out);
 
-	outF << "CD\t ID\t FD\t WD\t ED\n";
+	ofstream outF;//variable to deal with output file , declared here for multiple functions
+	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::out);
+
+
+	outF << "CD\tID\tFD\tWD\tED\n";
 	outF.close();
 }
 
@@ -727,7 +731,7 @@ void MarsStation_Class::Out2()
 	ofstream outF;
 
 	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
-	
+
 	Mission* dummy_mission;
 	while (Temp_CD_Mission.dequeue(dummy_mission))
 	{
@@ -743,11 +747,13 @@ void MarsStation_Class::Out2()
 void MarsStation_Class::Out3()
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
+	int MounSumTotal = Mountainous_Mission::NumOfMMissions + Mountainous_Mission::NumOfAutoPMissions;
+	int Msum = Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
 
 	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
 
-	outF << "………………………………………………\n………………………………………………\n"
-		<< "Missions:" << Msum;
+	outF << ".............................................\n.............................................\n"
+		<< "Missions:" << Mountainous_Mission::NumOfMMissions + Polar_Mission::NumOfPMissions + Emergency_Mission::NumOfEMissions;
 	outF << "\t[M: " << Mountainous_Mission::NumOfMMissions << ", P: " << Polar_Mission::NumOfPMissions
 		<< ", E: " << Emergency_Mission::NumOfEMissions << "]\n";
 	outF << "Rovers:" << Rover::E_Rover_Count + Rover::P_Rover_Count + Rover::M_Rover_Count
