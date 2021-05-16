@@ -60,14 +60,21 @@ void MarsStation_Class::Assign_E_M()
 			if (Available_ER.dequeue(E_Rover))      ///// Check Emergency Rover list first
 			{
 				Emergence_mission->Set_Rptr(E_Rover);
+				E_Rover->Increment_Mission_Count();
 			}
 			else if (Available_MR.dequeue(M_Rover)) ///// Check Mountainous Rover list second
 			{
 				Emergence_mission->Set_Rptr(M_Rover);
+				M_Rover->Increment_Mission_Count();
 			}
 			else if(Available_PR.dequeue(P_Rover))                                    ///// Check Polar Rover list Last
 			{
 				Emergence_mission->Set_Rptr(P_Rover);
+				P_Rover->Increment_Mission_Count();
+			}
+			else
+			{
+				return;
 			}
 			Emergence_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
 			Emergency_EX_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_CD_Priority());
@@ -87,14 +94,15 @@ void MarsStation_Class::Assign_P_M()
 			if (Available_PR.dequeue(P_Rover))      ///// Check Emergency Rover list first
 			{
 				Polar_mission->Set_Rptr(P_Rover);
+				P_Rover->Increment_Mission_Count();
 				Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
 				Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
+
 			}
 			else
 			{
 				break;
 			}
-		
 		}
 	}
 }
@@ -138,7 +146,7 @@ void MarsStation_Class::Assign_All_Mission()
 	Assign_P_M();
 	Auto_Promoting();/////?is it will be like that at the first before any assign???
 }
-
+/*
 void MarsStation_Class::Emergency_EX_Mission_to_completed()
 {
 	Mission* Emergence_mission;
@@ -235,8 +243,54 @@ void MarsStation_Class::InExecution_to_Completed()
 	Mountainous_EX_Mission_to_completed();
 	Polar_EX_Mission_to_completed();
 	//Mamdouh : maybe here you can call out2? remember you shall send a queue of sorted completed missions ;) 
+}*/
+void MarsStation_Class::InExecution_to_Completed()
+{
+	//////// Check Emergency Execution List ///////
+	General_InEXecution_to_Completed(Emergency_EX_Mission,E_ID);
+	//////// Check Mountainous Execution List ///////
+	General_InEXecution_to_Completed(Mountainous_EX_Mission,M_ID);
+	//////// Check Polar Execution List ///////
+	General_InEXecution_to_Completed(Polar_EX_Mission,P_ID);
 }
+void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>& Execution_list,
+	string &List_ID)
+{
+	Mission* mission_type;
+	while (Execution_list.peek(mission_type))
+	{
+		if (mission_type->Get_CD() == Day_count)
+		{
+			Execution_list.dequeue(mission_type);
+			Temp_CD_Mission.enqueue(mission_type, mission_type->Calculate_ED_Priority());
+			Completed_E_Mission_ID.enqueue(mission_type->Get_ID());
+			// string should take ID //
 
+			List_ID.append(to_string(mission_type->Get_ID()));
+			List_ID.append(to_string(','));
+
+			Rover* rover = mission_type->Get_Rptr();
+			if (rover->GetType() == Emergency)
+			{
+				General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::E_Rover_Count, Rover::Check_ER);
+
+			}
+			else if (rover->GetType() == Mountainous)
+			{
+				General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
+			}
+			else
+			{
+				General_Check_R_State(rover, Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
+				//Check_PR_State(rover);
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+}
 void MarsStation_Class::Auto_Promoting()
 {
 	Mission* MMptr;
@@ -752,7 +806,8 @@ void MarsStation_Class::Out3()
 	int Msum = Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;
 
 	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
-
+	if (outF.is_open())
+		return;
 	outF << ".............................................\n.............................................\n"
 		<< "Missions:" << Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;
 	outF << "\t[M: " << Mission::NumOfMMissions << ", P: " << Mission::NumOfPMissions
