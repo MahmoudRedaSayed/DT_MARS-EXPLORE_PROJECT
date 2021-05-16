@@ -1,6 +1,5 @@
 #include"MarsStation_Class.h"
-int main()
-{
+int main(){
 
 	MarsStation_Class object;
 	object.Program_Startup();
@@ -12,8 +11,8 @@ int main()
 		object.InExecution_to_Completed();
 		object.Check_Up_to_Available_All();
 		/////////// printting functions & outputfile read /////////
-		object.increment_day();
 		object.Out2();
+		object.increment_day();
 	}
 	object.Out3();
 }

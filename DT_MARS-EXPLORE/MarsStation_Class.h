@@ -80,9 +80,10 @@ public:
 	void Assign_All_Mission();
 	//////// Move from in execution to completed to available again //////////
 	void InExecution_to_Completed();
-	void Emergency_EX_Mission_to_completed();
-	void Mountainous_EX_Mission_to_completed();
-	void Polar_EX_Mission_to_completed();
+
+	//void Emergency_EX_Mission_to_completed();
+	//void Mountainous_EX_Mission_to_completed();
+	//void Polar_EX_Mission_to_completed();
 
 
 	void General_Check_R_State(Rover* CRptr,LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration);
@@ -96,6 +97,7 @@ public:
 	void Check_Up_to_Available_P();*/
 	///
 	void General_Check_Up_to_Available(LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list);
+	void General_InEXecution_to_Completed(PriorityQueue<Mission*>& Execution_list, string &List_ID);
 	void Check_Up_to_Available_All();
 
 	///////////////////////////The function the will read the data from the file////////////////////
