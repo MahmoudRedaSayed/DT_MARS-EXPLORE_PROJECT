@@ -27,6 +27,8 @@ private:
 	int Day_out;
 	//
 
+	///////////// Bonus Maintanence ////////////////
+	/* int Current_Mission_EX_Time;*/
 public:
 	//static Data Members
 	static int ID_Count;			 //Count of Rovers & assigning each new rover latest ID count
@@ -58,7 +60,7 @@ public:
 	}
 	//Let Default speed for rover is 3 km/hour (Although we may not need this condition :D )
 	//just added in case of invalid input
-	~Rover() {}
+	~Rover() { /*Current_Mission_EX_Time = 0;*/ }
 	//Getters
 	Type_G GetType() const { return Type; }
 	int GetID()const { return ID; }
@@ -89,7 +91,19 @@ public:
 	 void Set_Day_out(int x) { Day_out = (x > 0 ? x : 1); }//?is that condition ok??//Mamdouh:I think it's fine
 	 int Get_Day_out() { return Day_out; }
 	 //
-	
+	 //////////////////// Bonus Maintenance ////////////////////////////
+	 /*
+	 void set_Mission_EXtime(double ED )
+	 {
+		 Current_Mission_EX_Time = ED;
+	 }
+	 void Check_Maintenance()
+	 {
+
+	 }
+	 */
+
+
 	//void SetIsInMaintenance(bool m) { IsInMaintenance = m; }
 	//Move Rover to maintenance 
 	/*void Move_To_Maintenance() {
