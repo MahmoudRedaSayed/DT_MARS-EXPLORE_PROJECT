@@ -25,7 +25,7 @@ void MarsStation_Class::increment_day()
 {
 	Day_count++;
 }
-//////////////// ASsign Emergency Missions using Priority Queue (Linked List) //////////////////////////
+/////////////// Execute Events /////////////////
 void MarsStation_Class::Execute()
 {
 	Event* event;
@@ -35,6 +35,8 @@ void MarsStation_Class::Execute()
 		{
 			Events_List.dequeue(event);
 			event->Execute(E_Mission, P_Mission, M_Mission);
+			delete event; // we don't need created object of Event so we delete it
+			// What about dynamic cast , did object is deleted Completely or need dynamic cast ?!
 		}
 		else
 		{
@@ -42,9 +44,11 @@ void MarsStation_Class::Execute()
 		}
 	}
 }
+//////////////// Assign Emergency Missions using Priority Queue (Linked List) //////////////////////////
 
 void MarsStation_Class::Assign_E_M()
 {
+	/*
 	if (Available_ER.isEmpty() && Available_PR.isEmpty() && Available_MR.isEmpty())
 	{
 		return;
@@ -80,9 +84,34 @@ void MarsStation_Class::Assign_E_M()
 			Emergency_EX_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_CD_Priority());
 		}
 	}
+	*/
+	while (!E_Mission.isEmpty() &&(!Available_ER.isEmpty() || !Available_PR.isEmpty() || !Available_MR.isEmpty()))
+	{
+		Mission* Emergence_mission;
+		Rover* rover;
+		E_Mission.dequeue(Emergence_mission);
+		if (Available_ER.dequeue(rover))      ///// Check Emergency Rover list first
+		{
+			Emergence_mission->Set_Rptr(rover);
+			rover->Increment_Mission_Count();
+		}
+		else if (Available_MR.dequeue(rover)) ///// Check Mountainous Rover list second
+		{
+			Emergence_mission->Set_Rptr(rover);
+			rover->Increment_Mission_Count();
+		}
+		else if (Available_PR.dequeue(rover))    ///// Check Polar Rover list Last
+		{
+			Emergence_mission->Set_Rptr(rover);
+			rover->Increment_Mission_Count();
+		}
+		Emergence_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
+		Emergency_EX_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_CD_Priority());
+	}
 }
 void MarsStation_Class::Assign_P_M()
 {
+	/*
 	if (Available_PR.isEmpty())
 		return;
 	else
@@ -104,6 +133,17 @@ void MarsStation_Class::Assign_P_M()
 				break;
 			}
 		}
+	}*/
+	while (!P_Mission.isEmpty() && !Available_PR.isEmpty())
+	{
+		Mission* Polar_mission;
+		P_Mission.dequeue(Polar_mission);
+		Rover* P_Rover;
+		Available_PR.dequeue(P_Rover);
+		Polar_mission->Set_Rptr(P_Rover);
+		P_Rover->Increment_Mission_Count();
+		Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
+		Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
 	}
 }
 
@@ -770,7 +810,9 @@ bool MarsStation_Class::isFinished()
 {
 	return (Events_List.isEmpty() && P_Mission.isEmpty() && M_Mission.isEmpty() &&
 		E_Mission.isEmpty() && Emergency_EX_Mission.isEmpty() && Mountainous_EX_Mission.isEmpty() &&
-		Polar_EX_Mission.isEmpty() && Temp_CD_Mission.isEmpty());
+		Polar_EX_Mission.isEmpty());
+	// check if All Lists of Missions & events is empty this mean all missions are Completed then 
+	// terminate the Program
 }
 
 void MarsStation_Class::Out1()
