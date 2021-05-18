@@ -482,10 +482,8 @@ void MarsStation_Class::Program_Startup()
 			{
 				while (Line[i] != ' ')
 				{
-					int k = 0;
-					Speeds_Str[j][k] = Line[i];
+					Speeds_Str[j]+= Line[i];
 					i++;
-					k++;
 				}
 				Speeds[j] = stoi(Speeds_Str[j]);
 				while (Line[i] == ' ')
