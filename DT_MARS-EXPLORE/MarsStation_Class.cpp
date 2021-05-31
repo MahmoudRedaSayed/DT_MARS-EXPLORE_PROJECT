@@ -327,8 +327,8 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 			MarsStation_Class::completed_missions_count++;
 			//Completed_E_Mission_ID.enqueue(mission_type->Get_ID());
 			// string should take ID //
-			List_ID.append(to_string(mission_type->Get_ID()));
-			List_ID.append(to_string(','));
+			List_ID =List_ID+(to_string(mission_type->Get_ID()));
+			List_ID =List_ID+(",");
 
 			Rover* rover = mission_type->Get_Rptr();
 			rover->SetIsAssigned(false);
@@ -857,11 +857,11 @@ void MarsStation_Class::print() {
 	{
 		ui.print_Availble(Day_count,waiting_missions_count, E_Mission,
 			P_Mission, M_Mission);
-		//ui.Print_In_Execution_Missions_Rovers(execution_missions_count,  Emergency_EX_Mission,
-			// Mountainous_EX_Mission, Polar_EX_Mission);
+		ui.Print_In_Execution_Missions_Rovers(execution_missions_count,  Emergency_EX_Mission,
+			 Mountainous_EX_Mission, Polar_EX_Mission);
 
 		ui.Print_In_Checkup_Rovers(checkup_Rover_count,Check_up_ER, Check_up_PR,Check_up_MR);
-		//ui.Print_Completed(completed_missions_count,  M_ID,  P_ID,E_ID);
+		ui.Print_Completed(completed_missions_count,  M_ID,  P_ID,E_ID);
 	}
 	else if(Mode == Step_By_Step)
 	{
