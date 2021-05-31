@@ -16,7 +16,10 @@ UI::~UI()
 		std::cout << "\n================================================================================================================\n";
 
 }
-
+Terminal_Mode UI::get_mode()
+{
+	return Mode;
+}
 void UI::SelectMode()
 {
 	int m;
@@ -45,8 +48,8 @@ void UI::SelectMode()
 
 void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<Mission*> Emergency_EX_Mission, PriorityQueue<Mission*> Mountainous_EX_Mission, PriorityQueue<Mission*> Polar_EX_Mission)
 {
-	cout << NUM_OF_Missions << "In-Execution Missions/Rovers: ";
-	Mission* PTR;
+	cout << NUM_OF_Missions << " In-Execution Missions/Rovers: ";
+	Mission* PTR = nullptr;
 	int count = 0;//To avoid the comma
 	//printing the emergency
 	Emergency_EX_Mission.peek(PTR);
@@ -115,20 +118,20 @@ void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<M
 
 void UI::Print_Completed(int NUM_OF_Missions, string M_ID, string P_ID, string E_ID)
 {
-	cout << NUM_OF_Missions<<"Completed Missions: ";
-	if (M_ID != " ")
+	cout << NUM_OF_Missions<<" Completed Missions: ";
+	if (M_ID != "")
 	{
 		M_ID = M_ID.substr(M_ID.size() - 2);
 		cout << "  " << '{' << M_ID << '}';
 	}
 
-	if (P_ID != " ")
+	if (P_ID != "")
 	{
 		P_ID = P_ID.substr(P_ID.size() - 2);
 		cout <<"  " <<'(' << P_ID << ')';
 	}
 
-	if (E_ID != " ")
+	if (E_ID != "")
 	{
 		E_ID = E_ID.substr(E_ID.size() - 2);
 		cout<<"  "<< '[' << E_ID << ']';
@@ -137,10 +140,11 @@ void UI::Print_Completed(int NUM_OF_Missions, string M_ID, string P_ID, string E
 	 cout<<endl;
 }
 
-void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up_ER, LinkedQueue<Rover*> Check_up_PR, LinkedQueue<Rover*> Check_up_MR)
+void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up_ER,
+	LinkedQueue<Rover*> Check_up_PR, LinkedQueue<Rover*> Check_up_MR)
 {
-	cout << NUM_OF_Rovers << "In-Checkup Rovers: ";
-	Rover* PTR;
+	cout << NUM_OF_Rovers << " In-Checkup Rovers: ";
+	Rover* PTR = nullptr;
 	int count = 0;//To avoid the comma
 	//printing the Emergency
 	Check_up_ER.peek(PTR);
@@ -148,7 +152,7 @@ void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up
 	{
 		cout << '[';
 	}
-	while (PTR)
+	while (Check_up_ER.peek(PTR))
 	{
 		if (count != 0)
 		{
@@ -162,18 +166,19 @@ void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up
 		cout << ']'<<' ';
 	// printing the polar 
 	count = 0;
+	PTR = nullptr;
 	Check_up_PR.peek(PTR);
 	if (PTR)
 	{
 		cout << '(';
 	}
-	while (PTR)
+	while (Check_up_PR.peek(PTR))
 	{
 		if (count != 0)
 		{
 			cout << ',';
 		}
-		Check_up_ER.dequeue(PTR);
+		Check_up_PR.dequeue(PTR);
 		cout << PTR->GetID();
 		count++;
 	}
@@ -181,18 +186,19 @@ void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up
 		cout << ')' << ' ';
 	//printing the Mountainous
 	count = 0;
+	PTR = nullptr;
 	Check_up_MR.peek(PTR);
 	if (PTR)
 	{
 		cout << '{';
 	}
-	while (PTR)
+	while (Check_up_MR.peek(PTR))
 	{
 		if (count != 0)
 		{
 			cout << ',';
 		}
-		Check_up_ER.dequeue(PTR);
+		Check_up_MR.dequeue(PTR);
 		cout << PTR->GetID();
 		count++;
 	}
@@ -202,16 +208,17 @@ void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up
 }
 
 
-void UI::print_Availble(int waiting_missions,PriorityQueue<Mission*> E_Mission,
+void UI::print_Availble(int day_count,int waiting_missions,PriorityQueue<Mission*> E_Mission,
 	LinkedQueue<Mission*> P_Mission, LinkedQueue<Mission*> M_Mission)
 {
 	Mission* mission;
 	Mission* mission_next;
-	cout << waiting_missions <<"Waiting Missions: ";
-	if (!!E_Mission.isEmpty())
+	cout << "current day:" << day_count << endl;
+	cout << waiting_missions <<" Waiting Missions: ";
+	if (!E_Mission.isEmpty())
 	{
 		E_Mission.dequeue(mission);
-		cout << "[ ";
+		cout << "[";
 		while (E_Mission.dequeue(mission_next))
 		{
 			cout << mission->Get_ID() << ",";
@@ -222,7 +229,7 @@ void UI::print_Availble(int waiting_missions,PriorityQueue<Mission*> E_Mission,
 	if (!P_Mission.isEmpty())
 	{
 		P_Mission.dequeue(mission);
-		cout << "( ";
+		cout << "(";
 		while (P_Mission.dequeue(mission_next))
 		{
 			cout << mission->Get_ID() << ",";
@@ -230,10 +237,10 @@ void UI::print_Availble(int waiting_missions,PriorityQueue<Mission*> E_Mission,
 		}
 		cout << mission->Get_ID() << ") ";
 	}
-	if (!!M_Mission.isEmpty())
+	if (!M_Mission.isEmpty())
 	{
 		M_Mission.dequeue(mission);
-		cout << "{ ";
+		cout << "{";
 		while (M_Mission.dequeue(mission_next))
 		{
 			cout << mission->Get_ID() << ",";
@@ -241,6 +248,7 @@ void UI::print_Availble(int waiting_missions,PriorityQueue<Mission*> E_Mission,
 		}
 		cout << mission->Get_ID() << "} ";
 	}
+	cout << endl;
 }
 
 string UI::read_input_file_name()

@@ -1,21 +1,16 @@
 #pragma once
-#include"Mission.h"
-//#include"Mission.h"
-//#include"Mission.h"
-//#include"Mission.h"
-
+#include "Mission.h"
 #include "Event.h"
 #include "Formulaion_Event.h"
 #include "Cancellation_Event.h"
 #include "Promotion_Event.h"
-
 #include "Rover.h"
-#include<string.h>
-#include"LinkedQueue.h"
-#include"PriorityQueue.h"
+#include <string.h>
+#include "LinkedQueue.h"
+#include "PriorityQueue.h"
 #include "UI.h"
+#include <iostream>
 
-#include<iostream>
 using namespace std;
 
 
@@ -57,6 +52,11 @@ private:
 	LinkedQueue<Event*> Events_List ;
 
 	static int Day_count;
+	static int waiting_missions_count,
+		execution_missions_count,
+		completed_missions_count,
+		availble_Rover_count,
+		checkup_Rover_count;
 	int WD_SUM;//variable for waiting sum
 	int ED_SUM;// & execution sum
 	//count of waiting missions & 
@@ -106,6 +106,8 @@ public:
 	void Program_Startup();
 	//////// Check is All mission is finished /////////////
 	bool isFinished();
+	// print function
+	void print();
 	//------------------[out Functions]-------------------
 	//PS:may/will be modified later
 	void Out1();//prints first line of out file
