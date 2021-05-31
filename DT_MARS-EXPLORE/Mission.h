@@ -71,6 +71,6 @@ public:
 	//Polar.h
 	static int NumOfPMissions;
 	///////////////////////////////
-
+	static int NumOfNoNAutoPMissions;
 };
 

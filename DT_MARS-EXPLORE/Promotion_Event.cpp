@@ -32,6 +32,7 @@ void Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 		delete ITERATOR;
 		Eme_Missions.enqueue(Promoted_Mission, Promoted_Mission->Calculate_priority()); //Add the Mission to the emergency missions queue 
 		Mission::NumOfEMissions++;
+		Mission::NumOfNoNAutoPMissions++;
 		Mission::NumOfMMissions--;
 	}
 }

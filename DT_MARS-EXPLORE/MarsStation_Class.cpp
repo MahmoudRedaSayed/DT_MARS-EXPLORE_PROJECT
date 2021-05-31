@@ -868,7 +868,7 @@ void MarsStation_Class::Out2()
 void MarsStation_Class::Out3()
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
-	int MounSumTotal = Mission::NumOfMMissions + Mission::NumOfAutoPMissions;
+	int MounSumTotal = Mission::NumOfMMissions + Mission::NumOfAutoPMissions+ Mission::NumOfNoNAutoPMissions ;
 	int Msum = Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;
 
 	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
