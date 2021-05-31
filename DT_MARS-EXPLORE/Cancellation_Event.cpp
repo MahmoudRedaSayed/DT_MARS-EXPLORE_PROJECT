@@ -21,7 +21,11 @@ void Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 			Mou_Missions.enqueue(ITERATOR);
 		}
 	}
-	delete ITERATOR;
+	if(ITERATOR)
+	{
+		delete ITERATOR;
+	}
+	
 }
 
 Cancellation_Event::~Cancellation_Event()
