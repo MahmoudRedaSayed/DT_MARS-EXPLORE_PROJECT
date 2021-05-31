@@ -1,6 +1,6 @@
 #include"MarsStation_Class.h"
 int main(){
-
+	
 	MarsStation_Class object;
 	object.Program_Startup();
 	object.Out1();// to be called in mars station
@@ -15,4 +15,5 @@ int main(){
 		object.increment_day();
 	}
 	object.Out3();
+
 }

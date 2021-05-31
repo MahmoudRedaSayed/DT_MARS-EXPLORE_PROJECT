@@ -92,16 +92,19 @@ void MarsStation_Class::Assign_E_M()
 		E_Mission.dequeue(Emergence_mission);
 		if (Available_ER.dequeue(rover))      ///// Check Emergency Rover list first
 		{
+			rover->SetIsAssigned(true);
 			Emergence_mission->Set_Rptr(rover);
 			rover->Increment_Mission_Count();
 		}
 		else if (Available_MR.dequeue(rover)) ///// Check Mountainous Rover list second
 		{
+			rover->SetIsAssigned(true);
 			Emergence_mission->Set_Rptr(rover);
 			rover->Increment_Mission_Count();
 		}
 		else if (Available_PR.dequeue(rover))    ///// Check Polar Rover list Last
 		{
+			rover->SetIsAssigned(true);
 			Emergence_mission->Set_Rptr(rover);
 			rover->Increment_Mission_Count();
 		}
@@ -141,6 +144,7 @@ void MarsStation_Class::Assign_P_M()
 		Rover* P_Rover;
 		Available_PR.dequeue(P_Rover);
 		Polar_mission->Set_Rptr(P_Rover);
+		P_Rover->SetIsAssigned(true);
 		P_Rover->Increment_Mission_Count();
 		Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
 		Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
@@ -161,6 +165,7 @@ void MarsStation_Class::Assign_M_M()
 		ARptr->Increment_Mission_Count();
 		MMptr->Calculate_WD(Day_count);
 		MMptr->Set_Rptr(ARptr);
+		ARptr->SetIsAssigned(true);
 		Mountainous_EX_Mission.enqueue(MMptr, MMptr->Calculate_CD_Priority());
 
 	}
@@ -171,6 +176,7 @@ void MarsStation_Class::Assign_M_M()
 		ARptr->Increment_Mission_Count();
 		MMptr->Calculate_WD(Day_count);
 		MMptr->Set_Rptr(ARptr);
+		ARptr->SetIsAssigned(true);
 		Mountainous_EX_Mission.enqueue(MMptr, MMptr->Calculate_CD_Priority());
 
 	}
@@ -310,6 +316,7 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 			List_ID.append(to_string(','));
 
 			Rover* rover = mission_type->Get_Rptr();
+			rover->SetIsAssigned(false);
 			if (rover->GetType() == Emergency)
 			{
 				General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::E_Rover_Count, Rover::Check_ER);

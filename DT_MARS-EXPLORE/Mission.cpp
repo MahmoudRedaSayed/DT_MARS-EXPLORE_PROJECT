@@ -62,13 +62,13 @@ int Mission::Calculate_CD()
 }
 double Mission::Calculate_CD_Priority()
 {
-	Calculate_CD();
-	return 1 / CD;
+	CD = Calculate_CD();
+	return -CD;
 }
 double Mission::Calculate_ED_Priority()
 {
 	Calculate_ED();
-	return 1 / ED;
+	return -ED;
 }
 
 void Mission::Set_Rptr(Rover* Rptr_x)
