@@ -8,7 +8,7 @@
 #include"PriorityQueue.h"
 #include"Mission.h"
 using namespace std;
-enum class Terminal_Mode {
+enum  Terminal_Mode {
 	Interactive ,
 	Step_By_Step ,
 	Silent
@@ -21,11 +21,12 @@ public:
 	UI();
 	~UI();
 	//shall make function to recieve input file name ___ talk to 7oda
+	Terminal_Mode get_mode();
 	void SelectMode();
 	void Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<Mission*> Emergency_EX_Mission, PriorityQueue<Mission*> Mountainous_EX_Mission, PriorityQueue<Mission*> Polar_EX_Mission);
     void Print_Completed(int NUM_OF_Missions,string  M_ID, string  P_ID, string  E_ID);
 	void Print_In_Checkup_Rovers( int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up_ER, LinkedQueue<Rover*> Check_up_PR, LinkedQueue<Rover*> Check_up_MR);
-	void print_Availble(int waiting_missions,PriorityQueue<Mission*> E_Mission,
+	void print_Availble(int day_count,int waiting_missions,PriorityQueue<Mission*> E_Mission,
 		LinkedQueue<Mission*> P_Mission,LinkedQueue<Mission*> M_Mission);
 	/*void Print_To_Console(int Curr_Day, LinkedQueue<Mission*> P_Mission,LinkedQueue<Mission*> M_Mission, PriorityQueue<Mission*> E_Mission,
 		PriorityQueue<Mission*> Emergency_EX_Mission,PriorityQueue<Mission*> Mountainous_EX_Mission,PriorityQueue<Mission*> Polar_EX_Mission,
