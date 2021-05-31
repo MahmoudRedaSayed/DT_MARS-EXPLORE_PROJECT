@@ -471,7 +471,7 @@ void MarsStation_Class::Program_Startup()
 		//////////////////////Read the speed of the rover///////////////
 		getline(My_File, Line);                             //To avoid the reminder of the line
 		getline(My_File, Line);
-		int i = 0;
+		int i = 1;
 		int count = 0;
 		while (Line[i] == ' ')
 		{
@@ -487,6 +487,7 @@ void MarsStation_Class::Program_Startup()
 		Spaces = Spaces - 1;
 		Spaces = (Spaces / count);
 		Spaces = Spaces + 1;
+		i = 0;
 		//////////////////// Bounas case///////////////////
 	 ///////////////////reading the speeds///////////////////// 
 		if (Spaces == Num_Rovers)        //The case of the different speeds
@@ -706,7 +707,7 @@ void MarsStation_Class::Program_Startup()
 				{
 					j++;
 				}
-				for (int i = 0; i < Line.size(); i++)
+				for (int i = 0; i < Line.size() && j < Line.size(); i++)
 				{
 					if (Line[j] != ' ')
 					{
