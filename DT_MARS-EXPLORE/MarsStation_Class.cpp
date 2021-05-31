@@ -472,12 +472,21 @@ void MarsStation_Class::Program_Startup()
 		getline(My_File, Line);                             //To avoid the reminder of the line
 		getline(My_File, Line);
 		int i = 0;
+		int count = 0;
+		while (Line[i] == ' ')
+		{
+			i++;
+			count++;
+		}
 		int Spaces = 0;
 		for (int k = 0; k < Line.size(); k++)
 		{
 			if (Line[k] == ' ')
 				Spaces++;
 		}
+		Spaces = Spaces - 1;
+		Spaces = (Spaces / count);
+		Spaces = Spaces + 1;
 		//////////////////// Bounas case///////////////////
 	 ///////////////////reading the speeds///////////////////// 
 		if (Spaces == Num_Rovers)        //The case of the different speeds
