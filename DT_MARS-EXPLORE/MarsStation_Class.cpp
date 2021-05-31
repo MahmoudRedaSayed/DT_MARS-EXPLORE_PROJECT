@@ -8,6 +8,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+
 using namespace std;
 int  MarsStation_Class::files_Count = 0;//#files to be created for output(#user operations), needs discussion with team
 
@@ -872,6 +873,7 @@ void MarsStation_Class::print() {
 		ui.Print_Availble_Rover(availble_Rover_count, Available_ER, Available_MR, Available_PR);
 		ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
 		ui.Print_Completed(completed_missions_count, M_ID, P_ID, E_ID);
+		ui.sleep(1.0);
 	}
 	else
 	{

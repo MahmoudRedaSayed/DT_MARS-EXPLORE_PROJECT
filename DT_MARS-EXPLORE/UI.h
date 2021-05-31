@@ -7,6 +7,7 @@
 #include"LinkedQueue.h"
 #include"PriorityQueue.h"
 #include"Mission.h"
+#include <ctime>
 using namespace std;
 enum  Terminal_Mode {
 	Interactive ,
@@ -31,6 +32,13 @@ public:
 	void Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Available_ER,
 	PriorityQueue<Rover*> Available_MR,
 	PriorityQueue<Rover*> Available_PR);
+	void sleep(float seconds) {
+		clock_t startClock = clock();
+		float secondsAhead = seconds * CLOCKS_PER_SEC;
+		// do nothing until the elapsed time has passed.
+		while (clock() < startClock + secondsAhead);
+		return;
+	}
 	/*void Print_To_Console(int Curr_Day, LinkedQueue<Mission*> P_Mission,LinkedQueue<Mission*> M_Mission, PriorityQueue<Mission*> E_Mission,
 		PriorityQueue<Mission*> Emergency_EX_Mission,PriorityQueue<Mission*> Mountainous_EX_Mission,PriorityQueue<Mission*> Polar_EX_Mission,
 		PriorityQueue<Rover*> Available_ER, PriorityQueue<Rover*> Available_MR, PriorityQueue<Rover*> Available_PR,
