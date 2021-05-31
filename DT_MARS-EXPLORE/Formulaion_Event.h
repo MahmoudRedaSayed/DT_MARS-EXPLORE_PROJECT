@@ -16,6 +16,6 @@ public:
     void Set_MDUR(int Duration);
     void Set_SIG(int sig);
     //execute function that will create the missions  
-    void Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions);
+    bool Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions);
 };
 

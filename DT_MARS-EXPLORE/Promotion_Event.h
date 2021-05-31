@@ -5,6 +5,6 @@ class Promotion_Event :
 {public:
     Promotion_Event(int id, int ED);
     ~Promotion_Event();
-    void Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions);
+    bool Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions);
 };
 
