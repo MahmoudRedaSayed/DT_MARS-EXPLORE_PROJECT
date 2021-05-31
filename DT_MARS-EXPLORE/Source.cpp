@@ -11,6 +11,7 @@ int main(){
 		object.InExecution_to_Completed();
 		object.Check_Up_to_Available_All();
 		/////////// printting functions & outputfile read /////////
+		object.print();
 		object.Out2();
 		object.increment_day();
 	}

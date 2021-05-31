@@ -68,6 +68,7 @@ void Formulaion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueu
 		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID(), Mountainous);
 		Mou_Missions.enqueue(PTR_MISSION);
 		Mission::NumOfMMissions++;
+
 		return;
 	}
 }
