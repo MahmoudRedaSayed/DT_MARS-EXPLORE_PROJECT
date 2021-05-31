@@ -250,7 +250,49 @@ void UI::print_Availble(int day_count,int waiting_missions,PriorityQueue<Mission
 	}
 	cout << endl;
 }
+void UI::Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Available_ER,
+	PriorityQueue<Rover*> Available_MR,
+	PriorityQueue<Rover*> Available_PR)
+{
+	Rover* rover;
+	Rover* rover_next;
+	cout << availble_Rover_count << " Waiting Missions: ";
+	if (!Available_ER.isEmpty())
+	{
+		Available_ER.dequeue(rover);
+		cout << "[";
+		while (Available_ER.dequeue(rover_next))
+		{
+			cout << rover->GetID() << ",";
+			rover = rover_next;
+		}
+		cout << rover->GetID() << "] ";
+	}
+	if (!Available_PR.isEmpty())
+	{
+		Available_PR.dequeue(rover);
+		cout << "(";
+		while (Available_PR.dequeue(rover_next))
+		{
+			cout << rover->GetID() << ",";
+			rover = rover_next;
+		}
+		cout << rover->GetID() << ") ";
+	}
+	if (!Available_MR.isEmpty())
+	{
+		Available_MR.dequeue(rover);
+		cout << "{";
+		while (Available_MR.dequeue(rover_next))
+		{
+			cout << rover->GetID() << ",";
+			rover = rover_next;
+		}
+		cout << rover->GetID() << "} ";
+	}
+	cout << endl;
 
+}
 string UI::read_input_file_name()
 {
 	string FName;
