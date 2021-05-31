@@ -172,3 +172,5 @@ int Mission::NumOfEMissions = 0;
 //////////////////////////////
 	//Polar.h
 int Mission::NumOfPMissions = 0;
+///////////////////////////////
+int Mission::NumOfNoNAutoPMissions = 0;
