@@ -859,7 +859,7 @@ void MarsStation_Class::print() {
 			P_Mission, M_Mission);
 		ui.Print_In_Execution_Missions_Rovers(execution_missions_count,  Emergency_EX_Mission,
 			 Mountainous_EX_Mission, Polar_EX_Mission);
-
+		ui.Print_Availble_Rover( availble_Rover_count, Available_ER, Available_MR,Available_PR);
 		ui.Print_In_Checkup_Rovers(checkup_Rover_count,Check_up_ER, Check_up_PR,Check_up_MR);
 		ui.Print_Completed(completed_missions_count,  M_ID,  P_ID,E_ID);
 	}
@@ -869,7 +869,7 @@ void MarsStation_Class::print() {
 			P_Mission, M_Mission);
 		ui.Print_In_Execution_Missions_Rovers(execution_missions_count, Emergency_EX_Mission,
 			Mountainous_EX_Mission, Polar_EX_Mission);
-
+		ui.Print_Availble_Rover(availble_Rover_count, Available_ER, Available_MR, Available_PR);
 		ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
 		ui.Print_Completed(completed_missions_count, M_ID, P_ID, E_ID);
 	}

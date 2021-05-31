@@ -261,7 +261,7 @@ void UI::Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Ava
 {
 	Rover* rover;
 	Rover* rover_next;
-	cout << availble_Rover_count << " Waiting Missions: ";
+	cout << availble_Rover_count << " Availble Rovers: ";
 	if (!Available_ER.isEmpty())
 	{
 		Available_ER.dequeue(rover);
