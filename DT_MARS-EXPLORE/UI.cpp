@@ -202,6 +202,46 @@ void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up
 }
 
 
+void UI::print_Availble(int waiting_missions,PriorityQueue<Mission*> E_Mission,
+	LinkedQueue<Mission*> P_Mission, LinkedQueue<Mission*> M_Mission)
+{
+	Mission* mission;
+	Mission* mission_next;
+	cout << waiting_missions <<"Waiting Missions: ";
+	if (!!E_Mission.isEmpty())
+	{
+		E_Mission.dequeue(mission);
+		cout << "[ ";
+		while (E_Mission.dequeue(mission_next))
+		{
+			cout << mission->Get_ID() << ",";
+			mission = mission_next;
+		}
+		cout <<mission->Get_ID()<<"] ";
+	}
+	if (!P_Mission.isEmpty())
+	{
+		P_Mission.dequeue(mission);
+		cout << "( ";
+		while (P_Mission.dequeue(mission_next))
+		{
+			cout << mission->Get_ID() << ",";
+			mission = mission_next;
+		}
+		cout << mission->Get_ID() << ") ";
+	}
+	if (!!M_Mission.isEmpty())
+	{
+		M_Mission.dequeue(mission);
+		cout << "{ ";
+		while (M_Mission.dequeue(mission_next))
+		{
+			cout << mission->Get_ID() << ",";
+			mission = mission_next;
+		}
+		cout << mission->Get_ID() << "} ";
+	}
+}
 
 string UI::read_input_file_name()
 {
