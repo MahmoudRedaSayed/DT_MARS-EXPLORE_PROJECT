@@ -10,7 +10,7 @@ Promotion_Event::~Promotion_Event()
 {
 }
 ////////////excaption handling if the id is not found//////////
-void Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
+bool Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
 {
 	Mission* ITERATOR=NULL;
 	Mission* ITERATOR2 = NULL;
@@ -18,7 +18,7 @@ void Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 	Mou_Missions.peek(TOP); 
 	if (TOP == nullptr)
 	{
-		return;
+		return false;
 	}
 	if (TOP)
 	{
@@ -31,7 +31,7 @@ void Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 			Mission::NumOfEMissions++;
 			Mission::NumOfNoNAutoPMissions++;
 			Mission::NumOfMMissions--;
-			return;
+			return true;
 		}
 	}
 
@@ -56,5 +56,7 @@ void Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 		Mission::NumOfEMissions++;
 		Mission::NumOfNoNAutoPMissions++;
 		Mission::NumOfMMissions--;
+		return true;
 	}
+	return false;
 }

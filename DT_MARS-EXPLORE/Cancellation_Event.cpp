@@ -6,7 +6,7 @@ Cancellation_Event::Cancellation_Event(int id, int ED)
 	Set_Mission_ID(id);
 }
 ////////////excaption handling if the id is not found//////////
-void Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
+bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
 {
 	Mission* ITERATOR = NULL;
 	Mission* ITERATOR2 = NULL;
@@ -14,7 +14,7 @@ void Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 	Mou_Missions.peek(TOP);
 	if (TOP == nullptr)
 	{
-		return;
+		return false;
 	}
 	if (TOP)
 	{
@@ -22,7 +22,7 @@ void Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 		{
 			Mou_Missions.dequeue(TOP);
 			delete TOP;
-			return;
+			return true;
 		}
 	}
 	while (ITERATOR != TOP)
@@ -40,8 +40,9 @@ void Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 	if(ITERATOR2)
 	{
 		delete ITERATOR2;
+		return true;
 	}
-	
+	return false;
 }
 
 Cancellation_Event::~Cancellation_Event()

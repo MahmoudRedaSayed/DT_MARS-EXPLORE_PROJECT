@@ -52,18 +52,16 @@ void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<M
 	Mission* PTR = nullptr;
 	int count = 0;//To avoid the comma
 	//printing the emergency
-	Emergency_EX_Mission.peek(PTR);
-	if (PTR)
+	if (Emergency_EX_Mission.peek(PTR))
 	{
 		cout << '[';
 	}
-    while (PTR)
+    while (Emergency_EX_Mission.dequeue(PTR))
     {
 			if (count != 0)
 			{
 				cout << ',';
 			}
-			Emergency_EX_Mission.dequeue(PTR);
 			cout << PTR->Get_ID() << '/'<<PTR->Get_Rptr()->GetID();
 			count++;
     }
@@ -73,18 +71,16 @@ void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<M
 	}
 	//printing the polar
 	count = 0;
-	Polar_EX_Mission.peek(PTR);
-	if (PTR)
+	if (Polar_EX_Mission.peek(PTR))
 	{
 		cout << '(';
 	}
-	while (PTR)
+	while (Polar_EX_Mission.dequeue(PTR))
 	{
 		if (count != 0)
 		{
 			cout << ',';
 		}
-		Polar_EX_Mission.dequeue(PTR);
 		cout << PTR->Get_ID() << '/' << PTR->Get_Rptr()->GetID();
 		count++;
 	}
@@ -94,18 +90,17 @@ void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<M
 	}
 	//printing the mountainous
 	count = 0;
-	Mountainous_EX_Mission.peek(PTR);
-	if (PTR)
+	
+	if (Mountainous_EX_Mission.peek(PTR))
 	{
 		cout << '{';
 	}
-	while (PTR)
+	while (Mountainous_EX_Mission.dequeue(PTR))
 	{
 		if (count != 0)
 		{
 			cout << ',';
 		}
-		Mountainous_EX_Mission.dequeue(PTR);
 		cout << PTR->Get_ID() << '/' << PTR->Get_Rptr()->GetID();
 		count++;
 	}
@@ -116,25 +111,35 @@ void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<M
 	cout << endl;
 }
 
-void UI::Print_Completed(int NUM_OF_Missions, string M_ID, string P_ID, string E_ID)
+void UI::Print_Completed(int NUM_OF_Missions, string& M_ID, string& P_ID, string& E_ID)
 {
+	NUM_OF_Missions = 0;
+	int count1 = count(M_ID.begin(), M_ID.end(), ',');
+	int count2 = count(P_ID.begin(), P_ID.end(), ',');
+	int count3 = count(E_ID.begin(), E_ID.end(), ',');
+	if (M_ID != "") { NUM_OF_Missions += count1 ; }
+	if (P_ID != "") { NUM_OF_Missions += count2 ; }
+	if (E_ID != "") { NUM_OF_Missions += count3 ; }
 	cout << NUM_OF_Missions<<" Completed Missions: ";
 	if (M_ID != "")
 	{
-		M_ID = M_ID.substr(M_ID.size() - 2);
+		M_ID = M_ID.substr(0,M_ID.size() - 1);
 		cout << "  " << '{' << M_ID << '}';
+		M_ID = "";
 	}
 
 	if (P_ID != "")
 	{
-		P_ID = P_ID.substr(P_ID.size() - 2);
+		P_ID = P_ID.substr(0,P_ID.size() - 1);
 		cout <<"  " <<'(' << P_ID << ')';
+		P_ID = "";
 	}
 
 	if (E_ID != "")
 	{
-		E_ID = E_ID.substr(E_ID.size() - 2);
+		E_ID=E_ID.substr(0,E_ID.size()-1);
 		cout<<"  "<< '[' << E_ID << ']';
+		E_ID = "";
 	}
 	
 	 cout<<endl;
