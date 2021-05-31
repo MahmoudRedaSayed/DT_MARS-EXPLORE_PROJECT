@@ -63,7 +63,7 @@ public:
 	//Emergency.h
 	 //Getters
 	double Get_Priority();//?no need for it?
-	void Cal_Prirority();                        //Need it to calculate the priority after setting all data to the pointer in the promotion event 
+	//void Cal_Prirority();                        //Need it to calculate the priority after setting all data to the pointer in the promotion event 
 	double Calculate_priority();//?should i make it void as its funtionality is calculating?
 								//?should i uncomment Set_Priority and use it inside this mem func?
 	static int NumOfEMissions;

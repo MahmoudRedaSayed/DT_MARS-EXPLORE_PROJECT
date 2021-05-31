@@ -178,10 +178,7 @@ void MarsStation_Class::Assign_M_M()
 		MMptr->Set_Rptr(ARptr);
 		ARptr->SetIsAssigned(true);
 		Mountainous_EX_Mission.enqueue(MMptr, MMptr->Calculate_CD_Priority());
-
 	}
-
-
 
 }
 
@@ -309,7 +306,7 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 		{
 			Execution_list.dequeue(mission_type);
 			Temp_CD_Mission.enqueue(mission_type, mission_type->Calculate_ED_Priority());
-			Completed_E_Mission_ID.enqueue(mission_type->Get_ID());
+			//Completed_E_Mission_ID.enqueue(mission_type->Get_ID());
 			// string should take ID //
 
 			List_ID.append(to_string(mission_type->Get_ID()));
@@ -742,15 +739,25 @@ void MarsStation_Class::General_Check_Up_to_Available(LinkedQueue<Rover*>& Check
 {
 	Rover* Gptr = nullptr;
 	Check_up_list.peek(Gptr);
+	/*
 	if (!Gptr)
 	{
 		return;
-	}
-	while (Gptr->Get_Day_out() == MarsStation_Class::Day_count)
-	{
-		Check_up_list.dequeue(Gptr);
-		Available_list.enqueue(Gptr, Gptr->GetSpeed());
-		Check_up_list.peek(Gptr);
+	}*/
+	while (Gptr) {
+
+		if(Gptr->Get_Day_out() == MarsStation_Class::Day_count)
+		{
+			Check_up_list.dequeue(Gptr);
+			Available_list.enqueue(Gptr, Gptr->GetSpeed());
+			Gptr = nullptr;
+			Check_up_list.peek(Gptr);
+
+		}
+		else
+		{
+			break;
+		}
 	}
 }
 //void MarsStation_Class::Check_Up_to_Available_E()

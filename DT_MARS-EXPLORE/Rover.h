@@ -88,8 +88,11 @@ public:
 	 void SetCheck_MR(int c) { Check_MR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
 
 	 //samaa
-	 void Set_Day_out(int x) { Day_out = (x > 0 ? x : 1); }//?is that condition ok??//Mamdouh:I think it's fine
-	 int Get_Day_out() { return Day_out; }
+	 void Set_Day_out(int x) { Day_out = (x > 0) ? x : 1; }//?is that condition ok??//Mamdouh:I think it's fine
+	 int Get_Day_out()
+	 { 
+		 return Day_out; 
+	 }
 	 //
 	 //////////////////// Bonus Maintenance ////////////////////////////
 	 /*

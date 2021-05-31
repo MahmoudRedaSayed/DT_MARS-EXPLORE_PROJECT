@@ -40,11 +40,11 @@ private:
 	LinkedQueue<Rover*> Check_up_ER;
 	LinkedQueue<Rover*> Check_up_MR;
 	LinkedQueue<Rover*> Check_up_PR;
-
+	/*
 	LinkedQueue<int> Completed_E_Mission_ID;
 	LinkedQueue<int> Completed_P_Mission_ID;
 	LinkedQueue<int> Completed_M_Mission_ID;
-
+	*/
 	PriorityQueue<Mission*> E_Mission;
 	//PriorityQueue<Mission*> EX_Mission;
 	///////////////// 3 separate lists ////////////////

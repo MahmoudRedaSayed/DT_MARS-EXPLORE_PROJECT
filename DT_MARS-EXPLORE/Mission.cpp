@@ -63,7 +63,7 @@ int Mission::Calculate_CD()
 double Mission::Calculate_CD_Priority()
 {
 	CD = Calculate_CD();
-	return -CD;
+	return -CD; 
 }
 double Mission::Calculate_ED_Priority()
 {
@@ -158,10 +158,11 @@ double Mission::Get_Priority()
 {
 	return Priority;
 }
+/*
 void Mission::Cal_Prirority()
 {
 	Priority = Get_SIG() * Get_TLOC() * Get_MDUR() / Get_FD();
-}
+}*/
 double Mission::Calculate_priority()
 {
 	Priority = SIG * TLOC * MDUR / FD;//equation m2ktaaa

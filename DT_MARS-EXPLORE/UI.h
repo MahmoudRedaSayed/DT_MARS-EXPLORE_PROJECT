@@ -1,6 +1,10 @@
 #pragma once
 //#include "MarsStation_Class.h"
 #include<string>
+#include"LinkedQueue.h"
+#include"PriorityQueue.h"
+#include"Mission.h"
+#include "Rover.h"
 #include <iostream>
 using namespace std;
 enum class Terminal_Mode {
@@ -17,7 +21,8 @@ public:
 	~UI();
 	//shall make function to recieve input file name ___ talk to 7oda
 	void SelectMode();
-
+	void print_Availble(int waiting_missions,PriorityQueue<Mission*> E_Mission,
+		LinkedQueue<Mission*> P_Mission,LinkedQueue<Mission*> M_Mission);
 	/*void Print_To_Console(int Curr_Day, LinkedQueue<Mission*> P_Mission,LinkedQueue<Mission*> M_Mission, PriorityQueue<Mission*> E_Mission,
 		PriorityQueue<Mission*> Emergency_EX_Mission,PriorityQueue<Mission*> Mountainous_EX_Mission,PriorityQueue<Mission*> Polar_EX_Mission,
 		PriorityQueue<Rover*> Available_ER, PriorityQueue<Rover*> Available_MR, PriorityQueue<Rover*> Available_PR,
