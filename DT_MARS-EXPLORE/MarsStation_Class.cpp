@@ -856,6 +856,7 @@ void MarsStation_Class::print() {
 	Terminal_Mode Mode = ui.get_mode();
 	if (Mode == Interactive)
 	{
+		cin.get();
 		ui.print_Availble(Day_count,waiting_missions_count, E_Mission,
 			P_Mission, M_Mission);
 		ui.Print_In_Execution_Missions_Rovers(execution_missions_count,  Emergency_EX_Mission,
@@ -875,10 +876,7 @@ void MarsStation_Class::print() {
 		ui.Print_Completed(completed_missions_count, M_ID, P_ID, E_ID);
 		ui.sleep(1.0);
 	}
-	else
-	{
-
-	}
+	
 }
 bool MarsStation_Class::isFinished()
 {

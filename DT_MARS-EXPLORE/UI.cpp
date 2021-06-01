@@ -11,6 +11,11 @@ UI::UI()
 
 UI::~UI()
 {
+	if (Mode == Silent)
+	{
+		cout << endl<<"Silent Mode" << endl;
+		cout << "Simulation Starts..." ;
+	}
 	std::cout << "\nSimulation ends, Output file created\n";
 	for (int i = 0; i < 3; i++)
 		std::cout << "\n================================================================================================================\n";
@@ -108,7 +113,7 @@ void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<M
 	{
 		cout << '}' << " ";
 	}
-	cout << endl;
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 
 void UI::Print_Completed(int NUM_OF_Missions, string& M_ID, string& P_ID, string& E_ID)
@@ -142,7 +147,7 @@ void UI::Print_Completed(int NUM_OF_Missions, string& M_ID, string& P_ID, string
 		E_ID = "";
 	}
 	
-	 cout<<endl;
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 
 void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up_ER,
@@ -209,7 +214,7 @@ void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up
 	}
 	if (count != 0)
 		cout << '}' << ' ';
-	cout << endl;
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 
 
@@ -253,7 +258,7 @@ void UI::print_Availble(int day_count,int waiting_missions,PriorityQueue<Mission
 		}
 		cout << mission->Get_ID() << "} ";
 	}
-	cout << endl;
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 void UI::Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Available_ER,
 	PriorityQueue<Rover*> Available_MR,
@@ -295,7 +300,8 @@ void UI::Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Ava
 		}
 		cout << rover->GetID() << "} ";
 	}
-	cout << endl;
+	cout << endl<<"---------------------------------------------------------------------------------------" << endl;
+
 
 }
 string UI::read_input_file_name()
