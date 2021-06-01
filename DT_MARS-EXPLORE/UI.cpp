@@ -1,4 +1,5 @@
 #include "UI.h"
+#include<string>
 
 
 UI::UI()
@@ -27,28 +28,31 @@ Terminal_Mode UI::get_mode()
 }
 void UI::SelectMode()
 {
-	int m;
+	string M;
 	std::cout << "\n<<<<<<<< Please select simulation mode [default mode : step-by-step] >>>>>>>>\n" <<
 		"1-Interactive Mode  (produces output file including simulation statistics, monitors & prints daily statistics\n during simulation on terminal window, you can increase simulation days manually!) \n" <<
 		"2-Step-By-Step Mode (same as interactive , but increases days automatically)! \n" <<
 		"3-Silent Mode		 (program produces only output files, no simulation steps will be shown on the console)!\n" <<
 		"please type number of mode from (1,2 and 3)\n";
-	std::cin >> m;
-	switch (m)
+	std::cin >> M;
+
+	if (M == "1")
 	{
-	case 1:
 		Mode = Terminal_Mode::Interactive;
-		break;
-	case 2:
-		Mode = Terminal_Mode::Step_By_Step;
-		break;
-	case 3:
-		Mode = Terminal_Mode::Silent;
-		break;
-	default:
-		Mode = Terminal_Mode::Step_By_Step;
-		break;
 	}
+	else if (M == "2")
+	{
+		Mode = Terminal_Mode::Step_By_Step;
+	}
+	else if (M == "3")
+	{
+		Mode = Terminal_Mode::Silent;
+	}
+	else
+	{
+		Mode = Terminal_Mode::Step_By_Step;
+	}
+	
 }
 
 void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<Mission*> Emergency_EX_Mission, PriorityQueue<Mission*> Mountainous_EX_Mission, PriorityQueue<Mission*> Polar_EX_Mission)
@@ -316,7 +320,7 @@ if (i == 2)
 {
 	string FName;
 	cout << "the file is not exist" << endl;
-	cout << "\nPlease::enter the correct name or if you want to exit enter number 0\n" << endl;
+	cout << "Please::enter the correct name or if you want to exit enter number 0\n" << endl;
 	cin >> FName;
 	return FName;
 }
