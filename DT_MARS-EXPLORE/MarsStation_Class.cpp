@@ -369,6 +369,7 @@ void MarsStation_Class::Auto_Promoting()
 			E_Mission.enqueue(EMptr, EMptr->Get_Priority());
 			Mission::NumOfAutoPMissions++;
 			Mission::NumOfMMissions--;
+			Mission::NumOfEMissions++;
 			//D.F to add NumOfAutoPMissions with NumOfMMissions to get num of totall m mission to calculat el nsba el m2wya for ayto promoting in output file
 			delete MMptr;//?delete in general and null errors......
 		}
@@ -479,9 +480,15 @@ void MarsStation_Class::Program_Startup()
 	int* Speeds;
 	/*cout << "Please::enter the name of the file the you want to load it" << endl;
 	cin >> File_Name;*/
-	File_Name = ui.read_input_file_name();
+	File_Name = ui.read_input_file_name(1);
 	ifstream My_File;
 	My_File.open("\Files\\" + File_Name + ".txt");
+	while (!My_File.is_open())
+	{
+		File_Name = ui.read_input_file_name(2);
+		My_File.open("\Files\\" + File_Name + ".txt");
+		if (File_Name == "0") break;
+	}
 	if (My_File.is_open())                       //Check if the file is found or not
 	{
 		My_File >> Num_M_Rovers >> Num_P_Rovers >> Num_E_Rovers;

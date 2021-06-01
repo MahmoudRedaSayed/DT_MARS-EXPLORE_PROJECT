@@ -304,12 +304,23 @@ void UI::Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Ava
 
 
 }
-string UI::read_input_file_name()
+string UI::read_input_file_name( int i)
+{if(i==1)
 {
 	string FName;
 	cout << "\nPlease::enter the name of the file the you want to load it\n" << endl;
 	cin >> FName;
 	return FName;
+}
+if (i == 2)
+{
+	string FName;
+	cout << "the file is not exist" << endl;
+	cout << "\nPlease::enter the correct name or if you want to exit enter number 0\n" << endl;
+	cin >> FName;
+	return FName;
+}
+	
 }
 
 
