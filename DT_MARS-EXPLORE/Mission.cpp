@@ -4,27 +4,29 @@ Mission::Mission(double TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x, Type_
 //?should i make those paramter const int ?
 //?should we delete int FD_x from the parameters?
 //?no e7tmal that at the same time mission is being created that it will be assign to a rover ? i mean we will not right a Rptr_x as a peremeter to the constructor right?
-	:TLOC(TLOC_x >= 0 ? TLOC_x : 0),//?>=0 or > only? for all the following??
-	MDUR(MDUR_x > 0 ? MDUR_x : 0),
-	SIG(SIG_x >= 0 ? SIG_x : 0),
-	FD(FD_x > 0 ? FD_x : 0),
-	ID(ID_x > 0 ? ID_x : 0)
+	//:TLOC(TLOC_x >= 0 ? TLOC_x : 0),//?>=0 or > only? for all the following??
+	//MDUR(MDUR_x > 0 ? MDUR_x : 0),
+	//SIG(SIG_x >= 0 ? SIG_x : 0),
+	//FD(FD_x > 0 ? FD_x : 0),
+	//ID(ID_x > 0 ? ID_x : 0)
 {
-	/*Set_TLOC(TLOC_x);
+	Set_TLOC(TLOC_x);
 	Set_MDUR(MDUR_x);
 	Set_SIG(SIG_x);
 	Set_FD(FD_x);
-	Set_ID(ID_x);*/
+	Set_ID(ID_x);
 	//Rptr=nullptr;
-	//Set_Rptr(Rptr_x);
-	type_of_mission = type_of_mission_x;
-	Rptr = nullptr;
+	Set_Rptr(nullptr);
+	//type_of_mission = type_of_mission_x;
+	Set_type_of_mission(type_of_mission_x);
+	//Rptr = nullptr;
 	WD = 0;
 	ED = 0;
 	CD = 0;
 	//i think the previous 3 lines are not important
 }
 //Setters functions
+
 void Mission::Set_TLOC(int x)
 {
 	TLOC = x >= 0 ? x : 0;
@@ -44,6 +46,10 @@ void Mission::Set_FD(int x)
 void Mission::Set_ID(int x)
 {
 	ID = x >= 0 ? x : 0;
+}
+void Mission::Set_type_of_mission(Type_G type_of_mission_x)
+{
+	type_of_mission = type_of_mission_x;
 }
 int Mission::Calculate_WD(int CurrDay)
 {
@@ -131,6 +137,10 @@ Rover* Mission::Get_Rptr()
 const int Mission::Get_ID()
 {
 	return ID;
+}
+Type_G Mission::Get_type_of_mission()
+{
+	return type_of_mission;
 }
 //Others
 int Mission::Calculate_ED()

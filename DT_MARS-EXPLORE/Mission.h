@@ -27,6 +27,7 @@ public:
 	void Set_SIG(int x);
 	void Set_FD(int x);
 	void Set_ID(int x);
+	void Set_type_of_mission(Type_G type_of_mission_x);
 	int Calculate_WD(int CurrDay);//?no need fot it?
 	//void Set_ED(int x);//I think no need to this function as there is -Calculate_ED-
 	int Calculate_CD();
@@ -39,7 +40,7 @@ public:
 	int Get_SIG();
 	int Get_FD();
 	const int Get_ID();
-
+	Type_G Get_type_of_mission( );
 	/*const int Get_TLOC();
 	const int Get_MDUR();
 	const int Get_SIG();

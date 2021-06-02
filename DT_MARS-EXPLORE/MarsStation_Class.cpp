@@ -356,22 +356,24 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 }
 void MarsStation_Class::Auto_Promoting()
 {
-	Mission* MMptr;
-	Mission* EMptr;
+	//Mission* MMptr;
+	//Mission* EMptr;
+	Mission* Auto_P_Mptr;
 
 	while (!M_Mission.isEmpty())
 	{
-		M_Mission.peek(MMptr);
-		if (MMptr->Calculate_WD(Day_count) == Mission::AutoP)
+		M_Mission.peek(Auto_P_Mptr);
+		if (Auto_P_Mptr->Calculate_WD(Day_count) == Mission::AutoP)
 		{
-			M_Mission.dequeue(MMptr);
-			EMptr = new Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID(), Emergency);
-			E_Mission.enqueue(EMptr, EMptr->Get_Priority());
+			M_Mission.dequeue(Auto_P_Mptr);
+			//EMptr = new Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID(), Emergency);
+			Auto_P_Mptr->Set_type_of_mission(Emergency);
+			E_Mission.enqueue(Auto_P_Mptr, Auto_P_Mptr->Calculate_priority());
 			Mission::NumOfAutoPMissions++;
 			Mission::NumOfMMissions--;
 			Mission::NumOfEMissions++;
 			//D.F to add NumOfAutoPMissions with NumOfMMissions to get num of totall m mission to calculat el nsba el m2wya for ayto promoting in output file
-			delete MMptr;//?delete in general and null errors......
+			//delete MMptr;//?delete in general and null errors......
 		}
 		else
 			break;//or return
@@ -379,6 +381,32 @@ void MarsStation_Class::Auto_Promoting()
 
 
 }
+/////////////////////
+//void MarsStation_Class::Auto_Promoting()
+//{
+//	Mission* MMptr;
+//	Mission* EMptr;
+//
+//	while (!M_Mission.isEmpty())
+//	{
+//		M_Mission.peek(MMptr);
+//		if (MMptr->Calculate_WD(Day_count) == Mission::AutoP)
+//		{
+//			M_Mission.dequeue(MMptr);
+//			EMptr = new Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID(), Emergency);
+//			E_Mission.enqueue(EMptr, EMptr->Calculate_priority());
+//			Mission::NumOfAutoPMissions++;
+//			Mission::NumOfMMissions--;
+//			Mission::NumOfEMissions++;
+//			//D.F to add NumOfAutoPMissions with NumOfMMissions to get num of totall m mission to calculat el nsba el m2wya for ayto promoting in output file
+//			delete MMptr;//?delete in general and null errors......
+//		}
+//		else
+//			break;//or return
+//	}
+//
+//
+//}
 
 
 void MarsStation_Class::General_Check_R_State(Rover* CRptr, LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration)

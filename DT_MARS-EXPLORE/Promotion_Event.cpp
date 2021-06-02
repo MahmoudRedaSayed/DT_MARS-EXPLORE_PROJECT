@@ -25,9 +25,8 @@ bool Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 		if (TOP->Get_ID() == Get_Mission_ID())
 		{
 			Mou_Missions.dequeue(TOP);
-			Mission* Promoted_Mission = new Mission(TOP->Get_TLOC(), TOP->Get_MDUR(), TOP->Get_SIG(), TOP->Get_FD(), TOP->Get_ID(), Emergency);
-			delete TOP;
-			Eme_Missions.enqueue(Promoted_Mission, Promoted_Mission->Calculate_priority()); //Add the Mission to the emergency missions queue 
+			TOP->Set_type_of_mission(Emergency);
+			Eme_Missions.enqueue(TOP, TOP->Calculate_priority()); //Add the Mission to the emergency missions queue 
 			Mission::NumOfEMissions++;
 			Mission::NumOfNoNAutoPMissions++;
 			Mission::NumOfMMissions--;
@@ -59,9 +58,7 @@ bool Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 	//Setting the data to the new mission rather than use a copy constructor
 	if (ITERATOR2) 
 	{
-		Mission* Promoted_Mission = new Mission(ITERATOR2->Get_TLOC(),ITERATOR2->Get_MDUR(), ITERATOR2 ->Get_SIG(),ITERATOR2->Get_FD(), ITERATOR2->Get_ID(), Emergency);
-		delete ITERATOR2;
-		Eme_Missions.enqueue(Promoted_Mission, Promoted_Mission->Calculate_priority()); //Add the Mission to the emergency missions queue 
+		Eme_Missions.enqueue(ITERATOR2, ITERATOR2->Calculate_priority()); //Add the Mission to the emergency missions queue 
 		Mission::NumOfEMissions++;
 		Mission::NumOfNoNAutoPMissions++;
 		Mission::NumOfMMissions--;
