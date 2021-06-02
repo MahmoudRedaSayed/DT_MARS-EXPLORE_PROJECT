@@ -36,11 +36,24 @@ void MarsStation_Class::Execute()
 		{
 			Events_List.dequeue(event);
 			Formulaion_Event* temp_event = dynamic_cast<Formulaion_Event*> (event);
+			Cancellation_Event* temp_event2 = dynamic_cast<Cancellation_Event*> (event);
 			if (temp_event)
 			{
+				event->Execute(E_Mission, P_Mission, M_Mission);
 				MarsStation_Class::waiting_missions_count++;
 			}
-			event->Execute(E_Mission, P_Mission, M_Mission);
+			else if (temp_event2)
+			{
+				if (event->Execute(E_Mission, P_Mission, M_Mission))
+				{
+					MarsStation_Class::waiting_missions_count--;
+				}
+			}
+			else
+			{
+				event->Execute(E_Mission, P_Mission, M_Mission);
+			}
+	
 			delete event; // we don't need created object of Event so we delete it
 			// What about dynamic cast , did object is deleted Completely or need dynamic cast ?!
 		}
@@ -344,10 +357,7 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 			}
 			else if(rover->GetType() == Polar)
 			{
-
-
 				General_Check_R_State(rover, Check_up_PR, Available_PR, Rover::Missions_Before_Check_Up, Rover::Check_PR);
-				//Check_PR_State(rover);
 			}
 		}
 		else
@@ -889,30 +899,25 @@ void MarsStation_Class::Check_Up_to_Available_All()
 	General_Check_Up_to_Available(Check_up_PR, Available_PR);
 	////
 }
-void MarsStation_Class::print() {
+void MarsStation_Class::print() 
+{
 	Terminal_Mode Mode = ui.get_mode();
+
 	if (Mode == Interactive)
 	{
 		cin.get();
-		ui.print_Availble(Day_count,waiting_missions_count, E_Mission,
-			P_Mission, M_Mission);
-		ui.Print_In_Execution_Missions_Rovers(execution_missions_count,  Emergency_EX_Mission,
-			 Mountainous_EX_Mission, Polar_EX_Mission);
-		ui.Print_Availble_Rover( availble_Rover_count, Available_ER, Available_MR,Available_PR);
-		ui.Print_In_Checkup_Rovers(checkup_Rover_count,Check_up_ER, Check_up_PR,Check_up_MR);
-		ui.Print_Completed(completed_missions_count,  M_ID,  P_ID,E_ID);
 	}
 	else if(Mode == Step_By_Step)
 	{
-		ui.print_Availble(Day_count,waiting_missions_count, E_Mission,
-			P_Mission, M_Mission);
-		ui.Print_In_Execution_Missions_Rovers(execution_missions_count, Emergency_EX_Mission,
-			Mountainous_EX_Mission, Polar_EX_Mission);
-		ui.Print_Availble_Rover(availble_Rover_count, Available_ER, Available_MR, Available_PR);
-		ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
-		ui.Print_Completed(completed_missions_count, M_ID, P_ID, E_ID);
 		ui.sleep(1.0);
 	}
+	ui.print_Availble_missions(Day_count, waiting_missions_count, E_Mission,
+		P_Mission, M_Mission);
+	ui.Print_In_Execution_Missions_Rovers(execution_missions_count, Emergency_EX_Mission,
+		Mountainous_EX_Mission, Polar_EX_Mission);
+	ui.Print_Availble_Rover(availble_Rover_count, Available_ER, Available_MR, Available_PR);
+	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
+	ui.Print_Completed(completed_missions_count, M_ID, P_ID, E_ID);
 	
 }
 bool MarsStation_Class::isFinished()

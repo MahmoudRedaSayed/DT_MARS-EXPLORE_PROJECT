@@ -222,45 +222,29 @@ void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up
 }
 
 
-void UI::print_Availble(int day_count,int waiting_missions,PriorityQueue<Mission*> E_Mission,
-	LinkedQueue<Mission*> P_Mission, LinkedQueue<Mission*> M_Mission)
+void UI::print_Availble_missions(int day_count,int waiting_missions,PriorityQueue<Mission*>& E_Mission,
+	LinkedQueue<Mission*>& P_Mission, LinkedQueue<Mission*>& M_Mission)
 {
-	Mission* mission;
-	Mission* mission_next;
 	cout << "current day:" << day_count << endl;
 	cout << waiting_missions <<" Waiting Missions: ";
 	if (!E_Mission.isEmpty())
 	{
-		E_Mission.dequeue(mission);
 		cout << "[";
-		while (E_Mission.dequeue(mission_next))
-		{
-			cout << mission->Get_ID() << ",";
-			mission = mission_next;
-		}
-		cout <<mission->Get_ID()<<"] ";
+		print_Availble_missions_PriorityQueue(E_Mission);
+		cout <<"] ";
 	}
 	if (!P_Mission.isEmpty())
 	{
-		P_Mission.dequeue(mission);
 		cout << "(";
-		while (P_Mission.dequeue(mission_next))
-		{
-			cout << mission->Get_ID() << ",";
-			mission = mission_next;
-		}
-		cout << mission->Get_ID() << ") ";
+		print_Availble_missions_Queue(P_Mission);
+		cout <<  ") ";
 	}
 	if (!M_Mission.isEmpty())
 	{
-		M_Mission.dequeue(mission);
+		
 		cout << "{";
-		while (M_Mission.dequeue(mission_next))
-		{
-			cout << mission->Get_ID() << ",";
-			mission = mission_next;
-		}
-		cout << mission->Get_ID() << "} ";
+		print_Availble_missions_Queue(M_Mission);
+		cout <<  "} ";
 	}
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
@@ -305,8 +289,34 @@ void UI::Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Ava
 		cout << rover->GetID() << "} ";
 	}
 	cout << endl<<"---------------------------------------------------------------------------------------" << endl;
-
-
+}
+void UI::print_Availble_missions_Queue(LinkedQueue<Mission*>& Queue_Mission_List)
+{
+	Mission* mission, * mission_next, * TOP;
+	Queue_Mission_List.dequeue(TOP);
+	Queue_Mission_List.enqueue(TOP);
+	cout << TOP->Get_ID();
+	if (Queue_Mission_List.peek(mission))
+	{
+		while (TOP != mission)
+		{
+			Queue_Mission_List.dequeue(mission);
+			cout << "," << mission->Get_ID();
+			Queue_Mission_List.enqueue(mission);
+			Queue_Mission_List.peek(mission);
+		}
+	}
+}
+void UI::print_Availble_missions_PriorityQueue(PriorityQueue<Mission*> PriorityQueue_Mission_List)
+{
+	Mission* mission,* mission_next;
+	PriorityQueue_Mission_List.dequeue(mission);
+	cout << mission->Get_ID();
+	while (PriorityQueue_Mission_List.dequeue(mission))
+	{
+		cout << "," << mission->Get_ID();
+	}
+	
 }
 string UI::read_input_file_name( int i)
 {if(i==1)
@@ -326,5 +336,52 @@ if (i == 2)
 }
 	
 }
+
+
+
+/*
+void UI::Print_Availble_Rover(int availble_Rover_count, PriorityQueue<Rover*> Available_ER,
+	PriorityQueue<Rover*> Available_MR,
+	PriorityQueue<Rover*> Available_PR)
+{
+	Rover* rover;
+	Rover* rover_next;
+	cout << availble_Rover_count << " Availble Rovers: ";
+	if (!Available_ER.isEmpty())
+	{
+		Available_ER.dequeue(rover);
+		cout << "[";
+		while (Available_ER.dequeue(rover_next))
+		{
+			cout << rover->GetID() << ",";
+			rover = rover_next;
+		}
+		cout << rover->GetID() << "] ";
+	}
+	if (!Available_PR.isEmpty())
+	{
+		Available_PR.dequeue(rover);
+		cout << "(";
+		while (Available_PR.dequeue(rover_next))
+		{
+			cout << rover->GetID() << ",";
+			rover = rover_next;
+		}
+		cout << rover->GetID() << ") ";
+	}
+	if (!Available_MR.isEmpty())
+	{
+		Available_MR.dequeue(rover);
+		cout << "{";
+		while (Available_MR.dequeue(rover_next))
+		{
+			cout << rover->GetID() << ",";
+			rover = rover_next;
+		}
+		cout << rover->GetID() << "} ";
+	}
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+}*/
+
 
 
