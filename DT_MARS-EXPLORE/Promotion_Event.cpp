@@ -34,10 +34,19 @@ bool Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 			return true;
 		}
 	}
-
+	Mou_Missions.dequeue(TOP);
+	Mou_Missions.enqueue(TOP);
 	while (ITERATOR != TOP)
 	{
-		Mou_Missions.dequeue(ITERATOR);
+		Mou_Missions.peek(ITERATOR);
+		if (ITERATOR != TOP)
+		{
+			Mou_Missions.dequeue(ITERATOR);
+		}
+		else
+		{
+			break;
+		}
 		if (ITERATOR->Get_ID() == Get_Mission_ID())
 		{
 			ITERATOR2 = ITERATOR;
