@@ -25,6 +25,9 @@
     <Filter Include="Source Files\DS_impementaion">
       <UniqueIdentifier>{f5a739ca-dc0b-4033-8aaf-d434d834d244}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{7be5b4fb-f962-46af-ae1d-ca89d1f4030f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Event.h">
@@ -104,14 +107,14 @@
     <ClCompile Include="MarsStation_Class.cpp">
       <Filter>MarsStation</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Rover.cpp">
       <Filter>Rovers</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>EVENTS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
