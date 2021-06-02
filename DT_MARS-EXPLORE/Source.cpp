@@ -7,12 +7,10 @@ int main(){
 	while (!object.isFinished())
 	{
 		object.Execute();
-		object.InExecution_to_Completed();
 		object.Assign_All_Mission();
-		//object.Assign_All_Mission();
-		//object.InExecution_to_Completed();
-		//object.Assign_All_Mission();
+		object.InExecution_to_Completed();
 		object.Check_Up_to_Available_All();
+		object.Assign_All_Mission();
 		/////////// printting functions & outputfile read /////////
 		object.print();
 		object.Out2();
