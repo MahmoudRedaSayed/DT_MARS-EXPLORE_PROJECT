@@ -6,7 +6,8 @@ int Rover::E_Rover_Count = 0;
 int Rover::Check_ER = 5;
 int Rover::M_Rover_Count = 0;
 int Rover::Check_MR = 5;
-int Rover::Missions_Before_Check_Up=0;
+int Rover::Missions_Before_Check_Up=1;
+int Rover::NO_ofMissions_Before_Maintenance = 1;
 
 Type_G Rover::GetType() const
 {
@@ -88,4 +89,5 @@ Rover::Rover(float Rover_Speed, Type_G T) :ID(++ID_Count), speed((Rover_Speed > 
 			E_Rover_Count++;
 		else if (T == Polar)
 			P_Rover_Count++;*/
+	////////// Bonus    Maintenance /////////////////
 }

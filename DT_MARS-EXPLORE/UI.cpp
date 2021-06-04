@@ -286,7 +286,7 @@ void UI::Print_PriorityQueue_Rover(PriorityQueue<Rover*> Available_R)
 }
 void UI::Print_Queue_Mission(LinkedQueue<Mission*>& Queue_Mission_List)
 {
-	Mission* mission, * mission_next, * TOP;
+	Mission* mission, * TOP;
 	Queue_Mission_List.dequeue(TOP);
 	Queue_Mission_List.enqueue(TOP);
 	cout << TOP->Get_ID();
@@ -303,7 +303,7 @@ void UI::Print_Queue_Mission(LinkedQueue<Mission*>& Queue_Mission_List)
 }
 void UI::Print_PriorityQueue_Mission(PriorityQueue<Mission*> PriorityQueue_Mission_List)
 {
-	Mission* mission,* mission_next;
+	Mission* mission;
 	PriorityQueue_Mission_List.dequeue(mission);
 	cout << mission->Get_ID();
 	while (PriorityQueue_Mission_List.dequeue(mission))

@@ -21,14 +21,15 @@ private:
 	bool IsAssigned;        //Is this rover assigned to a certain mission or not?
 	bool IsInCheckup;      //Is this rover undergoing a checkup or not?
 	int Mission_Count;    //no. of missions that rover had executed
-	//bool IsInMaintenance;//Is the rover undergoing Maintenance or not?
+	bool IsInMaintenance;//Is the rover undergoing Maintenance or not?
 					    //\Rovers\ need maintenance when ://To be discussed with team
 	//samaa
 	int Day_out;
 	//
 
 	///////////// Bonus Maintanence ////////////////
-	/* int Current_Mission_EX_Time;*/
+	float Current_Mission_EX_Time;
+
 public:
 	//static Data Members
 	static int ID_Count;			 //Count of Rovers & assigning each new rover latest ID count
@@ -38,6 +39,8 @@ public:
 	static int M_Rover_Count;     //Mount. Rovers count for file output
 	static int E_Rover_Count;    //Polar. Rovers count for file output
 
+	///////////// Bonus Maintanence ////////////////
+	static int NO_ofMissions_Before_Maintenance;
 
 	static int Check_PR;      //The duration (in days) of checkups that a **Polar** rover needs 
 							//to perform after completing N missions.
@@ -68,6 +71,17 @@ public:
      const int GetM_Rover_Count() { return M_Rover_Count; }
 	 const int GetCheck_MR() { return Check_MR; }*/
 	//Setters
+	void SetSpeed(float x)
+	{
+		if (x > 0)
+		{
+			speed = x;
+		}
+		else
+		{
+			speed = 1;
+		}
+	}
 	void SetIsAssigned(bool a);
 	void SetIsInCheckup(bool c);
 	void Increment_Mission_Count();// if(0%4 == 0 && Mission_Count !=0)
@@ -79,25 +93,25 @@ public:
 	 //samaa
 	void Set_Day_out(int x);//?is that condition ok??//Mamdouh:I think it's fine
 	int Get_Day_out();
-	 //
-	 //////////////////// Bonus Maintenance ////////////////////////////
-	 /*
-	 void set_Mission_EXtime(double ED )
-	 {
-		 Current_Mission_EX_Time = ED;
-	 }
-	 void Check_Maintenance()
-	 {
 
-	 }
-	 */
-
-
-	//void SetIsInMaintenance(bool m) { IsInMaintenance = m; }
-	//Move Rover to maintenance 
-	/*void Move_To_Maintenance() {
-		//To be discussed with team ISA
-	}*/
+	///////////////////// Bonus Maintenance ////////////////////////////
+	 
+	void set_Mission_EXtime(double ED) 
+	{
+		Current_Mission_EX_Time += ED;
+	}
+	bool Check_Maintenance()
+	{
+		if (Mission_Count % NO_ofMissions_Before_Maintenance == 0 || Current_Mission_EX_Time > 100)  // constant threshold 
+		{
+			Current_Mission_EX_Time = 0;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 };
 

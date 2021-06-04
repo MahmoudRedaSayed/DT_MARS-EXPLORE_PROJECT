@@ -17,10 +17,6 @@ using namespace std;
 class MarsStation_Class
 {
 private:
-	string M_ID;
-	string P_ID;
-	string E_ID;
-
 
 	static int files_Count;//#files to be created for output(#user operations), needs discussion with team
 	UI ui;
@@ -29,6 +25,7 @@ private:
 	LinkedQueue<Mission*> M_Mission;
 	PriorityQueue<Mission*> E_Mission;
 
+	//////// Bonus Rover Speed ////////
 	PriorityQueue<Rover*> Available_ER;
 	PriorityQueue<Rover*> Available_MR;
 	PriorityQueue<Rover*> Available_PR;
@@ -36,11 +33,20 @@ private:
 	LinkedQueue<Rover*> Check_up_ER;
 	LinkedQueue<Rover*> Check_up_MR;
 	LinkedQueue<Rover*> Check_up_PR;
+
+	///////// Bonus Maintenance /////////////
+	LinkedQueue<Rover*> Maintenance_ER;
+	LinkedQueue<Rover*> Maintenance_MR;
+	LinkedQueue<Rover*> Maintenance_PR;
+
 	/*
 	LinkedQueue<int> Completed_E_Mission_ID;
 	LinkedQueue<int> Completed_P_Mission_ID;
 	LinkedQueue<int> Completed_M_Mission_ID;
 	*/
+	string M_ID;
+	string P_ID;
+	string E_ID;
 
 	///////////////// 3 separate lists ////////////////
 	PriorityQueue<Mission*> Emergency_EX_Mission;
@@ -49,12 +55,14 @@ private:
 
 	PriorityQueue<Mission*> Temp_CD_Mission;
 	LinkedQueue<Event*> Events_List ;
-	static int Day_count;
-	static int waiting_missions_count,
-		execution_missions_count,
-		completed_missions_count,
-		availble_Rover_count,
-		checkup_Rover_count;
+	
+	static int Day_count,
+			   waiting_missions_count,
+			   execution_missions_count,
+			   completed_missions_count,
+		       availble_Rover_count,
+		       checkup_Rover_count,
+		       maintenance_Rover_count;
 	int WD_SUM;//variable for waiting sum
 	int ED_SUM;// & execution sum
 	//count of waiting missions & 
@@ -72,6 +80,10 @@ public:
 	///////// Execute Events /////////
 	void Execute();
 	//////// assignment operations Functions /////////
+	void Assign_Mission_to_QueueRover(int& Counter,LinkedQueue<Mission*> &availble_Mission_list,
+				PriorityQueue<Mission*> &EX_Mission_list,PriorityQueue<Rover*>& Rover_list);
+	void Assign_Mission_to_PriorityQueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
+		PriorityQueue<Mission*>& EX_Mission_list, LinkedQueue<Rover*>& Rover_list);
 	void Assign_E_M();
 	void Assign_M_M();
 	void Auto_Promoting();
@@ -79,14 +91,13 @@ public:
 	void Assign_All_Mission();
 	//////// Move from in execution to completed to available again //////////
 	void InExecution_to_Completed();
-
+	void General_Check_R_State(Rover* CRptr,LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration);
+	bool General_Check_Maintenance(Rover* CRptr,LinkedQueue<Rover*>& Maintence_list,int Duration);
+	
+	///
 	//void Emergency_EX_Mission_to_completed();
 	//void Mountainous_EX_Mission_to_completed();
 	//void Polar_EX_Mission_to_completed();
-
-
-	void General_Check_R_State(Rover* CRptr,LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration);
-	///
 	/*void Check_MR_State(Rover* CMRptr);
 	void Check_ER_State(Rover* CERptr);
 	void Check_PR_State(Rover* CPRptr);*/
@@ -95,9 +106,14 @@ public:
 	void Check_Up_to_Available_E();
 	void Check_Up_to_Available_P();*/
 	///
-	void General_Check_Up_to_Available(LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list);
+	
+	//////////////////////////////// Bonus Maintenance /////////////////////////////////
+	void Maintenance_to_Available();
+
+	void General_Check_Up_OR_maintenance_to_Available(int& n,LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list);
 	void General_InEXecution_to_Completed(PriorityQueue<Mission*>& Execution_list, string &List_ID);
 	void Check_Up_to_Available_All();
+
 
 	//////// Check is All mission is finished /////////////
 	bool isFinished();

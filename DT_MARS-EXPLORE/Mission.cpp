@@ -175,7 +175,7 @@ void Mission::Cal_Prirority()
 }*/
 double Mission::Calculate_priority()
 {
-	Priority = SIG * TLOC * MDUR / FD;//equation m2ktaaa
+	Priority = (10 * SIG) + (0.03 * TLOC) + (5 * MDUR) - (FD/3); //equation m2ktaaa
 	return Priority;
 }
 int Mission::NumOfEMissions = 0;

@@ -9,6 +9,7 @@ int main()
 		object.Execute();
 		object.Assign_All_Mission();
 		object.InExecution_to_Completed();
+		object.Maintenance_to_Available();
 		object.Check_Up_to_Available_All();
 		/////////// printting functions & outputfile read /////////
 		object.print();
