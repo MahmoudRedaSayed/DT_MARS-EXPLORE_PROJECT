@@ -18,6 +18,7 @@ class UI
 {
 private:
 	Terminal_Mode Mode;
+	string Output_File_Name;
 public:
 	UI();
 	~UI();
@@ -27,8 +28,8 @@ public:
 	void Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<Mission*> Emergency_EX_Mission,
 											PriorityQueue<Mission*> Mountainous_EX_Mission, PriorityQueue<Mission*> Polar_EX_Mission);
 	void Print_Completed(int NUM_OF_Missions, string& M_ID, string& P_ID, string& E_ID);
-	void Print_In_Checkup_Rovers( int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up_ER, 
-								LinkedQueue<Rover*> Check_up_PR, LinkedQueue<Rover*> Check_up_MR);
+	void Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*>& Check_up_ER,
+		LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR);
 	
 	void print_Availble_missions(int day_count,int waiting_missions,PriorityQueue<Mission*>& E_Mission,
 								LinkedQueue<Mission*>& P_Mission,LinkedQueue<Mission*>& M_Mission);
@@ -46,5 +47,7 @@ public:
 	}
 	//3 waiting missions lists , 3 in exec , 3 available rovers,3 checkup lists, 3 completed lists<int>
 	string read_input_file_name(int i);
+	void read_output_file_name();
+	string Get_Output_File_Name();
 };
 

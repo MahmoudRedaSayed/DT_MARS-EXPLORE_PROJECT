@@ -331,6 +331,10 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 	string &List_ID)
 {
 	Mission* mission_type;
+	if (List_ID != "")
+	{
+		List_ID = List_ID + (",");
+	}
 	while (Execution_list.peek(mission_type))
 	{
 		if (mission_type->Get_CD() == Day_count)
@@ -522,11 +526,11 @@ void MarsStation_Class::Program_Startup()
 	cin >> File_Name;*/
 	File_Name = ui.read_input_file_name(1);
 	ifstream My_File;
-	My_File.open("\Files\\" + File_Name + ".txt");
+	My_File.open("\Input\\" + File_Name + ".txt");
 	while (!My_File.is_open())
 	{
 		File_Name = ui.read_input_file_name(2);
-		My_File.open("\Files\\" + File_Name + ".txt");
+		My_File.open("\Input\\" + File_Name + ".txt");
 		if (File_Name == "0") break;
 	}
 	if (My_File.is_open())                       //Check if the file is found or not
@@ -911,6 +915,10 @@ void MarsStation_Class::print()
 	{
 		ui.sleep(1.0);
 	}
+	else if (Mode == Silent)
+	{
+		return;
+	}
 	ui.print_Availble_missions(Day_count, waiting_missions_count, E_Mission,
 		P_Mission, M_Mission);
 	ui.Print_In_Execution_Missions_Rovers(execution_missions_count, Emergency_EX_Mission,
@@ -918,7 +926,6 @@ void MarsStation_Class::print()
 	ui.Print_Availble_Rover(availble_Rover_count, Available_ER, Available_MR, Available_PR);
 	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
 	ui.Print_Completed(completed_missions_count, M_ID, P_ID, E_ID);
-	
 }
 bool MarsStation_Class::isFinished()
 {
@@ -931,11 +938,9 @@ bool MarsStation_Class::isFinished()
 
 void MarsStation_Class::Out1()
 {
-
+	ui.read_output_file_name();
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
-	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::out);
-
-
+	outF.open("\Output\\" + ui.Get_Output_File_Name() + ".txt", ios::out);
 	outF << "CD\tID\tFD\tWD\tED\n";
 	outF.close();
 }
@@ -944,7 +949,7 @@ void MarsStation_Class::Out2()
 {
 	ofstream outF;
 
-	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
+	outF.open("\Output\\" + ui.Get_Output_File_Name() + ".txt", ios::app);
 
 	Mission* dummy_mission;
 	while (Temp_CD_Mission.dequeue(dummy_mission))
@@ -964,7 +969,7 @@ void MarsStation_Class::Out3()
 	int MounSumTotal = Mission::NumOfMMissions + Mission::NumOfAutoPMissions+ Mission::NumOfNoNAutoPMissions ;
 	int Msum = Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;
 
-	outF.open("\Output\\Station Statistics" + to_string(files_Count) + ".txt", ios::app);
+	outF.open("\Output\\" + ui.Get_Output_File_Name() + ".txt", ios::app);
 
 	outF << ".............................................\n.............................................\n"
 		<< "Missions:" << Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;

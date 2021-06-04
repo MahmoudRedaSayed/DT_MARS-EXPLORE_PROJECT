@@ -134,90 +134,149 @@ void UI::Print_Completed(int NUM_OF_Missions, string& M_ID, string& P_ID, string
 	{
 		M_ID = M_ID.substr(0,M_ID.size() - 1);
 		cout << "  " << '{' << M_ID << '}';
-		M_ID = "";
+		//M_ID = "";
 	}
 
 	if (P_ID != "")
 	{
 		P_ID = P_ID.substr(0,P_ID.size() - 1);
 		cout <<"  " <<'(' << P_ID << ')';
-		P_ID = "";
+		//P_ID = "";
 	}
 
 	if (E_ID != "")
 	{
 		E_ID=E_ID.substr(0,E_ID.size()-1);
 		cout<<"  "<< '[' << E_ID << ']';
-		E_ID = "";
+		//E_ID = "";
 	}
 	
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 
-void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*> Check_up_ER,
-	LinkedQueue<Rover*> Check_up_PR, LinkedQueue<Rover*> Check_up_MR)
+void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*>& Check_up_ER,
+	LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR)
 {
 	cout << NUM_OF_Rovers << " In-Checkup Rovers: ";
 	Rover* PTR = nullptr;
+	Rover* TOP = nullptr;
 	int count = 0;//To avoid the comma
 	//printing the Emergency
+
 	Check_up_ER.peek(PTR);
 	if (PTR)
 	{
-		cout << '[';
-	}
-	while (Check_up_ER.peek(PTR))
-	{
-		if (count != 0)
+		PTR = nullptr;
+		Check_up_ER.dequeue(TOP);
+		if (TOP)
 		{
-			cout << ',';
+			cout << '[';
+			cout << TOP->GetID();
+			count++;
 		}
-		Check_up_ER.dequeue(PTR);
-		cout << PTR->GetID();
-		count++;
+		Check_up_ER.enqueue(TOP);
+		while (TOP != PTR)
+		{
+			Check_up_ER.peek(PTR);
+			if (PTR != TOP)
+			{
+				Check_up_ER.dequeue(PTR);
+			}
+			else
+			{
+				break;
+			}
+			if (count != 0)
+			{
+				cout << ',';
+			}
+
+			cout << PTR->GetID();
+			count++;
+			Check_up_ER.enqueue(PTR);
+		}
+		if (count != 0)
+			cout << ']' << ' ';
 	}
-	if (count != 0)
-		cout << ']'<<' ';
 	// printing the polar 
 	count = 0;
 	PTR = nullptr;
 	Check_up_PR.peek(PTR);
 	if (PTR)
 	{
-		cout << '(';
-	}
-	while (Check_up_PR.peek(PTR))
-	{
-		if (count != 0)
+
+		PTR = nullptr;
+		Check_up_PR.dequeue(TOP);
+		if (TOP)
 		{
-			cout << ',';
+			cout << "(";
+			cout << TOP->GetID();
+			count++;
 		}
-		Check_up_PR.dequeue(PTR);
-		cout << PTR->GetID();
-		count++;
+		Check_up_PR.enqueue(TOP);
+		while (TOP != PTR)
+		{
+			Check_up_PR.peek(PTR);
+			if (PTR != TOP)
+			{
+				Check_up_PR.dequeue(PTR);
+			}
+			else
+			{
+				break;
+			}
+			if (count != 0)
+			{
+				cout << ',';
+			}
+
+			cout << PTR->GetID();
+			count++;
+			Check_up_PR.enqueue(PTR);
+		}
+		if (count != 0)
+			cout << ')' << ' ';
 	}
-	if (count != 0)
-		cout << ')' << ' ';
 	//printing the Mountainous
 	count = 0;
 	PTR = nullptr;
 	Check_up_MR.peek(PTR);
 	if (PTR)
 	{
-		cout << '{';
-	}
-	while (Check_up_MR.peek(PTR))
-	{
-		if (count != 0)
+		
+
+		PTR = nullptr;
+		Check_up_MR.dequeue(TOP);
+		if (TOP)
 		{
-			cout << ',';
+			cout << '{';
+			cout << TOP->GetID();
+			count++;
 		}
-		Check_up_MR.dequeue(PTR);
-		cout << PTR->GetID();
-		count++;
+		Check_up_MR.enqueue(TOP);
+		while (TOP != PTR)
+		{
+			Check_up_MR.peek(PTR);
+			if (PTR != TOP)
+			{
+				Check_up_MR.dequeue(PTR);
+			}
+			else
+			{
+				break;
+			}
+			if (count != 0)
+			{
+				cout << ',';
+			}
+
+			cout << PTR->GetID();
+			count++;
+			Check_up_MR.enqueue(PTR);
+		}
+		if (count != 0)
+			cout << '}' << ' ';
 	}
-	if (count != 0)
-		cout << '}' << ' ';
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 
@@ -335,6 +394,16 @@ if (i == 2)
 	return FName;
 }
 	
+}
+void UI::read_output_file_name()
+{
+	cout << "Please::enter the name of the output file to load the data in it" << endl<<endl;
+	cin >> Output_File_Name;
+}
+
+string UI::Get_Output_File_Name()
+{
+	return Output_File_Name;
 }
 
 
