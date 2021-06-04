@@ -46,34 +46,17 @@ public:
 	static int Check_ER;  //The duration (in days) of checkups that an **Emergency** rover rover needs 
 						//to perform after completing N missions.
 	//Constructor & Destructor
-	Rover(float Rover_Speed, Type_G T)
-		:ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0), IsAssigned(false)
-		, Mission_Count(0), Type(T)
-		, IsInCheckup(false) 
-	{//no need to it look at the input file
-		/*if (T == Mountainous)
-			M_Rover_Count++;
-		else if (T == Emergency)
-			E_Rover_Count++;
-		else if (T == Polar)
-			P_Rover_Count++;*/
-	}
+	Rover(float Rover_Speed, Type_G T);
 	//Let Default speed for rover is 3 km/hour (Although we may not need this condition :D )
 	//just added in case of invalid input
 	~Rover() { /*Current_Mission_EX_Time = 0;*/ }
 	//Getters
-	Type_G GetType() const { return Type; }
-	int GetID()const { return ID; }
-	float GetSpeed()const { return speed; }
-	bool GetIsAssigned()const { return IsAssigned; }
-	bool GetIsInCheckup()const 
-	{ 
-		return IsInCheckup;
-	}
-	int GetMission_Count()const 
-	{
-		return Mission_Count;
-	}
+	Type_G GetType() const;
+	int GetID()const;
+	float GetSpeed()const;
+	bool GetIsAssigned()const;
+	bool GetIsInCheckup()const;
+	int GetMission_Count()const;
 	//const bool GetIsInMaintenance() { return IsInMaintenance; }
 	//Static members getters
     /*const int GetID_Count(){return ID_Count;}
@@ -85,20 +68,17 @@ public:
      const int GetM_Rover_Count() { return M_Rover_Count; }
 	 const int GetCheck_MR() { return Check_MR; }*/
 	//Setters
-	void SetIsAssigned(bool a) { IsAssigned = a; }
-	void SetIsInCheckup(bool c) { IsInCheckup = c; }
-	void Increment_Mission_Count() { Mission_Count++; }// if(0%4 == 0 && Mission_Count !=0)
+	void SetIsAssigned(bool a);
+	void SetIsInCheckup(bool c);
+	void Increment_Mission_Count();// if(0%4 == 0 && Mission_Count !=0)
 	//static Members Getters
-	 void SetCheck_PR(int c) { Check_PR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
-	 void SetCheck_ER(int c) { Check_ER = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
-	 void SetCheck_MR(int c) { Check_MR = c > 0 ? c : 5; } // Let Default checkup duration = 5 days
+	void SetCheck_PR(int c); // Let Default checkup duration = 5 days
+	void SetCheck_ER(int c); // Let Default checkup duration = 5 days
+	void SetCheck_MR(int c); // Let Default checkup duration = 5 days
 
 	 //samaa
-	 void Set_Day_out(int x) { Day_out = (x > 0) ? x : 1; }//?is that condition ok??//Mamdouh:I think it's fine
-	 int Get_Day_out()
-	 { 
-		 return Day_out; 
-	 }
+	void Set_Day_out(int x);//?is that condition ok??//Mamdouh:I think it's fine
+	int Get_Day_out();
 	 //
 	 //////////////////// Bonus Maintenance ////////////////////////////
 	 /*
@@ -120,6 +100,5 @@ public:
 	}*/
 
 };
-//static members initializers
 
 
