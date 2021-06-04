@@ -33,10 +33,12 @@ public:
 	
 	void print_Availble_missions(int day_count,int waiting_missions,PriorityQueue<Mission*>& E_Mission,
 								LinkedQueue<Mission*>& P_Mission,LinkedQueue<Mission*>& M_Mission);
-	void Print_Availble_Rover(PriorityQueue<Rover*> Available_R);
-								
-	void print_Availble_missions_Queue(LinkedQueue<Mission*>& Queue_Mission_List);
-	void print_Availble_missions_PriorityQueue(PriorityQueue<Mission*> PriorityQueue_Mission_List);
+	void Print_Available_Rover(int Waiting_Rovers, PriorityQueue<Rover*>& Available_ER,
+								PriorityQueue<Rover*>& Available_PR, PriorityQueue<Rover*>& Available_MR);
+	void Print_Queue_Rover(PriorityQueue<Rover*> Available_R);		
+	void Print_Queue_Mission(LinkedQueue<Mission*>& Queue_Mission_List);
+	void Print_PriorityQueue_Mission(PriorityQueue<Mission*> PriorityQueue_Mission_List);
+
 	void sleep(float seconds) {
 		clock_t startClock = clock();
 		float secondsAhead = seconds * CLOCKS_PER_SEC;

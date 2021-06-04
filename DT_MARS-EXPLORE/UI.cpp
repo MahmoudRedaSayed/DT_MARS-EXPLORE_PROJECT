@@ -213,25 +213,34 @@ void UI::print_Availble_missions(int day_count,int waiting_missions,PriorityQueu
 	if (!E_Mission.isEmpty())
 	{
 		cout << "[";
-		print_Availble_missions_PriorityQueue(E_Mission);
+		Print_PriorityQueue_Mission(E_Mission);
 		cout <<"] ";
 	}
 	if (!P_Mission.isEmpty())
 	{
 		cout << "(";
-		print_Availble_missions_Queue(P_Mission);
+		Print_Queue_Mission(P_Mission);
 		cout <<  ") ";
 	}
 	if (!M_Mission.isEmpty())
 	{
 		
 		cout << "{";
-		print_Availble_missions_Queue(M_Mission);
+		Print_Queue_Mission(M_Mission);
 		cout <<  "} ";
 	}
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
-void UI::Print_Availble_Rover(PriorityQueue<Rover*> Available_R)
+void UI::Print_Available_Rover(int Waiting_Rovers, PriorityQueue<Rover*>& Available_ER,
+	PriorityQueue<Rover*>&Available_PR, PriorityQueue<Rover*>& Available_MR)
+{
+	cout << Waiting_Rovers << "Availble Rovers: ";
+	Print_Queue_Rover(Available_ER);
+	Print_Queue_Rover(Available_PR);
+	Print_Queue_Rover(Available_MR);
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+}
+void UI::Print_Queue_Rover(PriorityQueue<Rover*> Available_R)
 
 {
 	Rover* rover;
@@ -271,7 +280,7 @@ void UI::Print_Availble_Rover(PriorityQueue<Rover*> Available_R)
 		}
 	}
 }
-void UI::print_Availble_missions_Queue(LinkedQueue<Mission*>& Queue_Mission_List)
+void UI::Print_Queue_Mission(LinkedQueue<Mission*>& Queue_Mission_List)
 {
 	Mission* mission, * mission_next, * TOP;
 	Queue_Mission_List.dequeue(TOP);
@@ -288,7 +297,7 @@ void UI::print_Availble_missions_Queue(LinkedQueue<Mission*>& Queue_Mission_List
 		}
 	}
 }
-void UI::print_Availble_missions_PriorityQueue(PriorityQueue<Mission*> PriorityQueue_Mission_List)
+void UI::Print_PriorityQueue_Mission(PriorityQueue<Mission*> PriorityQueue_Mission_List)
 {
 	Mission* mission,* mission_next;
 	PriorityQueue_Mission_List.dequeue(mission);

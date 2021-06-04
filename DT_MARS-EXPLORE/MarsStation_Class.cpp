@@ -913,7 +913,7 @@ void MarsStation_Class::print()
 	}
 	else if(Mode == Step_By_Step)
 	{
-		//ui.sleep(1.0);
+		ui.sleep(1.0);
 	}
 	else if (Mode == Silent)
 	{
@@ -926,11 +926,7 @@ void MarsStation_Class::print()
 	ui.Print_In_Execution_Missions_Rovers(Mountainous_EX_Mission);
 	ui.Print_In_Execution_Missions_Rovers(Polar_EX_Mission);
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
-	cout << availble_Rover_count << " Availble Rovers: ";
-	ui.Print_Availble_Rover( Available_ER);
-	ui.Print_Availble_Rover(Available_PR);
-	ui.Print_Availble_Rover(Available_MR);
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+	ui.Print_Available_Rover(availble_Rover_count, Available_ER, Available_PR, Available_MR);
 	cout << checkup_Rover_count << " In-Checkup Rovers: ";
 	ui.Print_In_Checkup_Rovers(Check_up_ER);
 	ui.Print_In_Checkup_Rovers(Check_up_PR);
