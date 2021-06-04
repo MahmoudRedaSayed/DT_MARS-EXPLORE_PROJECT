@@ -921,17 +921,10 @@ void MarsStation_Class::print()
 	}
 	ui.print_Availble_missions(Day_count, waiting_missions_count, E_Mission,
 		P_Mission, M_Mission);
-	cout << execution_missions_count << " In-Execution Missions/Rovers: ";
-	ui.Print_In_Execution_Missions_Rovers(Emergency_EX_Mission);
-	ui.Print_In_Execution_Missions_Rovers(Mountainous_EX_Mission);
-	ui.Print_In_Execution_Missions_Rovers(Polar_EX_Mission);
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+	ui.Print_In_Execution_Missions_Rovers(execution_missions_count,Emergency_EX_Mission,
+											Mountainous_EX_Mission,Polar_EX_Mission);
 	ui.Print_Available_Rover(availble_Rover_count, Available_ER, Available_PR, Available_MR);
-	cout << checkup_Rover_count << " In-Checkup Rovers: ";
-	ui.Print_In_Checkup_Rovers(Check_up_ER);
-	ui.Print_In_Checkup_Rovers(Check_up_PR);
-	ui.Print_In_Checkup_Rovers(Check_up_MR);
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
 	ui.Print_Completed( M_ID, P_ID, E_ID);
 }
 bool MarsStation_Class::isFinished()

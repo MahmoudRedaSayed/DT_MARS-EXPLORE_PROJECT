@@ -55,7 +55,18 @@ void UI::SelectMode()
 	
 }
 
-void UI::Print_In_Execution_Missions_Rovers(PriorityQueue<Mission*> EX_Mission)
+void UI::Print_In_Execution_Missions_Rovers(int execution_missions_count, PriorityQueue<Mission*>& Emergency_EX_Mission,
+	PriorityQueue<Mission*>& Mountainous_EX_Mission,
+	PriorityQueue<Mission*>& Polar_EX_Mission)
+{
+	cout << execution_missions_count << " In-Execution Missions/Rovers: ";
+	Print_PriorityQueue_Mission_Rover(Emergency_EX_Mission);
+	Print_PriorityQueue_Mission_Rover(Mountainous_EX_Mission);
+	Print_PriorityQueue_Mission_Rover(Polar_EX_Mission);
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+
+}
+void UI::Print_PriorityQueue_Mission_Rover(PriorityQueue<Mission*> EX_Mission)
 {
 	Mission* PTR = nullptr;
 	int count = 0;//To avoid the comma
@@ -133,8 +144,16 @@ void UI::Print_Completed( string& M_ID, string& P_ID, string& E_ID)
 	
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
-
-void UI::Print_In_Checkup_Rovers(LinkedQueue<Rover*>& Check_up_R)
+void UI::Print_In_Checkup_Rovers(int Checkup_count_Rover, LinkedQueue<Rover*>& Check_up_ER,
+					LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR)
+{
+	cout << Checkup_count_Rover << " In-Checkup Rovers: ";
+	Print_Queue_Rover(Check_up_ER);
+	Print_Queue_Rover(Check_up_PR);
+	Print_Queue_Rover(Check_up_MR);
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+}
+void UI::Print_Queue_Rover(LinkedQueue<Rover*>& Check_up_R)
 {
 	
 	Rover* PTR = nullptr;
@@ -203,8 +222,6 @@ void UI::Print_In_Checkup_Rovers(LinkedQueue<Rover*>& Check_up_R)
 			
 	}
 }
-
-
 void UI::print_Availble_missions(int day_count,int waiting_missions,PriorityQueue<Mission*>& E_Mission,
 	LinkedQueue<Mission*>& P_Mission, LinkedQueue<Mission*>& M_Mission)
 {
@@ -234,13 +251,13 @@ void UI::print_Availble_missions(int day_count,int waiting_missions,PriorityQueu
 void UI::Print_Available_Rover(int Waiting_Rovers, PriorityQueue<Rover*>& Available_ER,
 	PriorityQueue<Rover*>&Available_PR, PriorityQueue<Rover*>& Available_MR)
 {
-	cout << Waiting_Rovers << "Availble Rovers: ";
-	Print_Queue_Rover(Available_ER);
-	Print_Queue_Rover(Available_PR);
-	Print_Queue_Rover(Available_MR);
+	cout << Waiting_Rovers << " Availble Rovers: ";
+	Print_PriorityQueue_Rover(Available_ER);
+	Print_PriorityQueue_Rover(Available_PR);
+	Print_PriorityQueue_Rover(Available_MR);
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
-void UI::Print_Queue_Rover(PriorityQueue<Rover*> Available_R)
+void UI::Print_PriorityQueue_Rover(PriorityQueue<Rover*> Available_R)
 
 {
 	Rover* rover;
@@ -336,7 +353,13 @@ string UI::Get_Output_File_Name()
 {
 	return Output_File_Name;
 }
-
+void UI::sleep(float seconds) {
+	clock_t startClock = clock();
+	float secondsAhead = seconds * CLOCKS_PER_SEC;
+	// do nothing until the elapsed time has passed.
+	while (clock() < startClock + secondsAhead);
+	return;
+}
 
 
 /*
