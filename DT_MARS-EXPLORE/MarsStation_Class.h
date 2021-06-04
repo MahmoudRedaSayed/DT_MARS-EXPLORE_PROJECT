@@ -27,6 +27,7 @@ private:
 
 	LinkedQueue<Mission*> P_Mission;
 	LinkedQueue<Mission*> M_Mission;
+	PriorityQueue<Mission*> E_Mission;
 
 	PriorityQueue<Rover*> Available_ER;
 	PriorityQueue<Rover*> Available_MR;
@@ -40,17 +41,14 @@ private:
 	LinkedQueue<int> Completed_P_Mission_ID;
 	LinkedQueue<int> Completed_M_Mission_ID;
 	*/
-	PriorityQueue<Mission*> E_Mission;
-	//PriorityQueue<Mission*> EX_Mission;
+
 	///////////////// 3 separate lists ////////////////
 	PriorityQueue<Mission*> Emergency_EX_Mission;
 	PriorityQueue<Mission*> Mountainous_EX_Mission;
 	PriorityQueue<Mission*> Polar_EX_Mission;
 
 	PriorityQueue<Mission*> Temp_CD_Mission;
-
 	LinkedQueue<Event*> Events_List ;
-
 	static int Day_count;
 	static int waiting_missions_count,
 		execution_missions_count,
@@ -60,10 +58,7 @@ private:
 	int WD_SUM;//variable for waiting sum
 	int ED_SUM;// & execution sum
 	//count of waiting missions & 
-	
 
-
-	//LinkedQueue<>
 public:
 	static int Get_Day_count();
 
@@ -72,6 +67,8 @@ public:
 	/*{
 		Day_count++;
 	}*/
+	///////////////////////////The function the will read the data from the file////////////////////
+	void Program_Startup();
 	///////// Execute Events /////////
 	void Execute();
 	//////// assignment operations Functions /////////
@@ -102,8 +99,6 @@ public:
 	void General_InEXecution_to_Completed(PriorityQueue<Mission*>& Execution_list, string &List_ID);
 	void Check_Up_to_Available_All();
 
-	///////////////////////////The function the will read the data from the file////////////////////
-	void Program_Startup();
 	//////// Check is All mission is finished /////////////
 	bool isFinished();
 	// print function

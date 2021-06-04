@@ -113,7 +113,7 @@
     <ClCompile Include="UI.cpp">
       <Filter>EVENTS</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>

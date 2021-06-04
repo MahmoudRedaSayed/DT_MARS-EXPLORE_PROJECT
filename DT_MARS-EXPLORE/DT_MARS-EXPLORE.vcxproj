@@ -161,13 +161,13 @@
     <ClCompile Include="Emergency_Mission.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Formulaion_Event.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="MarsStation_Class.cpp" />
     <ClCompile Include="Mission.cpp" />
     <ClCompile Include="Mountainous_Mission.cpp" />
     <ClCompile Include="Polar_Mission.cpp" />
     <ClCompile Include="Promotion_Event.cpp" />
     <ClCompile Include="Rover.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

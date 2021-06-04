@@ -220,104 +220,6 @@ void MarsStation_Class::Assign_All_Mission()
 	Assign_P_M();
 	Auto_Promoting();/////?is it will be like that at the first before any assign???
 }
-/*
-void MarsStation_Class::Emergency_EX_Mission_to_completed()
-{
-	Mission* Emergence_mission;
-	while (Emergency_EX_Mission.peek(Emergence_mission))
-	{
-		if (Emergence_mission->Get_CD() == Day_count)
-		{
-			Emergency_EX_Mission.dequeue(Emergence_mission);
-			Temp_CD_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_ED_Priority());
-			Completed_E_Mission_ID.enqueue(Emergence_mission->Get_ID());
-			// string should take ID //
-			E_ID.append(to_string(Emergence_mission->Get_ID()));
-			E_ID.append(to_string(','));
-			Rover* rover = Emergence_mission->Get_Rptr();
-			if (rover->GetType() == Emergency)
-			{
-				General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::E_Rover_Count, Rover::Check_ER);
-				//Check_ER_State(rover);
-			}
-			else if (rover->GetType() == Mountainous)
-			{
-				General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
-				//Check_MR_State(rover);
-			}
-			else
-			{
-				General_Check_R_State(rover, Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
-				//Check_PR_State(rover);
-			}
-		}
-		else
-		{
-			break;
-		}
-	}
-}
-void MarsStation_Class::Mountainous_EX_Mission_to_completed()
-{
-	Mission* Mountainous_mission;
-	while (Mountainous_EX_Mission.peek(Mountainous_mission))
-	{
-		if (Mountainous_mission->Get_CD() == Day_count)
-		{
-			Mountainous_EX_Mission.dequeue(Mountainous_mission);
-			Temp_CD_Mission.enqueue(Mountainous_mission, Mountainous_mission->Calculate_ED_Priority());
-			Completed_M_Mission_ID.enqueue(Mountainous_mission->Get_ID());
-			// string should take ID //
-			M_ID.append(to_string(Mountainous_mission->Get_ID()));
-			M_ID.append(to_string(','));
-			Rover* rover = Mountainous_mission->Get_Rptr();
-			if (rover->GetType() == Mountainous)
-			{
-				General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::E_Rover_Count, Rover::Check_ER);
-				//Check_MR_State(rover);
-			}
-			else
-			{
-				General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
-				//Check_ER_State(rover);
-			}
-		}
-		else
-		{
-			break;
-		}
-	}
-}
-void MarsStation_Class::Polar_EX_Mission_to_completed()
-{
-	Mission* polar_mission;
-	while (Polar_EX_Mission.peek(polar_mission))
-	{
-		if (polar_mission->Get_CD() == Day_count)
-		{
-			Polar_EX_Mission.dequeue(polar_mission);
-			Temp_CD_Mission.enqueue(polar_mission, polar_mission->Calculate_ED_Priority());
-			Completed_E_Mission_ID.enqueue(polar_mission->Get_ID());
-			// string should take ID //
-			P_ID.append(to_string(polar_mission->Get_ID()));
-			P_ID.append(to_string(','));
-			//Check_PR_State(Polar_mission->Get_Rptr());
-			General_Check_R_State(polar_mission->Get_Rptr(), Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
-		}
-		else
-		{
-			break;
-		}
-	}
-}
-///////////////////////////////////////////////////////////////
-void MarsStation_Class::InExecution_to_Completed()
-{
-	Emergency_EX_Mission_to_completed();
-	Mountainous_EX_Mission_to_completed();
-	Polar_EX_Mission_to_completed();
-	//Mamdouh : maybe here you can call out2? remember you shall send a queue of sorted completed missions ;) 
-}*/
 void MarsStation_Class::InExecution_to_Completed()
 {
 	//////// Check Emergency Execution List ///////
@@ -397,34 +299,6 @@ void MarsStation_Class::Auto_Promoting()
 
 
 }
-/////////////////////
-//void MarsStation_Class::Auto_Promoting()
-//{
-//	Mission* MMptr;
-//	Mission* EMptr;
-//
-//	while (!M_Mission.isEmpty())
-//	{
-//		M_Mission.peek(MMptr);
-//		if (MMptr->Calculate_WD(Day_count) == Mission::AutoP)
-//		{
-//			M_Mission.dequeue(MMptr);
-//			EMptr = new Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID(), Emergency);
-//			E_Mission.enqueue(EMptr, EMptr->Calculate_priority());
-//			Mission::NumOfAutoPMissions++;
-//			Mission::NumOfMMissions--;
-//			Mission::NumOfEMissions++;
-//			//D.F to add NumOfAutoPMissions with NumOfMMissions to get num of totall m mission to calculat el nsba el m2wya for ayto promoting in output file
-//			delete MMptr;//?delete in general and null errors......
-//		}
-//		else
-//			break;//or return
-//	}
-//
-//
-//}
-
-
 void MarsStation_Class::General_Check_R_State(Rover* CRptr, LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration)
 {
 	if (CRptr->GetMission_Count() == Count)
@@ -442,69 +316,6 @@ void MarsStation_Class::General_Check_R_State(Rover* CRptr, LinkedQueue<Rover*>&
 	//General_Check_R_State(mountain Rover * CRptr, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
 
 }
-
-//void MarsStation_Class::Check_MR_State(Rover* CMRptr)
-//{
-//	//dynamicM_Rover_Count
-//	if (CMRptr->GetMission_Count() == Rover::M_Rover_Count)
-//	{
-//		Check_up_MR.enqueue(CMRptr);
-//		//Rover::GetCheck_MR();
-//		CMRptr->Set_Day_out(Rover::Check_MR + Day_count);
-//	}
-//	else
-//	{
-//		Available_MR.enqueue(CMRptr);
-//	}
-//
-//}
-////check rover satutes
-//
-//void MarsStation_Class::Check_ER_State(Rover* CERptr)
-//{
-//	//dynamicM_Rover_Count
-//	if (CERptr->GetMission_Count() == Rover::E_Rover_Count)
-//	{
-//		Check_up_ER.enqueue(CERptr);
-//		CERptr->Set_Day_out(Rover::Check_ER + Day_count);
-//	}
-//	else
-//	{
-//		Available_ER.enqueue(CERptr);
-//	}
-//
-//}
-//
-//void MarsStation_Class::Check_PR_State(Rover* CPRptr)
-//{
-//	//dynamicM_Rover_Count
-//	if (CPRptr->GetMission_Count() == Rover::P_Rover_Count)
-//	{
-//		Check_up_PR.enqueue(CPRptr);
-//		CPRptr->Set_Day_out(Rover::Check_PR + Day_count);
-//	}
-//	else
-//	{
-//		Available_PR.enqueue(CPRptr);
-//	}
-//
-//}
-
-
-//void MarsStation_Class::Check_PR_State(Rover* CPRptr)
-//{
-//	//dynamicM_Rover_Count
-//	if (CPRptr->GetMission_Count() == Rover::P_Rover_Count)
-//	{
-//		Check_up_PR.enqueue(CPRptr);
-//		CPRptr->Set_Day_out(Rover::Check_PR + Day_count);
-//	}
-//	else
-//	{
-//		Available_PR.enqueue(CPRptr, CPRptr->GetSpeed());
-//	}
-//
-//}
 
 void MarsStation_Class::Program_Startup()
 {
@@ -845,52 +656,6 @@ void MarsStation_Class::General_Check_Up_to_Available(LinkedQueue<Rover*>& Check
 		}
 	}
 }
-//void MarsStation_Class::Check_Up_to_Available_E()
-//{
-//	Rover* EMptr;
-//	Check_up_ER.peek(EMptr);
-//	while (EMptr->Get_Day_out() == Day_count)
-//	{
-//		Check_up_ER.dequeue(EMptr);
-//		Available_ER.enqueue(EMptr, EMptr->GetSpeed());
-//		Check_up_ER.peek(EMptr);
-//	}
-
-//void MarsStation_Class::Check_Up_to_Available_M()
-//{
-//	Rover* MMptr;
-//	Check_up_MR.peek(MMptr);
-//	while (MMptr->Get_Day_out() == Day_count)
-//	{
-//		Check_up_MR.dequeue(MMptr);
-//		Available_MR.enqueue(MMptr);
-//		Check_up_MR.peek(MMptr);
-//	}
-//}
-//void MarsStation_Class::Check_Up_to_Available_E()
-//{
-//	Rover* EMptr;
-//	Check_up_ER.peek(EMptr);
-//	while (EMptr->Get_Day_out() == Day_count)
-//	{
-//		Check_up_ER.dequeue(EMptr);
-//		Available_ER.enqueue(EMptr);
-//		Check_up_ER.peek(EMptr);
-//	}
-//
-//}
-//void MarsStation_Class::Check_Up_to_Available_P()
-//{
-//	Rover* PMptr;
-//	Check_up_PR.peek(PMptr);
-//	while (PMptr->Get_Day_out() == Day_count)
-//	{
-//		Check_up_PR.dequeue(PMptr);
-//		Available_PR.enqueue(PMptr);
-//		Check_up_PR.peek(PMptr);
-//	}
-//
-//}
 
 void MarsStation_Class::Check_Up_to_Available_All()
 {
@@ -913,7 +678,7 @@ void MarsStation_Class::print()
 	}
 	else if(Mode == Step_By_Step)
 	{
-		//ui.sleep(1.0);
+		ui.sleep(1.0);
 	}
 	else if (Mode == Silent)
 	{
@@ -921,21 +686,10 @@ void MarsStation_Class::print()
 	}
 	ui.print_Availble_missions(Day_count, waiting_missions_count, E_Mission,
 		P_Mission, M_Mission);
-	cout << execution_missions_count << " In-Execution Missions/Rovers: ";
-	ui.Print_In_Execution_Missions_Rovers(Emergency_EX_Mission);
-	ui.Print_In_Execution_Missions_Rovers(Mountainous_EX_Mission);
-	ui.Print_In_Execution_Missions_Rovers(Polar_EX_Mission);
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
-	cout << availble_Rover_count << " Availble Rovers: ";
-	ui.Print_Availble_Rover( Available_ER);
-	ui.Print_Availble_Rover(Available_PR);
-	ui.Print_Availble_Rover(Available_MR);
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
-	cout << checkup_Rover_count << " In-Checkup Rovers: ";
-	ui.Print_In_Checkup_Rovers(Check_up_ER);
-	ui.Print_In_Checkup_Rovers(Check_up_PR);
-	ui.Print_In_Checkup_Rovers(Check_up_MR);
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+	ui.Print_In_Execution_Missions_Rovers(execution_missions_count,Emergency_EX_Mission,
+											Mountainous_EX_Mission,Polar_EX_Mission);
+	ui.Print_Available_Rover(availble_Rover_count, Available_ER, Available_PR, Available_MR);
+	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
 	ui.Print_Completed( M_ID, P_ID, E_ID);
 }
 bool MarsStation_Class::isFinished()
@@ -1003,3 +757,240 @@ int MarsStation_Class::execution_missions_count = 0;
 int MarsStation_Class::completed_missions_count = 0;
 int MarsStation_Class::availble_Rover_count = 0;
 int MarsStation_Class::checkup_Rover_count = 0;
+
+/*
+void MarsStation_Class::Emergency_EX_Mission_to_completed()
+{
+	Mission* Emergence_mission;
+	while (Emergency_EX_Mission.peek(Emergence_mission))
+	{
+		if (Emergence_mission->Get_CD() == Day_count)
+		{
+			Emergency_EX_Mission.dequeue(Emergence_mission);
+			Temp_CD_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_ED_Priority());
+			Completed_E_Mission_ID.enqueue(Emergence_mission->Get_ID());
+			// string should take ID //
+			E_ID.append(to_string(Emergence_mission->Get_ID()));
+			E_ID.append(to_string(','));
+			Rover* rover = Emergence_mission->Get_Rptr();
+			if (rover->GetType() == Emergency)
+			{
+				General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::E_Rover_Count, Rover::Check_ER);
+				//Check_ER_State(rover);
+			}
+			else if (rover->GetType() == Mountainous)
+			{
+				General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
+				//Check_MR_State(rover);
+			}
+			else
+			{
+				General_Check_R_State(rover, Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
+				//Check_PR_State(rover);
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+void MarsStation_Class::Mountainous_EX_Mission_to_completed()
+{
+	Mission* Mountainous_mission;
+	while (Mountainous_EX_Mission.peek(Mountainous_mission))
+	{
+		if (Mountainous_mission->Get_CD() == Day_count)
+		{
+			Mountainous_EX_Mission.dequeue(Mountainous_mission);
+			Temp_CD_Mission.enqueue(Mountainous_mission, Mountainous_mission->Calculate_ED_Priority());
+			Completed_M_Mission_ID.enqueue(Mountainous_mission->Get_ID());
+			// string should take ID //
+			M_ID.append(to_string(Mountainous_mission->Get_ID()));
+			M_ID.append(to_string(','));
+			Rover* rover = Mountainous_mission->Get_Rptr();
+			if (rover->GetType() == Mountainous)
+			{
+				General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::E_Rover_Count, Rover::Check_ER);
+				//Check_MR_State(rover);
+			}
+			else
+			{
+				General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::M_Rover_Count, Rover::Check_MR);
+				//Check_ER_State(rover);
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+void MarsStation_Class::Polar_EX_Mission_to_completed()
+{
+	Mission* polar_mission;
+	while (Polar_EX_Mission.peek(polar_mission))
+	{
+		if (polar_mission->Get_CD() == Day_count)
+		{
+			Polar_EX_Mission.dequeue(polar_mission);
+			Temp_CD_Mission.enqueue(polar_mission, polar_mission->Calculate_ED_Priority());
+			Completed_E_Mission_ID.enqueue(polar_mission->Get_ID());
+			// string should take ID //
+			P_ID.append(to_string(polar_mission->Get_ID()));
+			P_ID.append(to_string(','));
+			//Check_PR_State(Polar_mission->Get_Rptr());
+			General_Check_R_State(polar_mission->Get_Rptr(), Check_up_PR, Available_PR, Rover::P_Rover_Count, Rover::Check_PR);
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+///////////////////////////////////////////////////////////////
+void MarsStation_Class::InExecution_to_Completed()
+{
+	Emergency_EX_Mission_to_completed();
+	Mountainous_EX_Mission_to_completed();
+	Polar_EX_Mission_to_completed();
+	//Mamdouh : maybe here you can call out2? remember you shall send a queue of sorted completed missions ;)
+}*/
+/////////////////////
+//void MarsStation_Class::Auto_Promoting()
+//{
+//	Mission* MMptr;
+//	Mission* EMptr;
+//
+//	while (!M_Mission.isEmpty())
+//	{
+//		M_Mission.peek(MMptr);
+//		if (MMptr->Calculate_WD(Day_count) == Mission::AutoP)
+//		{
+//			M_Mission.dequeue(MMptr);
+//			EMptr = new Mission(MMptr->Get_TLOC(), MMptr->Get_MDUR(), MMptr->Get_SIG(), MMptr->Get_FD(), MMptr->Get_ID(), Emergency);
+//			E_Mission.enqueue(EMptr, EMptr->Calculate_priority());
+//			Mission::NumOfAutoPMissions++;
+//			Mission::NumOfMMissions--;
+//			Mission::NumOfEMissions++;
+//			//D.F to add NumOfAutoPMissions with NumOfMMissions to get num of totall m mission to calculat el nsba el m2wya for ayto promoting in output file
+//			delete MMptr;//?delete in general and null errors......
+//		}
+//		else
+//			break;//or return
+//	}
+//
+//
+//}
+//void MarsStation_Class::Check_MR_State(Rover* CMRptr)
+//{
+//	//dynamicM_Rover_Count
+//	if (CMRptr->GetMission_Count() == Rover::M_Rover_Count)
+//	{
+//		Check_up_MR.enqueue(CMRptr);
+//		//Rover::GetCheck_MR();
+//		CMRptr->Set_Day_out(Rover::Check_MR + Day_count);
+//	}
+//	else
+//	{
+//		Available_MR.enqueue(CMRptr);
+//	}
+//
+//}
+////check rover satutes
+//
+//void MarsStation_Class::Check_ER_State(Rover* CERptr)
+//{
+//	//dynamicM_Rover_Count
+//	if (CERptr->GetMission_Count() == Rover::E_Rover_Count)
+//	{
+//		Check_up_ER.enqueue(CERptr);
+//		CERptr->Set_Day_out(Rover::Check_ER + Day_count);
+//	}
+//	else
+//	{
+//		Available_ER.enqueue(CERptr);
+//	}
+//
+//}
+//
+//void MarsStation_Class::Check_PR_State(Rover* CPRptr)
+//{
+//	//dynamicM_Rover_Count
+//	if (CPRptr->GetMission_Count() == Rover::P_Rover_Count)
+//	{
+//		Check_up_PR.enqueue(CPRptr);
+//		CPRptr->Set_Day_out(Rover::Check_PR + Day_count);
+//	}
+//	else
+//	{
+//		Available_PR.enqueue(CPRptr);
+//	}
+//
+//}
+
+
+//void MarsStation_Class::Check_PR_State(Rover* CPRptr)
+//{
+//	//dynamicM_Rover_Count
+//	if (CPRptr->GetMission_Count() == Rover::P_Rover_Count)
+//	{
+//		Check_up_PR.enqueue(CPRptr);
+//		CPRptr->Set_Day_out(Rover::Check_PR + Day_count);
+//	}
+//	else
+//	{
+//		Available_PR.enqueue(CPRptr, CPRptr->GetSpeed());
+//	}
+//
+//}
+
+//void MarsStation_Class::Check_Up_to_Available_E()
+//{
+//	Rover* EMptr;
+//	Check_up_ER.peek(EMptr);
+//	while (EMptr->Get_Day_out() == Day_count)
+//	{
+//		Check_up_ER.dequeue(EMptr);
+//		Available_ER.enqueue(EMptr, EMptr->GetSpeed());
+//		Check_up_ER.peek(EMptr);
+//	}
+
+//void MarsStation_Class::Check_Up_to_Available_M()
+//{
+//	Rover* MMptr;
+//	Check_up_MR.peek(MMptr);
+//	while (MMptr->Get_Day_out() == Day_count)
+//	{
+//		Check_up_MR.dequeue(MMptr);
+//		Available_MR.enqueue(MMptr);
+//		Check_up_MR.peek(MMptr);
+//	}
+//}
+//void MarsStation_Class::Check_Up_to_Available_E()
+//{
+//	Rover* EMptr;
+//	Check_up_ER.peek(EMptr);
+//	while (EMptr->Get_Day_out() == Day_count)
+//	{
+//		Check_up_ER.dequeue(EMptr);
+//		Available_ER.enqueue(EMptr);
+//		Check_up_ER.peek(EMptr);
+//	}
+//
+//}
+//void MarsStation_Class::Check_Up_to_Available_P()
+//{
+//	Rover* PMptr;
+//	Check_up_PR.peek(PMptr);
+//	while (PMptr->Get_Day_out() == Day_count)
+//	{
+//		Check_up_PR.dequeue(PMptr);
+//		Available_PR.enqueue(PMptr);
+//		Check_up_PR.peek(PMptr);
+//	}
+//
+//}
+
+
+
