@@ -25,17 +25,16 @@ public:
 	//shall make function to recieve input file name ___ talk to 7oda
 	Terminal_Mode get_mode();
 	void SelectMode();
-	void Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<Mission*> Emergency_EX_Mission,
-											PriorityQueue<Mission*> Mountainous_EX_Mission, PriorityQueue<Mission*> Polar_EX_Mission);
-	void Print_Completed(int NUM_OF_Missions, string& M_ID, string& P_ID, string& E_ID);
-	void Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*>& Check_up_ER,
-		LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR);
+	void Print_In_Execution_Missions_Rovers(PriorityQueue<Mission*> EX_Mission); 
+											
+	void Print_Completed( string& M_ID, string& P_ID, string& E_ID);
+	void Print_In_Checkup_Rovers(LinkedQueue<Rover*>& Check_up_R);
+		
 	
 	void print_Availble_missions(int day_count,int waiting_missions,PriorityQueue<Mission*>& E_Mission,
 								LinkedQueue<Mission*>& P_Mission,LinkedQueue<Mission*>& M_Mission);
-	void Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Available_ER,
-								PriorityQueue<Rover*> Available_MR,
-								PriorityQueue<Rover*> Available_PR);
+	void Print_Availble_Rover(PriorityQueue<Rover*> Available_R);
+								
 	void print_Availble_missions_Queue(LinkedQueue<Mission*>& Queue_Mission_List);
 	void print_Availble_missions_PriorityQueue(PriorityQueue<Mission*> PriorityQueue_Mission_List);
 	void sleep(float seconds) {

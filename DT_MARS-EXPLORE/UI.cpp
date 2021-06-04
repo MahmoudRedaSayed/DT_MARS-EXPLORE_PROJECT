@@ -55,36 +55,29 @@ void UI::SelectMode()
 	
 }
 
-void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<Mission*> Emergency_EX_Mission, PriorityQueue<Mission*> Mountainous_EX_Mission, PriorityQueue<Mission*> Polar_EX_Mission)
+void UI::Print_In_Execution_Missions_Rovers(PriorityQueue<Mission*> EX_Mission)
 {
-	cout << NUM_OF_Missions << " In-Execution Missions/Rovers: ";
 	Mission* PTR = nullptr;
 	int count = 0;//To avoid the comma
+	Type_G Rover_type;
 	//printing the emergency
-	if (Emergency_EX_Mission.peek(PTR))
+	if (EX_Mission.peek(PTR))
 	{
-		cout << '[';
+		Rover_type = PTR->Get_type_of_mission();
+		if (Rover_type == Emergency)
+		{
+			cout << "[";
+		}
+		else if (Rover_type == Polar)
+		{
+			cout << "(";
+		}
+		else
+		{
+			cout << "{";
+		}
 	}
-    while (Emergency_EX_Mission.dequeue(PTR))
-    {
-			if (count != 0)
-			{
-				cout << ',';
-			}
-			cout << PTR->Get_ID() << '/'<<PTR->Get_Rptr()->GetID();
-			count++;
-    }
-	if (count != 0)
-	{
-		cout << ']'<<" ";
-	}
-	//printing the polar
-	count = 0;
-	if (Polar_EX_Mission.peek(PTR))
-	{
-		cout << '(';
-	}
-	while (Polar_EX_Mission.dequeue(PTR))
+	while (EX_Mission.dequeue(PTR))
 	{
 		if (count != 0)
 		{
@@ -95,34 +88,24 @@ void UI::Print_In_Execution_Missions_Rovers(int NUM_OF_Missions, PriorityQueue<M
 	}
 	if (count != 0)
 	{
-		cout << ')' << " ";
-	}
-	//printing the mountainous
-	count = 0;
-	
-	if (Mountainous_EX_Mission.peek(PTR))
-	{
-		cout << '{';
-	}
-	while (Mountainous_EX_Mission.dequeue(PTR))
-	{
-		if (count != 0)
+		if (Rover_type == Emergency)
 		{
-			cout << ',';
+			cout << "]";
 		}
-		cout << PTR->Get_ID() << '/' << PTR->Get_Rptr()->GetID();
-		count++;
+		else if (Rover_type == Polar)
+		{
+			cout << ")";
+		}
+		else
+		{
+			cout << "}";
+		};
 	}
-	if (count != 0)
-	{
-		cout << '}' << " ";
-	}
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 
-void UI::Print_Completed(int NUM_OF_Missions, string& M_ID, string& P_ID, string& E_ID)
+void UI::Print_Completed( string& M_ID, string& P_ID, string& E_ID)
 {
-	NUM_OF_Missions = 0;
+	 int NUM_OF_Missions = 0;
 	int count1 = count(M_ID.begin(), M_ID.end(), ',');
 	int count2 = count(P_ID.begin(), P_ID.end(), ',');
 	int count3 = count(E_ID.begin(), E_ID.end(), ',');
@@ -134,132 +117,61 @@ void UI::Print_Completed(int NUM_OF_Missions, string& M_ID, string& P_ID, string
 	{
 		M_ID = M_ID.substr(0,M_ID.size() - 1);
 		cout << "  " << '{' << M_ID << '}';
-		//M_ID = "";
 	}
 
 	if (P_ID != "")
 	{
 		P_ID = P_ID.substr(0,P_ID.size() - 1);
 		cout <<"  " <<'(' << P_ID << ')';
-		//P_ID = "";
 	}
 
 	if (E_ID != "")
 	{
 		E_ID=E_ID.substr(0,E_ID.size()-1);
 		cout<<"  "<< '[' << E_ID << ']';
-		//E_ID = "";
 	}
 	
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 
-void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*>& Check_up_ER,
-	LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR)
+void UI::Print_In_Checkup_Rovers(LinkedQueue<Rover*>& Check_up_R)
 {
-	cout << NUM_OF_Rovers << " In-Checkup Rovers: ";
+	
 	Rover* PTR = nullptr;
 	Rover* TOP = nullptr;
 	int count = 0;//To avoid the comma
 	//printing the Emergency
 
-	Check_up_ER.peek(PTR);
+	Check_up_R.peek(PTR);
 	if (PTR)
 	{
-		PTR = nullptr;
-		Check_up_ER.dequeue(TOP);
-		if (TOP)
+		Type_G Rover_type = PTR->GetType();
+		if (Rover_type == Emergency)
 		{
-			cout << '[';
-			cout << TOP->GetID();
-			count++;
+			cout << "[";
 		}
-		Check_up_ER.enqueue(TOP);
-		while (TOP != PTR)
-		{
-			Check_up_ER.peek(PTR);
-			if (PTR != TOP)
-			{
-				Check_up_ER.dequeue(PTR);
-			}
-			else
-			{
-				break;
-			}
-			if (count != 0)
-			{
-				cout << ',';
-			}
-
-			cout << PTR->GetID();
-			count++;
-			Check_up_ER.enqueue(PTR);
-		}
-		if (count != 0)
-			cout << ']' << ' ';
-	}
-	// printing the polar 
-	count = 0;
-	PTR = nullptr;
-	Check_up_PR.peek(PTR);
-	if (PTR)
-	{
-
-		PTR = nullptr;
-		Check_up_PR.dequeue(TOP);
-		if (TOP)
+		else if (Rover_type == Polar)
 		{
 			cout << "(";
-			cout << TOP->GetID();
-			count++;
 		}
-		Check_up_PR.enqueue(TOP);
-		while (TOP != PTR)
+		else
 		{
-			Check_up_PR.peek(PTR);
-			if (PTR != TOP)
-			{
-				Check_up_PR.dequeue(PTR);
-			}
-			else
-			{
-				break;
-			}
-			if (count != 0)
-			{
-				cout << ',';
-			}
-
-			cout << PTR->GetID();
-			count++;
-			Check_up_PR.enqueue(PTR);
+			cout << "{";
 		}
-		if (count != 0)
-			cout << ')' << ' ';
-	}
-	//printing the Mountainous
-	count = 0;
-	PTR = nullptr;
-	Check_up_MR.peek(PTR);
-	if (PTR)
-	{
-		
-
 		PTR = nullptr;
-		Check_up_MR.dequeue(TOP);
+		Check_up_R.dequeue(TOP);
 		if (TOP)
 		{
-			cout << '{';
 			cout << TOP->GetID();
 			count++;
 		}
-		Check_up_MR.enqueue(TOP);
+		Check_up_R.enqueue(TOP);
 		while (TOP != PTR)
 		{
-			Check_up_MR.peek(PTR);
+			Check_up_R.peek(PTR);
 			if (PTR != TOP)
 			{
-				Check_up_MR.dequeue(PTR);
+				Check_up_R.dequeue(PTR);
 			}
 			else
 			{
@@ -272,12 +184,24 @@ void UI::Print_In_Checkup_Rovers(int NUM_OF_Rovers, LinkedQueue<Rover*>& Check_u
 
 			cout << PTR->GetID();
 			count++;
-			Check_up_MR.enqueue(PTR);
+			Check_up_R.enqueue(PTR);
 		}
 		if (count != 0)
-			cout << '}' << ' ';
+			if (Rover_type == Emergency)
+			{
+				cout << "]"<<' ';
+			}
+			else if (Rover_type == Polar)
+			{
+				cout << ")"<<' ';
+			}
+			else
+			{
+				cout << "}"<<' ';
+			}
+			
+			
 	}
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 
 
@@ -307,47 +231,45 @@ void UI::print_Availble_missions(int day_count,int waiting_missions,PriorityQueu
 	}
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
-void UI::Print_Availble_Rover(int availble_Rover_count,PriorityQueue<Rover*> Available_ER,
-	PriorityQueue<Rover*> Available_MR,
-	PriorityQueue<Rover*> Available_PR)
+void UI::Print_Availble_Rover(PriorityQueue<Rover*> Available_R)
+
 {
 	Rover* rover;
 	Rover* rover_next;
-	cout << availble_Rover_count << " Availble Rovers: ";
-	if (!Available_ER.isEmpty())
+	if (!Available_R.isEmpty())
 	{
-		Available_ER.dequeue(rover);
-		cout << "[";
-		while (Available_ER.dequeue(rover_next))
+		Available_R.dequeue(rover);
+		Type_G Rover_type = rover->GetType();
+		if (Rover_type == Emergency)
+		{
+			cout << "[";
+		}
+		else if (Rover_type == Polar)
+		{
+			cout << "(";
+		}
+		else
+		{
+			cout << "{";
+		}
+		while (Available_R.dequeue(rover_next))
 		{
 			cout << rover->GetID() << ",";
 			rover = rover_next;
 		}
-		cout << rover->GetID() << "] ";
-	}
-	if (!Available_PR.isEmpty())
-	{
-		Available_PR.dequeue(rover);
-		cout << "(";
-		while (Available_PR.dequeue(rover_next))
+		if (Rover_type == Emergency)
 		{
-			cout << rover->GetID() << ",";
-			rover = rover_next;
+			cout << rover->GetID() << "] ";
 		}
-		cout << rover->GetID() << ") ";
-	}
-	if (!Available_MR.isEmpty())
-	{
-		Available_MR.dequeue(rover);
-		cout << "{";
-		while (Available_MR.dequeue(rover_next))
+		else if (Rover_type == Polar)
 		{
-			cout << rover->GetID() << ",";
-			rover = rover_next;
+			cout << rover->GetID() << ") ";
 		}
-		cout << rover->GetID() << "} ";
+		else
+		{
+			cout << rover->GetID() << "} ";
+		}
 	}
-	cout << endl<<"---------------------------------------------------------------------------------------" << endl;
 }
 void UI::print_Availble_missions_Queue(LinkedQueue<Mission*>& Queue_Mission_List)
 {
