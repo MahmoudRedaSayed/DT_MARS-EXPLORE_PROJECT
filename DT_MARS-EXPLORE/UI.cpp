@@ -114,35 +114,13 @@ void UI::Print_PriorityQueue_Mission_Rover(PriorityQueue<Mission*> EX_Mission)
 	}
 }
 
-void UI::Print_Completed( string& M_ID, string& P_ID, string& E_ID)
+void UI::Print_Completed_Missions( string brakets,string& M_ID)
 {
-	 int NUM_OF_Missions = 0;
-	int count1 = count(M_ID.begin(), M_ID.end(), ',');
-	int count2 = count(P_ID.begin(), P_ID.end(), ',');
-	int count3 = count(E_ID.begin(), E_ID.end(), ',');
-	if (M_ID != "") { NUM_OF_Missions += count1 ; }
-	if (P_ID != "") { NUM_OF_Missions += count2 ; }
-	if (E_ID != "") { NUM_OF_Missions += count3 ; }
-	cout << NUM_OF_Missions<<" Completed Missions: ";
 	if (M_ID != "")
 	{
 		M_ID = M_ID.substr(0,M_ID.size() - 1);
-		cout << "  " << '{' << M_ID << '}';
+		cout << "  " << brakets[0] << M_ID << brakets[1];
 	}
-
-	if (P_ID != "")
-	{
-		P_ID = P_ID.substr(0,P_ID.size() - 1);
-		cout <<"  " <<'(' << P_ID << ')';
-	}
-
-	if (E_ID != "")
-	{
-		E_ID=E_ID.substr(0,E_ID.size()-1);
-		cout<<"  "<< '[' << E_ID << ']';
-	}
-	
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 void UI::Print_In_Checkup_Rovers(int Checkup_count_Rover, LinkedQueue<Rover*>& Check_up_ER,
 					LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR)
@@ -152,6 +130,15 @@ void UI::Print_In_Checkup_Rovers(int Checkup_count_Rover, LinkedQueue<Rover*>& C
 	Print_Queue_Rover(Check_up_PR);
 	Print_Queue_Rover(Check_up_MR);
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+}
+void UI::Print_Completed(int NUM_OF_MISSIONS,string& M_ID, string& P_ID, string& E_ID)
+{
+	cout << NUM_OF_MISSIONS << " Completed Missions: ";
+	Print_Completed_Missions("{}",M_ID);
+	Print_Completed_Missions("[]", E_ID);
+	Print_Completed_Missions("()", P_ID);
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+
 }
 void UI::Print_Queue_Rover(LinkedQueue<Rover*>& Check_up_R)
 {

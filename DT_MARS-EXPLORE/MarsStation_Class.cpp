@@ -690,7 +690,7 @@ void MarsStation_Class::print()
 											Mountainous_EX_Mission,Polar_EX_Mission);
 	ui.Print_Available_Rover(availble_Rover_count, Available_ER, Available_PR, Available_MR);
 	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
-	ui.Print_Completed( M_ID, P_ID, E_ID);
+	ui.Print_Completed(completed_missions_count,M_ID, P_ID, E_ID);
 }
 bool MarsStation_Class::isFinished()
 {

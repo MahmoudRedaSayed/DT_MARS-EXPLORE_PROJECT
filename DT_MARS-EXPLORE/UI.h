@@ -36,7 +36,8 @@ public:
 		PriorityQueue<Rover*>& Available_PR, PriorityQueue<Rover*>& Available_MR);
 	void Print_In_Checkup_Rovers(int Checkup_count_Rover,LinkedQueue<Rover*>& Check_up_ER,
 							LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR);
-	void Print_Completed(string& M_ID, string& P_ID, string& E_ID);
+	void Print_Completed(int NUM_OF_MISSIONS, string& M_ID, string& P_ID, string& E_ID);
+
 
 	/////////// Print Function for Each Type (SAME LOGIC) ///////////////
 	void Print_Queue_Rover(LinkedQueue<Rover*>& Check_up_R);
@@ -44,6 +45,9 @@ public:
 	void Print_PriorityQueue_Rover(PriorityQueue<Rover*> Available_R);		
 	void Print_Queue_Mission(LinkedQueue<Mission*>& Queue_Mission_List);
 	void Print_PriorityQueue_Mission(PriorityQueue<Mission*> PriorityQueue_Mission_List);
+	void Print_Completed_Missions(string brakets, string& M_ID);
+
+	////////////////////////////Function to Make the delay/////////////////////
 	void sleep(float seconds);
 	
 	///////////// inputfile & Outfile Functions ///////////// 
