@@ -23,6 +23,7 @@ Mission::Mission(double TLOC_x, int MDUR_x, int SIG_x, int FD_x, int ID_x, Type_
 	WD = 0;
 	ED = 0;
 	CD = 0;
+	Priority = 0;
 	//i think the previous 3 lines are not important
 }
 //Setters functions

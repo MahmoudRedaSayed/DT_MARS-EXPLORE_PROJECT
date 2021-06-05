@@ -51,7 +51,7 @@ bool Formulaion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueu
 		//create emergency mission
 		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID(), Emergency);
 			
-		Eme_Missions.enqueue(PTR_MISSION, PTR_MISSION->Get_Priority());
+		Eme_Missions.enqueue(PTR_MISSION, PTR_MISSION->Calculate_priority());
 		Mission::NumOfEMissions++;
 		return true;
 	}
