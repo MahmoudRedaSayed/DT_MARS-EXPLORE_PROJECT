@@ -140,6 +140,14 @@ void UI::Print_Completed(int NUM_OF_MISSIONS,string& M_ID, string& P_ID, string&
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 
 }
+void UI::Print_In_Maintenance_Rovers(int Maintenance_Count_Rovers, LinkedQueue<Rover*> Maintenance_ER, LinkedQueue<Rover*> Maintenance_MR, LinkedQueue<Rover*> Maintenance_PR)
+{
+	cout << Maintenance_Count_Rovers << " In-Maintenance Rovers: ";
+	Print_Queue_Rover(Maintenance_ER);
+	Print_Queue_Rover(Maintenance_MR);
+	Print_Queue_Rover(Maintenance_PR);
+	cout << endl << "---------------------------------------------------------------------------------------" << endl;
+}
 void UI::Print_Queue_Rover(LinkedQueue<Rover*>& Check_up_R)
 {
 	
@@ -316,14 +324,14 @@ string UI::read_input_file_name( int i)
 {if(i==1)
 {
 	string FName;
-	cout << "\nPlease::enter the name of the file the you want to load it\n" << endl;
+	cout << "\nPlease::enter the name of the file the you want to load \n" << endl;
 	cin >> FName;
 	return FName;
 }
 if (i == 2)
 {
 	string FName;
-	cout << "the file is not exist" << endl;
+	cout << "the file does not exist" << endl;
 	cout << "Please::enter the correct name or if you want to exit enter number 0\n" << endl;
 	cin >> FName;
 	return FName;
@@ -332,7 +340,7 @@ if (i == 2)
 }
 void UI::read_output_file_name()
 {
-	cout << "Please::enter the name of the output file to load the data in it" << endl<<endl;
+	cout << "Please::enter the name of the output file to load the data in" << endl<<endl;
 	cin >> Output_File_Name;
 }
 

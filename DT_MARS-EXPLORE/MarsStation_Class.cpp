@@ -816,6 +816,7 @@ void MarsStation_Class::print()
 	ui.Print_Available_Rover(availble_Rover_count, Available_ER, Available_PR, Available_MR);
 	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
 	ui.Print_Completed(completed_missions_count,M_ID, P_ID, E_ID);
+	ui.Print_In_Maintenance_Rovers(maintenance_Rover_count, Maintenance_ER, Maintenance_MR, Maintenance_PR);
 }
 bool MarsStation_Class::isFinished()
 {

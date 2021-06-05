@@ -28,6 +28,9 @@
     <Filter Include="Main">
       <UniqueIdentifier>{7be5b4fb-f962-46af-ae1d-ca89d1f4030f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{7f03783a-3f25-4de5-a8cf-fbb1e0fd65a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Event.h">
@@ -72,11 +75,11 @@
     <ClInclude Include="PriorityQueueADT.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>EVENTS</Filter>
-    </ClInclude>
     <ClInclude Include="MarsStation_Class.h">
       <Filter>MarsStation</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,11 +113,11 @@
     <ClCompile Include="Rover.cpp">
       <Filter>Rovers</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>EVENTS</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

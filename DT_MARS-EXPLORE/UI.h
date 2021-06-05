@@ -27,16 +27,28 @@ public:
 	void SelectMode();
 
 	//////////////////////// Printing Functions //////////////////////
-	void print_Availble_missions(int day_count, int waiting_missions, PriorityQueue<Mission*>& E_Mission,
-		LinkedQueue<Mission*>& P_Mission, LinkedQueue<Mission*>& M_Mission);
-	void Print_In_Execution_Missions_Rovers(int execution_missions_count,PriorityQueue<Mission*>& Emergency_EX_Mission, 
+	void print_Availble_missions(int day_count, int waiting_missions,
+		PriorityQueue<Mission*>& E_Mission,
+		LinkedQueue<Mission*>& P_Mission,
+		LinkedQueue<Mission*>& M_Mission);
+	void Print_In_Execution_Missions_Rovers(int execution_missions_count,
+		PriorityQueue<Mission*>& Emergency_EX_Mission, 
 		PriorityQueue<Mission*>& Mountainous_EX_Mission,
 		PriorityQueue<Mission*>& Polar_EX_Mission);
-	void Print_Available_Rover(int Waiting_Rovers, PriorityQueue<Rover*>& Available_ER,
-		PriorityQueue<Rover*>& Available_PR, PriorityQueue<Rover*>& Available_MR);
-	void Print_In_Checkup_Rovers(int Checkup_count_Rover,LinkedQueue<Rover*>& Check_up_ER,
-							LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR);
+	void Print_Available_Rover(int Waiting_Rovers,
+		PriorityQueue<Rover*>& Available_ER,
+		PriorityQueue<Rover*>& Available_PR,
+		PriorityQueue<Rover*>& Available_MR);
+	void Print_In_Checkup_Rovers(int Checkup_count_Rover,
+		LinkedQueue<Rover*>& Check_up_ER,
+		LinkedQueue<Rover*>& Check_up_PR,
+		LinkedQueue<Rover*>& Check_up_MR);
 	void Print_Completed(int NUM_OF_MISSIONS, string& M_ID, string& P_ID, string& E_ID);
+	void Print_In_Maintenance_Rovers(int Maintenance_Count_Rovers,
+		LinkedQueue<Rover*> Maintenance_ER,
+		LinkedQueue<Rover*> Maintenance_MR,
+		LinkedQueue<Rover*> Maintenance_PR
+	);
 
 	/////////// Print Function for Each Type (SAME LOGIC) ///////////////
 	void Print_Queue_Rover(LinkedQueue<Rover*>& Check_up_R);
