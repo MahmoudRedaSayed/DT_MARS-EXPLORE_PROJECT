@@ -140,7 +140,7 @@ void UI::Print_Completed(int NUM_OF_MISSIONS,string& M_ID, string& P_ID, string&
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 
 }
-void UI::Print_In_Maintenance_Rovers(int Maintenance_Count_Rovers, LinkedQueue<Rover*> Maintenance_ER, LinkedQueue<Rover*> Maintenance_MR, LinkedQueue<Rover*> Maintenance_PR)
+void UI::Print_In_Maintenance_Rovers(int Maintenance_Count_Rovers, LinkedQueue<Rover*>& Maintenance_ER, LinkedQueue<Rover*>& Maintenance_MR, LinkedQueue<Rover*>& Maintenance_PR)
 {
 	cout << Maintenance_Count_Rovers << " In-Maintenance Rovers: ";
 	Print_Queue_Rover(Maintenance_ER);

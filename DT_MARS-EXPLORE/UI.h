@@ -45,9 +45,9 @@ public:
 		LinkedQueue<Rover*>& Check_up_MR);
 	void Print_Completed(int NUM_OF_MISSIONS, string& M_ID, string& P_ID, string& E_ID);
 	void Print_In_Maintenance_Rovers(int Maintenance_Count_Rovers,
-		LinkedQueue<Rover*> Maintenance_ER,
-		LinkedQueue<Rover*> Maintenance_MR,
-		LinkedQueue<Rover*> Maintenance_PR
+		LinkedQueue<Rover*>& Maintenance_ER,
+		LinkedQueue<Rover*>& Maintenance_MR,
+		LinkedQueue<Rover*>& Maintenance_PR
 	);
 
 	/////////// Print Function for Each Type (SAME LOGIC) ///////////////

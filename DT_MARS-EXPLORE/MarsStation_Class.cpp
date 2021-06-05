@@ -401,7 +401,7 @@ bool MarsStation_Class::General_Check_Maintenance(Rover* CRptr, LinkedQueue<Rove
 	{
 		CRptr->Set_Day_out(Duration + Day_count);
 		Maintenance_list.enqueue(CRptr);
-
+		MarsStation_Class::maintenance_Rover_count++;
 		return true;
 	}
 	else
@@ -815,9 +815,9 @@ void MarsStation_Class::print()
 											Mountainous_EX_Mission,Polar_EX_Mission);
 	ui.Print_Available_Rover(availble_Rover_count, Available_ER, Available_PR, Available_MR);
 	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
-	ui.Print_Completed(completed_missions_count,M_ID, P_ID, E_ID);
 	ui.Print_In_Maintenance_Rovers(maintenance_Rover_count, Maintenance_ER, Maintenance_MR, Maintenance_PR);
-}
+	ui.Print_Completed(completed_missions_count,M_ID, P_ID, E_ID);
+	}
 bool MarsStation_Class::isFinished()
 {
 	return (Events_List.isEmpty() && P_Mission.isEmpty() && M_Mission.isEmpty() &&
