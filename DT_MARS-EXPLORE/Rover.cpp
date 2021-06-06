@@ -24,11 +24,6 @@ float Rover::GetSpeed() const
 	return speed;
 }
 
-bool Rover::GetIsAssigned() const
-{
-	return IsAssigned;
-}
-
 bool Rover::GetIsInCheckup() const
 {
 	return IsInCheckup;
@@ -37,11 +32,6 @@ bool Rover::GetIsInCheckup() const
 int Rover::GetMission_Count() const
 {
 	return Mission_Count;
-}
-
-void Rover::SetIsAssigned(bool a)
-{
-	IsAssigned = a;
 }
 
 void Rover::SetIsInCheckup(bool c)
@@ -79,7 +69,7 @@ int Rover::Get_Day_out()
 	return Day_out;
 }
 
-Rover::Rover(float Rover_Speed, Type_G T) :ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0), IsAssigned(false)
+Rover::Rover(float Rover_Speed, Type_G T) :ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0) 
 , Mission_Count(0), Type(T)
 , IsInCheckup(false)
 {//no need to it look at the input file

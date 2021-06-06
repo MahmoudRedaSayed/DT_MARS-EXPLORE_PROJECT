@@ -18,7 +18,6 @@ class MarsStation_Class
 {
 private:
 
-	static int files_Count;//#files to be created for output(#user operations), needs discussion with team
 	UI ui;
 	//////// Waiting Missions Lists ////////
 	LinkedQueue<Mission*> P_Mission;

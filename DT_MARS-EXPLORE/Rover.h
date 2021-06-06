@@ -18,7 +18,6 @@ private:
 	float speed;			   // Rover Speed read from input file _ assumed to be float not int to avoid truncation,
 					          //in maintenance Condition that makes speed = 0.5 previous speed 
 	const int ID;            //Rover ID , assigned from latest ID_Count
-	bool IsAssigned;        //Is this rover assigned to a certain mission or not?
 	bool IsInCheckup;      //Is this rover undergoing a checkup or not?
 	int Mission_Count;    //no. of missions that rover had executed
 	bool IsInMaintenance;//Is the rover undergoing Maintenance or not?
@@ -57,7 +56,6 @@ public:
 	Type_G GetType() const;
 	int GetID()const;
 	float GetSpeed()const;
-	bool GetIsAssigned()const;
 	bool GetIsInCheckup()const;
 	int GetMission_Count()const;
 	//const bool GetIsInMaintenance() { return IsInMaintenance; }
@@ -82,7 +80,7 @@ public:
 			speed = 1;
 		}
 	}
-	void SetIsAssigned(bool a);
+
 	void SetIsInCheckup(bool c);
 	void Increment_Mission_Count();// if(0%4 == 0 && Mission_Count !=0)
 	//static Members Getters

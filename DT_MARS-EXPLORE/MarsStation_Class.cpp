@@ -10,7 +10,6 @@
 #include<string>
 
 using namespace std;
-int  MarsStation_Class::files_Count = 0;//#files to be created for output(#user operations), needs discussion with team
 
 int MarsStation_Class::Get_Day_count()
 {
@@ -20,7 +19,6 @@ int MarsStation_Class::Get_Day_count()
 MarsStation_Class::MarsStation_Class()
 	:WD_SUM(0), ED_SUM(0)
 {
-	files_Count++;
 }
 void MarsStation_Class::increment_day()
 {
@@ -75,7 +73,6 @@ void MarsStation_Class::Assign_Mission_to_QueueRover(int& Counter,LinkedQueue<Mi
 		Rover* rover;
 		Rover_list.dequeue(rover);
 		mission->Set_Rptr(rover);
-		rover->SetIsAssigned(true);
 		rover->Increment_Mission_Count();
 		mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
 		rover->set_Mission_EXtime(mission->Calculate_ED());
@@ -94,7 +91,6 @@ void MarsStation_Class::Assign_Mission_to_PriorityQueueRover(int& Counter, Linke
 		Rover* rover;
 		Rover_list.dequeue(rover);
 		mission->Set_Rptr(rover);
-		rover->SetIsAssigned(true);
 		rover->Increment_Mission_Count();
 		rover->SetSpeed(rover->GetSpeed() / 2);
 		mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
@@ -178,21 +174,18 @@ void MarsStation_Class::Assign_E_M()
 		E_Mission.dequeue(Emergence_mission);
 		if (Maintenance_ER.dequeue(rover))      ///// Check Emergency Rover list first
 		{
-			rover->SetIsAssigned(true);
 			Emergence_mission->Set_Rptr(rover);
 			rover->Increment_Mission_Count();
 			rover->SetSpeed(rover->GetSpeed() / 2);
 		}
 		else if (Maintenance_MR.dequeue(rover)) ///// Check Mountainous Rover list second
 		{
-			rover->SetIsAssigned(true);
 			Emergence_mission->Set_Rptr(rover);
 			rover->Increment_Mission_Count();
 			rover->SetSpeed(rover->GetSpeed() / 2);
 		}
 		else if (Maintenance_PR.dequeue(rover))    ///// Check Polar Rover list Last
 		{
-			rover->SetIsAssigned(true);
 			Emergence_mission->Set_Rptr(rover);
 			rover->Increment_Mission_Count();
 			rover->SetSpeed(rover->GetSpeed() / 2);
@@ -328,7 +321,6 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 			List_ID =List_ID+(",");
 
 			Rover* rover = mission_type->Get_Rptr();
-			rover->SetIsAssigned(false);
 			if (rover->GetType() == Emergency)
 			{
 				if (General_Check_Maintenance(rover,Maintenance_ER, (Rover::Check_ER)/2 +1))
@@ -440,17 +432,19 @@ void MarsStation_Class::Program_Startup()
 			if (Line[k] == ' ')
 				Spaces++;
 		}
-		Spaces = Spaces - 1;
+		
+		//Spaces = Spaces - 1;
 		Spaces = (Spaces / count);
 		Spaces = Spaces + 1;
+		
 		i = 0;
 		//////////////////// Bounas case///////////////////
 	 ///////////////////reading the speeds///////////////////// 
 		if (Spaces == Num_Rovers)        //The case of the different speeds
 		{
-			for (int j = 0; j < Num_Rovers; j++)
+			for (int j = 0; j < Num_Rovers ; j++)
 			{
-				while (Line[i] != ' ')
+				while (i < Line.size() &&Line[i] != ' ')
 				{
 					Speeds_Str[j]+= Line[i];
 					i++;
