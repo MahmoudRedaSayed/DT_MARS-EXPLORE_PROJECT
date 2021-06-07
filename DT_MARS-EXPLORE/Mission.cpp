@@ -123,7 +123,7 @@ int Mission::Calculate_ED()
 }
 double Mission::Calculate_priority()
 {
-	Priority = (10 * SIG) + (TLOC / 100) + (MDUR)-(FD);//Priority equation
+	Priority = (10 * SIG) + (TLOC / 100.0) + (MDUR)-(FD);//Priority equation
 	return Priority;
 }
 //Counters

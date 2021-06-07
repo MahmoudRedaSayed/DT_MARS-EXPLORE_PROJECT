@@ -323,20 +323,18 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 			Rover* rover = mission_type->Get_Rptr();
 			if (rover->GetType() == Emergency)
 			{
-				if (General_Check_Maintenance(rover,Maintenance_ER, (Rover::Check_ER)/2 +1))
+				if (!General_Check_Maintenance(rover,Maintenance_ER, (Rover::Check_ER)/2 +1))
 					General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::Missions_Before_Check_Up, Rover::Check_ER);
 			}
 			else if (rover->GetType() == Mountainous)
 			{
 				if (!General_Check_Maintenance(rover, Maintenance_MR, (Rover::Check_MR) / 2 + 1))
 					General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::Missions_Before_Check_Up, Rover::Check_MR);
-
 			}
 			else if(rover->GetType() == Polar)
 			{
 				if (!General_Check_Maintenance(rover, Maintenance_PR, (Rover::Check_PR) / 2 + 1))
 					General_Check_R_State(rover, Check_up_PR, Available_PR, Rover::Missions_Before_Check_Up, Rover::Check_PR);
-
 			}
 		}
 		else
