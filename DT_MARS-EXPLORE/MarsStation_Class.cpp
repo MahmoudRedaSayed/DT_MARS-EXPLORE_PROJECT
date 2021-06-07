@@ -13,7 +13,7 @@ MarsStation_Class::MarsStation_Class()
 	:WD_SUM(0), ED_SUM(0)
 {
 	Polar_found = false;
-	E_M_found = false;
+	M_found = false;
 }
 void MarsStation_Class::increment_day()
 {
@@ -345,7 +345,7 @@ bool MarsStation_Class::Rover_Exists() // check at start if there is rovers or n
 		return false;
 	}
 	*/
-	if (((Available_ER.isEmpty() && Available_MR.isEmpty()) && E_M_found)||(Available_PR.isEmpty() && Polar_found))
+	if (((Available_ER.isEmpty() && Available_MR.isEmpty()) && M_found)||(Available_PR.isEmpty() && Polar_found))
 	{
 		return false;
 	}
@@ -670,9 +670,9 @@ void MarsStation_Class::Program_Startup()
 				{
 					Polar_found = true;
 				}
-				else if (Type_Mission == 'E' || Type_Mission == 'M')
+				else if (Type_Mission == 'M')
 				{
-					E_M_found = true;
+					M_found = true;
 				}
 				///////////////////////////////////////////////////////////////////////////////////
 				

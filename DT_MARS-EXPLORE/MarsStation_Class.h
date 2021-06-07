@@ -65,7 +65,7 @@ private:
 	int ED_SUM;// & execution sum
 	////////////////bool to check if there is an emergency or mountainous or polar/////////////
 	bool Polar_found;
-	bool E_M_found;
+	bool M_found;
 	//count of waiting missions & 
 public:
 	//Constructor
