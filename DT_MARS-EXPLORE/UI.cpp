@@ -12,15 +12,6 @@ UI::UI()
 
 UI::~UI()
 {
-	if (Mode == Silent)
-	{
-		cout << endl << "Silent Mode" << endl;
-		cout << "Simulation Starts...";
-	}
-	std::cout << "\nSimulation ends, Output file created\n";
-	for (int i = 0; i < 3; i++)
-		std::cout << "\n================================================================================================================\n";
-
 }
 Terminal_Mode UI::get_mode()
 {
@@ -357,51 +348,19 @@ void UI::sleep(float seconds) {
 	while (clock() < startClock + secondsAhead);
 	return;
 }
-
-
-/*
-void UI::Print_Availble_Rover(int availble_Rover_count, PriorityQueue<Rover*> Available_ER,
-	PriorityQueue<Rover*> Available_MR,
-	PriorityQueue<Rover*> Available_PR)
+void UI::final_print()
 {
-	Rover* rover;
-	Rover* rover_next;
-	cout << availble_Rover_count << " Availble Rovers: ";
-	if (!Available_ER.isEmpty())
+	if (Mode == Silent)
 	{
-		Available_ER.dequeue(rover);
-		cout << "[";
-		while (Available_ER.dequeue(rover_next))
-		{
-			cout << rover->GetID() << ",";
-			rover = rover_next;
-		}
-		cout << rover->GetID() << "] ";
+		cout << endl << "Silent Mode" << endl;
+		cout << "Simulation Starts...";
 	}
-	if (!Available_PR.isEmpty())
-	{
-		Available_PR.dequeue(rover);
-		cout << "(";
-		while (Available_PR.dequeue(rover_next))
-		{
-			cout << rover->GetID() << ",";
-			rover = rover_next;
-		}
-		cout << rover->GetID() << ") ";
-	}
-	if (!Available_MR.isEmpty())
-	{
-		Available_MR.dequeue(rover);
-		cout << "{";
-		while (Available_MR.dequeue(rover_next))
-		{
-			cout << rover->GetID() << ",";
-			rover = rover_next;
-		}
-		cout << rover->GetID() << "} ";
-	}
-	cout << endl << "---------------------------------------------------------------------------------------" << endl;
-}*/
+	std::cout << "\nSimulation ends, Output file created\n";
+	for (int i = 0; i < 3; i++)
+		std::cout << "\n================================================================================================================\n";
+
+}
+
 
 
 

@@ -19,5 +19,6 @@ int main()
 			object.increment_day();
 		}
 		object.Out3(); // finalize Outputfile
+		object.Final_print();
 	}
 }

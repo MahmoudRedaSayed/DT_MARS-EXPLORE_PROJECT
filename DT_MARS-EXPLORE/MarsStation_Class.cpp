@@ -321,7 +321,31 @@ void MarsStation_Class::print()
 
 bool MarsStation_Class::Rover_Exists() // check at start if there is rovers or not
 {
-	if ((Available_ER.isEmpty() && Available_MR.isEmpty()) || Available_PR.isEmpty())
+	/*
+	if ((!Available_ER.isEmpty() && E_M_found) || (!Available_MR.isEmpty() && E_M_found))
+	{
+		if (!Available_PR.isEmpty())
+		{
+			return true;
+		}
+		else
+		{
+			if (Polar_found)
+			{
+				return false
+			}
+			else
+			{
+				return true;
+			}
+		}
+	}
+	else
+	{
+		return false;
+	}
+	*/
+	if (((Available_ER.isEmpty() && Available_MR.isEmpty()) && E_M_found)||(Available_PR.isEmpty() && Polar_found))
 	{
 		return false;
 	}
@@ -751,7 +775,10 @@ void MarsStation_Class::Delete_Rovers()
 	Delete_Rovers_Queue(Maintenance_PR);
 	Delete_Rovers_Queue(Maintenance_MR);
 }
-
+void MarsStation_Class::Final_print()
+{
+	ui.final_print();
+}
 void MarsStation_Class::Delete_Rovers_Queue(LinkedQueue<Rover*>& R)
 {
 	Rover* rover;
