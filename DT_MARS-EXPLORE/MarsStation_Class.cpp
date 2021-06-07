@@ -54,7 +54,7 @@ void MarsStation_Class::Execute()
 		}
 	}
 }
-//////////////// Assign Emergency Missions using Priority Queue (Linked List) //////////////////////////
+
 void MarsStation_Class::Assign_Mission_to_PriorityQueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
 	PriorityQueue<Mission*>& EX_Mission_list, PriorityQueue<Rover*>& Rover_list)
 {

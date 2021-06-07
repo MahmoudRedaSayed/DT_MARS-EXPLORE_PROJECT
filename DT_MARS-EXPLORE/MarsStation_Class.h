@@ -74,16 +74,21 @@ public:
 	void Execute();
 	//////////////////////////////////////////////General Functions////////////////////////////////////////////////
 	//////// assignment operations Functions /////////
+	//////////////// Assign  Missions using available rovers  //////////////////////////
 	void Assign_Mission_to_PriorityQueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
 		PriorityQueue<Mission*>& EX_Mission_list, PriorityQueue<Rover*>& Rover_list);
+
+	//////////////// Assign  Missions using maintenance rovers  //////////////////////////
 	void Assign_Mission_to_QueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
 		PriorityQueue<Mission*>& EX_Mission_list, LinkedQueue<Rover*>& Rover_list);
+
 	void Assign_E_M();
 	void Assign_M_M();
 	void Assign_P_M();
-	////////check if the rover need to enter its check up list or not////
+
+	//////// check if the rover need to enter its check up list or not ////////
 	void General_Check_R_State(Rover* CRptr, LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list, int Count, int Duration);
-	////////check if the rover need to enter its Maintenance list or not////
+	//////// check if the rover need to enter its Maintenance list or not ///////
 	bool General_Check_Maintenance(Rover* CRptr, LinkedQueue<Rover*>& Maintence_list, int Duration);
 	////// Move from in execution List to completed string//////
 	void General_InEXecution_to_Completed(PriorityQueue<Mission*>& Execution_list, string& List_ID);
