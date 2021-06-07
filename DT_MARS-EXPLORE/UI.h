@@ -55,9 +55,10 @@ public:
 	void Print_Queue_Rover(LinkedQueue<Rover*>& Check_up_R);
 	void Print_PriorityQueue_Mission_Rover(PriorityQueue<Mission*> EX_Mission);
 	void Print_PriorityQueue_Rover(PriorityQueue<Rover*> Available_R);
+	void Print_Completed_Missions(string brakets, string& M_ID);
 	void Print_Queue_Mission(LinkedQueue<Mission*>& Queue_Mission_List);
 	void Print_PriorityQueue_Mission(PriorityQueue<Mission*> PriorityQueue_Mission_List);
-	void Print_Completed_Missions(string brakets, string& M_ID);
+	
 
 	////////////////////////////Function to Make the delay/////////////////////
 	void sleep(float seconds);

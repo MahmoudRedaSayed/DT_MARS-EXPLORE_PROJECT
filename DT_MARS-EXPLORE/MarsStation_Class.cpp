@@ -477,7 +477,7 @@ void MarsStation_Class::Program_Startup()
 				Available_MR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
-			if(Num_M_Rovers!=0)
+			if(Num_M_Rovers!=0)//To test if the there is no mountainous
 				counter1++;
 			///////////////////////////Create Polar Rovers/////////////////////////////
 			for (int i = 0; i < Num_P_Rovers; i++)
@@ -486,7 +486,7 @@ void MarsStation_Class::Program_Startup()
 				Available_PR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
-			if (Num_P_Rovers != 0)
+			if (Num_P_Rovers != 0)//To test if the there is no polar
 				counter1++;
 			///////////////////////////Create Emergency Rovers/////////////////////////////
 			for (int i = 0; i < Num_E_Rovers; i++)
