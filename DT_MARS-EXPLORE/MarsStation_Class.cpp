@@ -742,7 +742,7 @@ void MarsStation_Class::Delete_Rovers()
 void MarsStation_Class::Delete_Rovers_Queue(LinkedQueue<Rover*>& R)
 {
 	Rover* rover;
-	if (!R.isEmpty())
+	while (!R.isEmpty())
 	{
 		R.dequeue(rover);
 		delete rover;
@@ -752,7 +752,7 @@ void MarsStation_Class::Delete_Rovers_Queue(LinkedQueue<Rover*>& R)
 void MarsStation_Class::Delete_Rovers_PriQueue(PriorityQueue<Rover*>& R)
 {
 	Rover* rover;
-	if (!R.isEmpty())
+	while (!R.isEmpty())
 	{
 		R.dequeue(rover);
 		delete rover;
