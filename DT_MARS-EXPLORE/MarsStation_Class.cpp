@@ -738,7 +738,7 @@ void MarsStation_Class::print()
 	}
 	else if(Mode == Step_By_Step)
 	{
-		ui.sleep(1.0);
+		//ui.sleep(1.0);
 	}
 	else if (Mode == Silent)
 	{
