@@ -58,7 +58,7 @@ int Rover::Get_Day_out()
 }
 
 Rover::Rover(float Rover_Speed, Type_G T) :ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0) 
-, Mission_Count(0), Type(T), Maintanence_count(1)
+, Mission_Count(0), Type(T), Maintanence_count(1), Current_Mission_EX_Time(0)
 {//no need to it look at the input file
 		/*if (T == Mountainous)
 			M_Rover_Count++;
@@ -87,10 +87,10 @@ void Rover::set_Mission_EXtime(double ED)
 }
 bool Rover::Check_Maintenance()
 {
-	if (Current_Mission_EX_Time > (40 * Maintanence_count))  // constant threshold 
+	if (Current_Mission_EX_Time > (50 * Maintanence_count))  // constant threshold 
 	{
 		Current_Mission_EX_Time = 0;
-		Maintanence_count += 1;
+		Maintanence_count += 1.5;
 		return true;
 	}
 	else
