@@ -47,7 +47,6 @@ public:
 	int GetID()const;
 	float GetSpeed()const;
 	int GetMission_Count()const;
-	//Static members getters
 	
 	//Setters
 	void Increment_Mission_Count();// if(0%4 == 0 && Mission_Count !=0)
@@ -56,8 +55,8 @@ public:
 	void SetCheck_ER(int c); // Let Default checkup duration = 5 days
 	void SetCheck_MR(int c); // Let Default checkup duration = 5 days
 
-	 //samaa
-	void Set_Day_out(int x);//?is that condition ok??//Mamdouh:I think it's fine
+
+	void Set_Day_out(int x);
 	int Get_Day_out();
 
 	///////////////////// Bonus Maintenance ////////////////////////////

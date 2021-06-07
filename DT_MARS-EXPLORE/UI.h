@@ -23,7 +23,6 @@ private:
 public:
 	UI();
 	~UI();
-	//shall make function to recieve input file name ___ talk to 7oda
 	Terminal_Mode get_mode();
 	void SelectMode();
 
