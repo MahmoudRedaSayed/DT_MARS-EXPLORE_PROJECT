@@ -385,6 +385,7 @@ void MarsStation_Class::Program_Startup()
 {
 	string File_Name, Line, ed = " ", id = " ", tolc = " ", mdur = " ", sig = " ";
 	string* Speeds_Str;
+	int Num_Of_speeds = 0;
 	char Type_Event, Type_Mission;
 	int Num_E_Rovers, Num_P_Rovers, Num_M_Rovers;
 	int Num_Rovers;
@@ -397,8 +398,6 @@ void MarsStation_Class::Program_Startup()
 	int j, ED, ID, TOLC, MDUR, SIG;
 	Rover** Array_OF_Rovers;
 	int* Speeds;
-	/*cout << "Please::enter the name of the file the you want to load it" << endl;
-	cin >> File_Name;*/
 	File_Name = ui.read_input_file_name(1);
 	ifstream My_File;
 	My_File.open("\Input\\" + File_Name + ".txt");
@@ -418,43 +417,41 @@ void MarsStation_Class::Program_Startup()
 		//////////////////////Read the speed of the rover///////////////
 		getline(My_File, Line);                             //To avoid the reminder of the line
 		getline(My_File, Line);
-		int i = 1;
-
-		int count = 0;
-		while (Line[i] == ' ')
-		{
-			i++;
-			count++;
-		}
-		int Spaces = 0;
-		for (int k = 0; k < Line.size(); k++)
-		{
-			if (Line[k] == ' ')
-				Spaces++;
-		}
 		
-		//Spaces = Spaces - 1;
-		Spaces = (Spaces / count);
-		Spaces = Spaces + 1;
-		
-		i = 0;
 		//////////////////// Bounas case///////////////////
-	 ///////////////////reading the speeds///////////////////// 
-		if (Spaces == Num_Rovers)        //The case of the different speeds
+		int i = 0;
+		for (int j = 0; j < Num_Rovers; j++)
 		{
-			for (int j = 0; j < Num_Rovers ; j++)
+			while (i < Line.size() && Line[i] != ' ')
 			{
-				while (i < Line.size() &&Line[i] != ' ')
-				{
-					Speeds_Str[j]+= Line[i];
-					i++;
-				}
-				Speeds[j] = stoi(Speeds_Str[j]);
-				while (Line[i] == ' ')
-				{
-					i++;
-				}
+				Speeds_Str[j] += Line[i];
+				i++;
 			}
+			while (Line[i] == ' ')
+			{
+				i++;
+			}
+		}
+		for (int k = 0; k < Num_Rovers; k++)
+		{
+			if (Speeds_Str[k] != "")
+				Num_Of_speeds++;
+		}
+	 ///////////////////reading the speeds///////////////////// 
+	if (Num_Of_speeds == Num_Rovers)        //The case of the different speeds
+	{
+		i = 0;
+			for (int j = 0; j < Num_Rovers; j++)
+			{
+				if (Speeds_Str[j] != "")
+				{
+					Speeds[i] = stoi(Speeds_Str[j]);
+					i++;
+				}
+				
+				
+			}
+
 			///////////////////////////Creating the rovers////////////////////////////
 			int counter = 0;
 			int j = 0;
@@ -479,19 +476,13 @@ void MarsStation_Class::Program_Startup()
 
 		}
 		else
-		{                          ////////////////the speed is const/////////////   
-			for (int j = 0; j < 3; j++)
+	{
+		i = 0;                     ////////////////the speed is const/////////////   
+			for (int j = 0; j < Num_Rovers; j++)
 			{
-				while (Line[i] != ' ')
+				if (Speeds_Str[j] != "")
 				{
-					int k = 0;
-					Speeds_Str[j][k] = Line[i];
-					i++;
-					k++;
-				}
-				Speeds[j] = stoi(Speeds_Str[j]);
-				while (Line[i] == ' ')
-				{
+					Speeds[i] = stoi(Speeds_Str[j]);
 					i++;
 				}
 			}
