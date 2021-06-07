@@ -14,6 +14,7 @@ enum  Terminal_Mode {
 	Step_By_Step,
 	Silent
 };
+
 class UI
 {
 private:

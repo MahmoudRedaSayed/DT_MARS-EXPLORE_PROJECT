@@ -48,16 +48,7 @@
     <ClInclude Include="Rover.h">
       <Filter>Rovers</Filter>
     </ClInclude>
-    <ClInclude Include="Emergency_Mission.h">
-      <Filter>Missions</Filter>
-    </ClInclude>
     <ClInclude Include="Mission.h">
-      <Filter>Missions</Filter>
-    </ClInclude>
-    <ClInclude Include="Mountainous_Mission.h">
-      <Filter>Missions</Filter>
-    </ClInclude>
-    <ClInclude Include="Polar_Mission.h">
       <Filter>Missions</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
@@ -95,16 +86,7 @@
     <ClCompile Include="Promotion_Event.cpp">
       <Filter>EVENTS</Filter>
     </ClCompile>
-    <ClCompile Include="Emergency_Mission.cpp">
-      <Filter>Missions</Filter>
-    </ClCompile>
     <ClCompile Include="Mission.cpp">
-      <Filter>Missions</Filter>
-    </ClCompile>
-    <ClCompile Include="Mountainous_Mission.cpp">
-      <Filter>Missions</Filter>
-    </ClCompile>
-    <ClCompile Include="Polar_Mission.cpp">
       <Filter>Missions</Filter>
     </ClCompile>
     <ClCompile Include="MarsStation_Class.cpp">

@@ -1,15 +1,9 @@
 #pragma once
-#include "Mission.h"
-#include "Event.h"
+
 #include "Formulaion_Event.h"
 #include "Cancellation_Event.h"
 #include "Promotion_Event.h"
-#include "Rover.h"
-#include <string.h>
-#include "LinkedQueue.h"
-#include "PriorityQueue.h"
 #include "UI.h"
-#include <iostream>
 
 using namespace std;
 
@@ -98,15 +92,13 @@ public:
 	////////////////////////////////////////////////////Collecting Functions//////////////////////////////////////////////
 	//////// Move from in execution to completed to available again //////////
 	void InExecution_to_Completed();
-	///
+
 	void Assign_All_Mission();
-	///
-	//void Emergency_EX_Mission_to_completed();
-	//void Mountainous_EX_Mission_to_completed();
-	//void Polar_EX_Mission_to_completed();
+
 	///////////////////// Bonus Maintenance ///////////////////////
 	void Maintenance_to_Available();
 	void Check_Up_to_Available_All();
+
 	/////// Auto Promoting operation///////
 	void Auto_Promoting();
 	//////// Check if All mission is finished /////////////

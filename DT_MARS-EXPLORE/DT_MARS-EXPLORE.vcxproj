@@ -140,15 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Cancellation_Event.h" />
-    <ClInclude Include="Emergency_Mission.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Formulaion_Event.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="MarsStation_Class.h" />
     <ClInclude Include="Mission.h" />
-    <ClInclude Include="Mountainous_Mission.h" />
     <ClInclude Include="Node.h" />
-    <ClInclude Include="Polar_Mission.h" />
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="PriorityQueueADT.h" />
     <ClInclude Include="Promotion_Event.h" />
@@ -158,14 +155,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cancellation_Event.cpp" />
-    <ClCompile Include="Emergency_Mission.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Formulaion_Event.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MarsStation_Class.cpp" />
     <ClCompile Include="Mission.cpp" />
-    <ClCompile Include="Mountainous_Mission.cpp" />
-    <ClCompile Include="Polar_Mission.cpp" />
     <ClCompile Include="Promotion_Event.cpp" />
     <ClCompile Include="Rover.cpp" />
     <ClCompile Include="UI.cpp" />
