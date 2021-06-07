@@ -30,11 +30,6 @@ public:
 	int Get_FD();
 	const int Get_ID();
 	Type_G Get_type_of_mission();
-	//const int Get_TLOC();
-	//const int Get_MDUR();
-	//const int Get_SIG();
-	//const int Get_FD();
-	//const int Get_ID();
 	int Get_WD();
 	int Get_ED();
 	int Get_CD();

@@ -61,10 +61,7 @@ int Mission::Get_FD()
 {
 	return FD;
 }
-//const int Mission::Get_TLOC()return TLOC;}
-//const int Mission::Get_MDUR(){return MDUR;}
-//const int Mission::Get_SIG(){return SIG;}
-//const int Mission::Get_FD(){return FD;}
+
 int Mission::Get_WD()
 {
 	return WD;
