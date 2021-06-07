@@ -342,6 +342,7 @@ void UI::read_output_file_name()
 {
 	cout << "Please::enter the name of the output file to load the data in" << endl<<endl;
 	cin >> Output_File_Name;
+	cout << endl;
 }
 
 string UI::Get_Output_File_Name()
