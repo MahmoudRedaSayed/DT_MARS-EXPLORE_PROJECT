@@ -9,11 +9,10 @@ Promotion_Event::Promotion_Event(int id, int ED)
 Promotion_Event::~Promotion_Event()
 {
 }
-////////////excaption handling if the id is not found//////////
 bool Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
 {
-	Mission* ITERATOR = NULL;
-	Mission* ITERATOR2 = NULL;
+	Mission* ITERATOR = NULL;// to make it first in first out
+	Mission* ITERATOR2 = NULL;// Pointer to carry the mission which will be cancelled
 	Mission* TOP = NULL;
 	Mou_Missions.peek(TOP);
 	if (TOP == nullptr)

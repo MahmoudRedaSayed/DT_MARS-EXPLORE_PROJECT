@@ -360,6 +360,7 @@ void MarsStation_Class::Program_Startup()
 {
 	string File_Name, Line, ed = " ", id = " ", tolc = " ", mdur = " ", sig = " ";
 	string* Speeds_Str;
+	float* Speeds;
 	int Num_Of_speeds = 0;
 	char Type_Event, Type_Mission;
 	int Num_E_Rovers, Num_P_Rovers, Num_M_Rovers;
@@ -372,17 +373,16 @@ void MarsStation_Class::Program_Startup()
 	int Auto_Promotion_in;
 	int j, ED, ID, TOLC, MDUR, SIG;
 	Rover** Array_OF_Rovers;
-	float* Speeds;
-	File_Name = ui.read_input_file_name(1);
 	ifstream My_File;
+	File_Name = ui.read_input_file_name(1); //take the input file name from the user 
 	My_File.open("\Input\\" + File_Name + ".txt");
-	while (!My_File.is_open())
+	while (!My_File.is_open())      //Check if the file is found or not 
 	{
-		File_Name = ui.read_input_file_name(2);
+		File_Name = ui.read_input_file_name(2);        //if not found will give the user another chance to enter the new name 
 		My_File.open("\Input\\" + File_Name + ".txt");
 		if (File_Name == "0") break;
 	}
-	if (My_File.is_open())                       //Check if the file is found or not
+	if (My_File.is_open())                     
 	{
 		My_File >> Num_M_Rovers >> Num_P_Rovers >> Num_E_Rovers;
 		Num_Rovers = Num_E_Rovers + Num_P_Rovers + Num_M_Rovers;
@@ -394,6 +394,7 @@ void MarsStation_Class::Program_Startup()
 		getline(My_File, Line);
 
 		//////////////////// Bounas case///////////////////
+		///////////////////reading the speeds as a string///////////////////// 
 		int i = 0;
 		for (int j = 0; j < Num_Rovers; j++)
 		{
@@ -415,8 +416,8 @@ void MarsStation_Class::Program_Startup()
 			if (Speeds_Str[k] != "")
 				Num_Of_speeds++;
 		}
-		///////////////////reading the speeds///////////////////// 
-		if (Num_Of_speeds == Num_Rovers)        //The case of the different speeds
+		if (Num_Of_speeds == Num_Rovers)   
+			/////////////////////////////The case of the different speeds///////////////////////////
 		{
 			i = 0;
 			for (int j = 0; j < Num_Rovers; j++)
@@ -433,18 +434,21 @@ void MarsStation_Class::Program_Startup()
 			///////////////////////////Creating the rovers////////////////////////////
 			int counter = 0;
 			int j = 0;
+			///////////////////////////Create Mountainous Rovers/////////////////////////////
 			for (int i = 0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Mountainous);
 				Available_MR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
+			///////////////////////////Create Polar Rovers/////////////////////////////
 			for (int i = 0; i < Num_P_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Polar);
 				Available_PR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
+			///////////////////////////Create Emergency Rovers/////////////////////////////
 			for (int i = 0; i < Num_E_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter], Emergency);
@@ -466,20 +470,25 @@ void MarsStation_Class::Program_Startup()
 			}
 			int counter = 0;          //to the Array of rovers 
 			int counter1 = 0;          //to the Array of speeds
+			///////////////////////////Create Mountainous Rovers/////////////////////////////
 			for (int i = 0; i < Num_M_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Mountainous);
 				Available_MR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
-			counter1++;
+			if(Num_M_Rovers!=0)
+				counter1++;
+			///////////////////////////Create Polar Rovers/////////////////////////////
 			for (int i = 0; i < Num_P_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Polar);
 				Available_PR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
-			counter1++;
+			if (Num_P_Rovers != 0)
+				counter1++;
+			///////////////////////////Create Emergency Rovers/////////////////////////////
 			for (int i = 0; i < Num_E_Rovers; i++)
 			{
 				Array_OF_Rovers[counter] = new Rover(Speeds[counter1], Emergency);
@@ -496,7 +505,7 @@ void MarsStation_Class::Program_Startup()
 		Rover::M_Rover_Count = Num_M_Rovers;
 		Rover::Check_MR = Check_UP_M_Rover;
 		Rover::Missions_Before_Check_Up = Missions_Before_Check_up;
-
+		//////////////////////////////////////////////////////////////////////////////////////
 		My_File >> Auto_Promotion_in;                //The value of the auto promotion limit
 		Mission::AutoP = Auto_Promotion_in;
 		My_File >> Num_Event;                       //The number of events
