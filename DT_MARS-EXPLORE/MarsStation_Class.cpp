@@ -12,6 +12,8 @@ int MarsStation_Class::Get_Day_count()
 MarsStation_Class::MarsStation_Class()
 	:WD_SUM(0), ED_SUM(0)
 {
+	Polar_found = false;
+	E_M_found = false;
 }
 void MarsStation_Class::increment_day()
 {
@@ -657,6 +659,17 @@ void MarsStation_Class::Program_Startup()
 			}
 			if (Type_Event == 'F')
 			{
+				//////////////////check the if there is polar or mountainous or Emergency///////////
+				if (Type_Mission == 'P')
+				{
+					Polar_found = true;
+				}
+				else if (Type_Mission == 'E' || Type_Mission == 'M')
+				{
+					E_M_found = true;
+				}
+				///////////////////////////////////////////////////////////////////////////////////
+				
 				PTR_Event[i] = new Formulaion_Event(Type_Mission, TOLC, MDUR, SIG, ID, ED);
 				Events_List.enqueue(PTR_Event[i]);
 			}

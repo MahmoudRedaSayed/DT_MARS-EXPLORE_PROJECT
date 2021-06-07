@@ -62,6 +62,9 @@ private:
 		maintenance_Rover_count;
 	int WD_SUM;//variable for waiting sum
 	int ED_SUM;// & execution sum
+	////////////////bool to check if there is an emergency or mountainous or polar/////////////
+	bool Polar_found;
+	bool E_M_found;
 	//count of waiting missions & 
 public:
 	//Constructor
