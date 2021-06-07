@@ -753,6 +753,17 @@ void MarsStation_Class::print()
 	ui.Print_In_Maintenance_Rovers(maintenance_Rover_count, Maintenance_ER, Maintenance_MR, Maintenance_PR);
 	ui.Print_Completed(completed_missions_count,M_ID, P_ID, E_ID);
 	}
+bool MarsStation_Class::Rover_Exists()
+{
+	if ((Available_ER.isEmpty() && Available_MR.isEmpty()) || Available_PR.isEmpty())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
 bool MarsStation_Class::isFinished()
 {
 	return (Events_List.isEmpty() && P_Mission.isEmpty() && M_Mission.isEmpty() &&

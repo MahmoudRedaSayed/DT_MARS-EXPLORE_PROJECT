@@ -110,6 +110,7 @@ public:
 	/////// Auto Promoting operation///////
 	void Auto_Promoting();
 	//////// Check if All mission is finished /////////////
+	bool Rover_Exists();
 	bool isFinished();
 	////// print function///////
 	void print();

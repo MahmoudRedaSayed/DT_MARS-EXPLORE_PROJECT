@@ -3,19 +3,22 @@ int main()
 {	
 	MarsStation_Class object;
 	object.Program_Startup();
-	object.Out1();// to be called in mars station
-	while (!object.isFinished())
+	if (object.Rover_Exists())
 	{
-		object.Execute();
-		object.Assign_All_Mission();
-		object.InExecution_to_Completed();
-		object.Maintenance_to_Available();
-		object.Check_Up_to_Available_All();
-		/////////// printting functions & outputfile read /////////
-		object.print();
-		object.Out2();
-		object.increment_day();
+		object.Out1();// to be called in mars station
+		while (!object.isFinished())
+		{
+			object.Execute();
+			object.Assign_All_Mission();
+			object.InExecution_to_Completed();
+			object.Maintenance_to_Available();
+			object.Check_Up_to_Available_All();
+			/////////// printting functions & outputfile read /////////
+			object.print();
+			object.Out2();
+			object.increment_day();
+		}
+		object.Out3();
 	}
-	object.Out3();
 
 }
