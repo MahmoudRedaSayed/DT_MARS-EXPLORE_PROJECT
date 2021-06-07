@@ -1,9 +1,5 @@
 #pragma once
-//enum Rover_Type {
-//	Emergency,
-//	Mountainous,
-//	Polar
-//};
+
 enum Type_G {
 	Emergency,
 	Mountainous,
@@ -14,15 +10,14 @@ class Rover
 private:
 
 	//Non-Static Data Members
+
 	Type_G Type;			// Rover Type
-	float speed;			   // Rover Speed read from input file _ assumed to be float not int to avoid truncation,
-							  //in maintenance Condition that makes speed = 0.5 previous speed 
-	const int ID;            //Rover ID , assigned from latest ID_Count
-	int Mission_Count;    //no. of missions that rover had executed
+	float speed;			// Rover Speed read from input file _ assumed to be float not int to avoid truncation,
+	const int ID;           //Rover ID , assigned from latest ID_Count
+	int Mission_Count;      //no. of missions that rover had executed
 
 	//samaa
 	int Day_out;
-	//
 
 	///////////// Bonus Maintanence ////////////////
 	float Current_Mission_EX_Time;
@@ -47,23 +42,15 @@ public:
 	Rover(float Rover_Speed, Type_G T);
 	//Let Default speed for rover is 3 km/hour (Although we may not need this condition :D )
 	//just added in case of invalid input
-	~Rover() { /*Current_Mission_EX_Time = 0;*/ }
+	~Rover() {}
 	//Getters
 	Type_G GetType() const;
 	int GetID()const;
 	float GetSpeed()const;
 	int GetMission_Count()const;
-	//const bool GetIsInMaintenance() { return IsInMaintenance; }
 	//Static members getters
-	/*const int GetID_Count(){return ID_Count;}
-
-	 const int GetP_Rover_Count() { return P_Rover_Count; }
-	 const int GetCheck_PR() { return Check_PR; }
-	 const int GetE_Rover_Count() { return E_Rover_Count; }
-	 const int GetCheck_ER() { return Check_ER; }
-	 const int GetM_Rover_Count() { return M_Rover_Count; }
-	 const int GetCheck_MR() { return Check_MR; }*/
-	 //Setters
+	
+	//Setters
 	void Increment_Mission_Count();// if(0%4 == 0 && Mission_Count !=0)
 	//static Members Getters
 	void SetCheck_PR(int c); // Let Default checkup duration = 5 days

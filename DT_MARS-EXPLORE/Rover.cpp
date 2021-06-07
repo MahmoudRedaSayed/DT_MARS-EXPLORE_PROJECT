@@ -59,14 +59,7 @@ int Rover::Get_Day_out()
 
 Rover::Rover(float Rover_Speed, Type_G T) :ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0)
 , Mission_Count(0), Type(T), Maintanence_count(1), Current_Mission_EX_Time(0)
-{//no need to it look at the input file
-		/*if (T == Mountainous)
-			M_Rover_Count++;
-		else if (T == Emergency)
-			E_Rover_Count++;
-		else if (T == Polar)
-			P_Rover_Count++;*/
-
+{
 }
 ////////// Bonus    Maintenance /////////////////
 void Rover::SetSpeed(float x)
