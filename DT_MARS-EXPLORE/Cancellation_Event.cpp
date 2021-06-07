@@ -21,6 +21,7 @@ bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 		{
 			Mou_Missions.dequeue(TOP);
 			delete TOP;
+			Mission::NumOfMMissions--;
 			return true;
 		}
 	}
@@ -51,6 +52,7 @@ bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 	if (ITERATOR2)//check if Null or not
 	{
 		delete ITERATOR2;
+		Mission::NumOfMMissions--;
 		return true;
 	}
 	return false;
