@@ -425,9 +425,12 @@ void MarsStation_Class::Program_Startup()
 				Speeds_Str[j] += Line[i];
 				i++;
 			}
-			while (Line[i] == ' ')
+			if (i < Line.size())
 			{
-				i++;
+				while (Line[i] == ' ')
+				{
+					i++;
+				}
 			}
 		}
 		for (int k = 0; k < Num_Rovers; k++)
