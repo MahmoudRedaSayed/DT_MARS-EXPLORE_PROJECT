@@ -87,7 +87,7 @@ void Rover::set_Mission_EXtime(double ED)
 }
 bool Rover::Check_Maintenance()
 {
-	if (Current_Mission_EX_Time > (50 * Maintanence_count))  // constant threshold 
+	if (Current_Mission_EX_Time > (40 * Maintanence_count))  // constant threshold 
 	{
 		Current_Mission_EX_Time = 0;
 		Maintanence_count += 1.5;
