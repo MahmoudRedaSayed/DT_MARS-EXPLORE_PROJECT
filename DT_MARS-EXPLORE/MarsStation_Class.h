@@ -52,6 +52,7 @@ private:
 	string M_ID;
 	string P_ID;
 	string E_ID;
+
 	//Counters
 	static int Day_count,
 		waiting_missions_count,

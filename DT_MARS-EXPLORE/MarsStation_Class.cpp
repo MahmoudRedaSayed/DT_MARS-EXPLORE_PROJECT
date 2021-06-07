@@ -99,22 +99,13 @@ void MarsStation_Class::Assign_E_M()
 		Mission* Emergence_mission;
 		Rover* rover;
 		E_Mission.dequeue(Emergence_mission);
-		if (Available_ER.dequeue(rover))      ///// Check Emergency Rover list first
-		{
-			//rover->SetIsAssigned(true);
-			Emergence_mission->Set_Rptr(rover);
-			rover->Increment_Mission_Count();
-		}
-		else if (Available_MR.dequeue(rover)) ///// Check Mountainous Rover list second
-		{
-			Emergence_mission->Set_Rptr(rover);
-			rover->Increment_Mission_Count();
-		}
-		else if (Available_PR.dequeue(rover))    ///// Check Polar Rover list Last
-		{
-			Emergence_mission->Set_Rptr(rover);
-			rover->Increment_Mission_Count();
-		}
+
+		if (Available_ER.dequeue(rover)) {}      ///// Check Emergency Rover list first
+		else if (Available_MR.dequeue(rover)) {} ///// Check Mountainous Rover list second
+		else if (Available_PR.dequeue(rover)) {}    ///// Check Polar Rover list Last
+
+		Emergence_mission->Set_Rptr(rover);
+		rover->Increment_Mission_Count();
 		Emergence_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
 		rover->set_Mission_EXtime(Emergence_mission->Calculate_ED());
 		Emergency_EX_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_CD_Priority());
@@ -129,23 +120,14 @@ void MarsStation_Class::Assign_E_M()
 		Rover* rover;
 		E_Mission.dequeue(Emergence_mission);
 		if (Maintenance_ER.dequeue(rover))      ///// Check Emergency Rover list first
-		{
-			Emergence_mission->Set_Rptr(rover);
-			rover->Increment_Mission_Count();
-			rover->SetSpeed(rover->GetSpeed() / 2);
-		}
+		{}
 		else if (Maintenance_MR.dequeue(rover)) ///// Check Mountainous Rover list second
-		{
-			Emergence_mission->Set_Rptr(rover);
-			rover->Increment_Mission_Count();
-			rover->SetSpeed(rover->GetSpeed() / 2);
-		}
-		else if (Maintenance_PR.dequeue(rover))    ///// Check Polar Rover list Last
-		{
-			Emergence_mission->Set_Rptr(rover);
-			rover->Increment_Mission_Count();
-			rover->SetSpeed(rover->GetSpeed() / 2);
-		}
+		{}
+		else if(Maintenance_PR.dequeue(rover))    ///// Check Polar Rover list Last
+		{}
+		Emergence_mission->Set_Rptr(rover);
+		rover->Increment_Mission_Count();
+		rover->SetSpeed(rover->GetSpeed() / 2);
 		Emergence_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
 		rover->set_Mission_EXtime(Emergence_mission->Calculate_ED());
 		Emergency_EX_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_CD_Priority());
