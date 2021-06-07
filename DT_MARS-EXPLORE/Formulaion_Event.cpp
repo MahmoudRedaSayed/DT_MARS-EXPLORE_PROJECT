@@ -1,8 +1,5 @@
 #include "Formulaion_Event.h"
 #include"Mission.h"
-#include"Emergency_Mission.h"
-#include"Mountainous_Mission.h"
-#include"Polar_Mission.h"
 #include<iostream>
 using namespace std;
 

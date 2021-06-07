@@ -1,7 +1,4 @@
 #pragma once
-#include"Emergency_Mission.h"
-#include"Mountainous_Mission.h"
-#include"Polar_Mission.h"
 #include"LinkedQueue.h"
 #include"PriorityQueue.h"
 #include"Mission.h"
