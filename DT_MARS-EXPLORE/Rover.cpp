@@ -7,7 +7,6 @@ int Rover::Check_ER = 5;
 int Rover::M_Rover_Count = 0;
 int Rover::Check_MR = 5;
 int Rover::Missions_Before_Check_Up=1;
-int Rover::NO_ofMissions_Before_Maintenance = 1;
 
 Type_G Rover::GetType() const
 {
@@ -23,20 +22,9 @@ float Rover::GetSpeed() const
 {
 	return speed;
 }
-
-bool Rover::GetIsInCheckup() const
-{
-	return IsInCheckup;
-}
-
 int Rover::GetMission_Count() const
 {
 	return Mission_Count;
-}
-
-void Rover::SetIsInCheckup(bool c)
-{
-	IsInCheckup = c;
 }
 
 void Rover::Increment_Mission_Count()
@@ -70,8 +58,7 @@ int Rover::Get_Day_out()
 }
 
 Rover::Rover(float Rover_Speed, Type_G T) :ID(++ID_Count), speed((Rover_Speed > 0) ? Rover_Speed : 3.0) 
-, Mission_Count(0), Type(T)
-, IsInCheckup(false)
+, Mission_Count(0), Type(T), Maintanence_count(1)
 {//no need to it look at the input file
 		/*if (T == Mountainous)
 			M_Rover_Count++;
@@ -82,11 +69,36 @@ Rover::Rover(float Rover_Speed, Type_G T) :ID(++ID_Count), speed((Rover_Speed > 
 
 }
 ////////// Bonus    Maintenance /////////////////
+void Rover::SetSpeed(float x)
+{
+	if (x > 0)
+	{
+		speed = x;
+	}
+	else
+	{
+		speed = 1;
+	}
+}
+
 void Rover::set_Mission_EXtime(double ED)
 {
 	Current_Mission_EX_Time += ED;
 }
 bool Rover::Check_Maintenance()
+{
+	if (Current_Mission_EX_Time > 80 * Maintanence_count)  // constant threshold 
+	{
+		Current_Mission_EX_Time = 0;
+		Maintanence_count += 0.5;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+/*bool Rover::Check_Maintenance()
 {
 	if (Mission_Count % NO_ofMissions_Before_Maintenance == 0 || Current_Mission_EX_Time > 100)  // constant threshold 
 	{
@@ -97,4 +109,4 @@ bool Rover::Check_Maintenance()
 	{
 		return false;
 	}
-}
+}*/

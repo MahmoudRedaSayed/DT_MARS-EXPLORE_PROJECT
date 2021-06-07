@@ -18,16 +18,15 @@ private:
 	float speed;			   // Rover Speed read from input file _ assumed to be float not int to avoid truncation,
 					          //in maintenance Condition that makes speed = 0.5 previous speed 
 	const int ID;            //Rover ID , assigned from latest ID_Count
-	bool IsInCheckup;      //Is this rover undergoing a checkup or not?
 	int Mission_Count;    //no. of missions that rover had executed
-	bool IsInMaintenance;//Is the rover undergoing Maintenance or not?
-					    //\Rovers\ need maintenance when ://To be discussed with team
+
 	//samaa
 	int Day_out;
 	//
 
 	///////////// Bonus Maintanence ////////////////
 	float Current_Mission_EX_Time;
+	float Maintanence_count;
 
 public:
 	//static Data Members
@@ -37,9 +36,6 @@ public:
 	static int P_Rover_Count;      //Polar. Rovers count for file output
 	static int M_Rover_Count;     //Mount. Rovers count for file output
 	static int E_Rover_Count;    //Polar. Rovers count for file output
-
-	///////////// Bonus Maintanence ////////////////
-	static int NO_ofMissions_Before_Maintenance;
 
 	static int Check_PR;      //The duration (in days) of checkups that a **Polar** rover needs 
 							//to perform after completing N missions.
@@ -56,7 +52,6 @@ public:
 	Type_G GetType() const;
 	int GetID()const;
 	float GetSpeed()const;
-	bool GetIsInCheckup()const;
 	int GetMission_Count()const;
 	//const bool GetIsInMaintenance() { return IsInMaintenance; }
 	//Static members getters
@@ -69,19 +64,6 @@ public:
      const int GetM_Rover_Count() { return M_Rover_Count; }
 	 const int GetCheck_MR() { return Check_MR; }*/
 	//Setters
-	void SetSpeed(float x)
-	{
-		if (x > 0)
-		{
-			speed = x;
-		}
-		else
-		{
-			speed = 1;
-		}
-	}
-
-	void SetIsInCheckup(bool c);
 	void Increment_Mission_Count();// if(0%4 == 0 && Mission_Count !=0)
 	//static Members Getters
 	void SetCheck_PR(int c); // Let Default checkup duration = 5 days
@@ -93,7 +75,7 @@ public:
 	int Get_Day_out();
 
 	///////////////////// Bonus Maintenance ////////////////////////////
-	 
+	void SetSpeed(float x);
 	void set_Mission_EXtime(double ED);
 	bool Check_Maintenance();
 

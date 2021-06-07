@@ -395,7 +395,7 @@ void MarsStation_Class::Program_Startup()
 	int Auto_Promotion_in;
 	int j, ED, ID, TOLC, MDUR, SIG;
 	Rover** Array_OF_Rovers;
-	int* Speeds;
+	float* Speeds;
 	File_Name = ui.read_input_file_name(1);
 	ifstream My_File;
 	My_File.open("\Input\\" + File_Name + ".txt");
@@ -410,7 +410,7 @@ void MarsStation_Class::Program_Startup()
 		My_File >> Num_M_Rovers >> Num_P_Rovers >> Num_E_Rovers;
 		Num_Rovers = Num_E_Rovers + Num_P_Rovers + Num_M_Rovers;
 		Array_OF_Rovers = new Rover * [Num_Rovers];
-		Speeds = new int[Num_Rovers];
+		Speeds = new float[Num_Rovers];
 		Speeds_Str = new string[Num_Rovers];
 		//////////////////////Read the speed of the rover///////////////
 		getline(My_File, Line);                             //To avoid the reminder of the line
@@ -516,7 +516,6 @@ void MarsStation_Class::Program_Startup()
 		Rover::M_Rover_Count = Num_M_Rovers;
 		Rover::Check_MR = Check_UP_M_Rover;
 		Rover::Missions_Before_Check_Up = Missions_Before_Check_up;
-		Rover::NO_ofMissions_Before_Maintenance = Missions_Before_Check_up + 1;
 
 		My_File >> Auto_Promotion_in;                //The value of the auto promotion limit
 		Mission::AutoP = Auto_Promotion_in;
