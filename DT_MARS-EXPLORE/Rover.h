@@ -16,8 +16,7 @@ private:
 	const int ID;           //Rover ID , assigned from latest ID_Count
 	int Mission_Count;      //no. of missions that rover had executed
 
-	//samaa
-	int Day_out;
+	int Day_out;			//#out of maintenance(if finished maintenance)/Checkup day
 
 	///////////// Bonus Maintanence ////////////////
 	float Current_Mission_EX_Time;

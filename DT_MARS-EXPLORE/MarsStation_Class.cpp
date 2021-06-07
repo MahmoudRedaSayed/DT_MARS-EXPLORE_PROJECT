@@ -328,7 +328,7 @@ void MarsStation_Class::print()
 	}
 	ui.print_Availble_missions(Day_count, waiting_missions_count, E_Mission, P_Mission, M_Mission);
 	ui.Print_In_Execution_Missions_Rovers(execution_missions_count, Emergency_EX_Mission,
-											Mountainous_EX_Mission, Polar_EX_Mission);
+		Mountainous_EX_Mission, Polar_EX_Mission);
 	ui.Print_Available_Rover(availble_Rover_count, Available_ER, Available_PR, Available_MR);
 	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
 	ui.Print_In_Maintenance_Rovers(maintenance_Rover_count, Maintenance_ER, Maintenance_MR, Maintenance_PR);
@@ -382,7 +382,7 @@ void MarsStation_Class::Program_Startup()
 		My_File.open("\Input\\" + File_Name + ".txt");
 		if (File_Name == "0") break;
 	}
-	if (My_File.is_open())                     
+	if (My_File.is_open())
 	{
 		My_File >> Num_M_Rovers >> Num_P_Rovers >> Num_E_Rovers;
 		Num_Rovers = Num_E_Rovers + Num_P_Rovers + Num_M_Rovers;
@@ -416,7 +416,7 @@ void MarsStation_Class::Program_Startup()
 			if (Speeds_Str[k] != "")
 				Num_Of_speeds++;
 		}
-		if (Num_Of_speeds == Num_Rovers)   
+		if (Num_Of_speeds == Num_Rovers)
 			/////////////////////////////The case of the different speeds///////////////////////////
 		{
 			i = 0;
@@ -477,7 +477,7 @@ void MarsStation_Class::Program_Startup()
 				Available_MR.enqueue(Array_OF_Rovers[counter], Array_OF_Rovers[counter]->GetSpeed());
 				counter++;
 			}
-			if(Num_M_Rovers!=0)//To test if the there is no mountainous
+			if (Num_M_Rovers != 0)//To test if the there is no mountainous
 				counter1++;
 			///////////////////////////Create Polar Rovers/////////////////////////////
 			for (int i = 0; i < Num_P_Rovers; i++)
@@ -743,6 +743,46 @@ void MarsStation_Class::Out3()
 	outF.close();
 
 }
+
+void MarsStation_Class::Delete_Rovers()
+{
+	Delete_Rovers_PriQueue(Available_ER);
+	Delete_Rovers_PriQueue(Available_PR);
+	Delete_Rovers_PriQueue(Available_MR);
+	Delete_Rovers_Queue(Check_up_ER);
+	Delete_Rovers_Queue(Check_up_PR);
+	Delete_Rovers_Queue(Check_up_MR);
+	Delete_Rovers_Queue(Maintenance_ER);
+	Delete_Rovers_Queue(Maintenance_PR);
+	Delete_Rovers_Queue(Maintenance_MR);
+}
+
+void MarsStation_Class::Delete_Rovers_Queue(LinkedQueue<Rover*>& R)
+{
+	Rover* rover;
+	if (!R.isEmpty())
+	{
+		R.dequeue(rover);
+		delete rover;
+	}
+}
+
+void MarsStation_Class::Delete_Rovers_PriQueue(PriorityQueue<Rover*>& R)
+{
+	Rover* rover;
+	if (!R.isEmpty())
+	{
+		R.dequeue(rover);
+		delete rover;
+	}
+}
+
+MarsStation_Class::~MarsStation_Class()
+{
+	Delete_Rovers();
+}
+
+
 
 
 int MarsStation_Class::Day_count = 1;
