@@ -35,7 +35,7 @@ void UI::SelectMode()
 		"3-Silent Mode		 (program produces only output files, no simulation steps will be shown on the console)!\n" <<
 		"please type number of mode from (1,2 and 3)\n";
 	std::cin >> M;
-
+	cout << endl;
 	if (M == "1")
 	{
 		Mode = Terminal_Mode::Interactive;
@@ -341,7 +341,7 @@ string UI::read_input_file_name(int i)
 }
 void UI::read_output_file_name()
 {
-	cout << "Please::enter the name of the output file to load the data in" << endl << endl;
+	cout << "\nPlease::enter the name of the output file to load the data in" << endl << endl;
 	cin >> Output_File_Name;
 	cout << endl;
 }

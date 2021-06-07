@@ -91,15 +91,4 @@ bool Rover::Check_Maintenance()
 		return false;
 	}
 }
-/*bool Rover::Check_Maintenance()
-{
-	if (Mission_Count % NO_ofMissions_Before_Maintenance == 0 || Current_Mission_EX_Time > 100)  // constant threshold
-	{
-		Current_Mission_EX_Time = 0;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}*/
+
