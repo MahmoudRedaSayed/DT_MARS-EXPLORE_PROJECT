@@ -51,7 +51,7 @@ void MarsStation_Class::Execute()
 			{
 				event->Execute(E_Mission, P_Mission, M_Mission);
 			}
-	
+
 			delete event; // we don't need created object of Event so we delete it
 			// What about dynamic cast , did object is deleted Completely or need dynamic cast ?!
 		}
@@ -62,8 +62,8 @@ void MarsStation_Class::Execute()
 	}
 }
 //////////////// Assign Emergency Missions using Priority Queue (Linked List) //////////////////////////
-void MarsStation_Class::Assign_Mission_to_QueueRover(int& Counter,LinkedQueue<Mission*>& availble_Mission_list,
-				PriorityQueue<Mission*>& EX_Mission_list, PriorityQueue<Rover*>& Rover_list)
+void MarsStation_Class::Assign_Mission_to_QueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
+	PriorityQueue<Mission*>& EX_Mission_list, PriorityQueue<Rover*>& Rover_list)
 {
 	Counter = 0;
 	while (!availble_Mission_list.isEmpty() && !Rover_list.isEmpty())
@@ -133,12 +133,12 @@ void MarsStation_Class::Assign_E_M()
 			{
 				return;
 			}
-			Emergence_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
+			Emergence_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list
 			Emergency_EX_Mission.enqueue(Emergence_mission, Emergence_mission->Calculate_CD_Priority());
 		}
 	}
 	*/
-	while (!E_Mission.isEmpty() &&(!Available_ER.isEmpty() || !Available_PR.isEmpty() || !Available_MR.isEmpty()))
+	while (!E_Mission.isEmpty() && (!Available_ER.isEmpty() || !Available_PR.isEmpty() || !Available_MR.isEmpty()))
 	{
 		Mission* Emergence_mission;
 		Rover* rover;
@@ -166,8 +166,8 @@ void MarsStation_Class::Assign_E_M()
 		MarsStation_Class::execution_missions_count++;
 		MarsStation_Class::availble_Rover_count--;
 	}
-	while (!E_Mission.isEmpty() && (!Maintenance_ER.isEmpty() || !Maintenance_PR.isEmpty() 
-									|| !Maintenance_MR.isEmpty()))
+	while (!E_Mission.isEmpty() && (!Maintenance_ER.isEmpty() || !Maintenance_PR.isEmpty()
+		|| !Maintenance_MR.isEmpty()))
 	{
 		Mission* Emergence_mission;
 		Rover* rover;
@@ -213,8 +213,8 @@ void MarsStation_Class::Assign_P_M()
 			{
 				Polar_mission->Set_Rptr(P_Rover);
 				P_Rover->Increment_Mission_Count();
-				Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
-				Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
+				Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list
+				Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending
 
 			}
 			else
@@ -224,11 +224,11 @@ void MarsStation_Class::Assign_P_M()
 		}
 	}*/
 	int counter1 = 0, counter2 = 0;
-	Assign_Mission_to_QueueRover(counter1,P_Mission, Polar_EX_Mission, Available_PR);;
-	MarsStation_Class::availble_Rover_count-= counter1;
-	Assign_Mission_to_PriorityQueueRover(counter2,P_Mission, Polar_EX_Mission,Maintenance_PR);
-	MarsStation_Class::waiting_missions_count -= counter2+ counter1;
-	MarsStation_Class::execution_missions_count += counter2+ counter1;
+	Assign_Mission_to_QueueRover(counter1, P_Mission, Polar_EX_Mission, Available_PR);;
+	MarsStation_Class::availble_Rover_count -= counter1;
+	Assign_Mission_to_PriorityQueueRover(counter2, P_Mission, Polar_EX_Mission, Maintenance_PR);
+	MarsStation_Class::waiting_missions_count -= counter2 + counter1;
+	MarsStation_Class::execution_missions_count += counter2 + counter1;
 	MarsStation_Class::maintenance_Rover_count -= counter2;
 
 	/*
@@ -241,8 +241,8 @@ void MarsStation_Class::Assign_P_M()
 		Polar_mission->Set_Rptr(P_Rover);
 		P_Rover->SetIsAssigned(true);
 		P_Rover->Increment_Mission_Count();
-		Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list 
-		Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending 
+		Polar_mission->Calculate_WD(Day_count); ///// Add Mission from available to Excution Mission list
+		Polar_EX_Mission.enqueue(Polar_mission, Polar_mission->Calculate_CD_Priority()); //// note: sorted ascending
 		MarsStation_Class::waiting_missions_count--;
 		MarsStation_Class::execution_missions_count++;
 		MarsStation_Class::availble_Rover_count--;
@@ -256,11 +256,11 @@ void MarsStation_Class::Assign_M_M()
 	Assign_Mission_to_QueueRover(counter1, M_Mission, Mountainous_EX_Mission, Available_MR);
 	Assign_Mission_to_QueueRover(counter2, M_Mission, Mountainous_EX_Mission, Available_ER);
 
-	MarsStation_Class::availble_Rover_count -= counter2+ counter1;
+	MarsStation_Class::availble_Rover_count -= counter2 + counter1;
 	Assign_Mission_to_PriorityQueueRover(counter3, M_Mission, Mountainous_EX_Mission, Maintenance_MR);
 	Assign_Mission_to_PriorityQueueRover(counter4, M_Mission, Mountainous_EX_Mission, Maintenance_ER);
-	MarsStation_Class::waiting_missions_count -= counter2 + counter1+ counter3 + counter4;
-	MarsStation_Class::execution_missions_count += counter2 + counter1+ counter3 + counter4;
+	MarsStation_Class::waiting_missions_count -= counter2 + counter1 + counter3 + counter4;
+	MarsStation_Class::execution_missions_count += counter2 + counter1 + counter3 + counter4;
 	MarsStation_Class::availble_Rover_count -= counter3 + counter4;
 }
 void MarsStation_Class::Auto_Promoting()
@@ -293,14 +293,14 @@ void MarsStation_Class::Assign_All_Mission()
 void MarsStation_Class::InExecution_to_Completed()
 {
 	//////// Check Emergency Execution List ///////
-	General_InEXecution_to_Completed(Emergency_EX_Mission,E_ID);
+	General_InEXecution_to_Completed(Emergency_EX_Mission, E_ID);
 	//////// Check Mountainous Execution List ///////
-	General_InEXecution_to_Completed(Mountainous_EX_Mission,M_ID);
+	General_InEXecution_to_Completed(Mountainous_EX_Mission, M_ID);
 	//////// Check Polar Execution List ///////
-	General_InEXecution_to_Completed(Polar_EX_Mission,P_ID);
+	General_InEXecution_to_Completed(Polar_EX_Mission, P_ID);
 }
 void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>& Execution_list,
-	string &List_ID)
+	string& List_ID)
 {
 	Mission* mission_type;
 	if (List_ID != "")
@@ -317,13 +317,13 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 			MarsStation_Class::completed_missions_count++;
 			//Completed_E_Mission_ID.enqueue(mission_type->Get_ID());
 			// string should take ID //
-			List_ID =List_ID+(to_string(mission_type->Get_ID()));
-			List_ID =List_ID+(",");
+			List_ID = List_ID + (to_string(mission_type->Get_ID()));
+			List_ID = List_ID + (",");
 
 			Rover* rover = mission_type->Get_Rptr();
 			if (rover->GetType() == Emergency)
 			{
-				if (!General_Check_Maintenance(rover,Maintenance_ER, (Rover::Check_ER)/2 +1))
+				if (!General_Check_Maintenance(rover, Maintenance_ER, (Rover::Check_ER) / 2 + 1))
 					General_Check_R_State(rover, Check_up_ER, Available_ER, Rover::Missions_Before_Check_Up, Rover::Check_ER);
 			}
 			else if (rover->GetType() == Mountainous)
@@ -331,7 +331,7 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 				if (!General_Check_Maintenance(rover, Maintenance_MR, (Rover::Check_MR) / 2 + 1))
 					General_Check_R_State(rover, Check_up_MR, Available_MR, Rover::Missions_Before_Check_Up, Rover::Check_MR);
 			}
-			else if(rover->GetType() == Polar)
+			else if (rover->GetType() == Polar)
 			{
 				if (!General_Check_Maintenance(rover, Maintenance_PR, (Rover::Check_PR) / 2 + 1))
 					General_Check_R_State(rover, Check_up_PR, Available_PR, Rover::Missions_Before_Check_Up, Rover::Check_PR);
@@ -346,7 +346,7 @@ void MarsStation_Class::General_InEXecution_to_Completed(PriorityQueue<Mission*>
 
 //////////////////////////////////////// Bonus  Maintenance ////////////////////////////////////////
 bool MarsStation_Class::General_Check_Maintenance(Rover* CRptr, LinkedQueue<Rover*>& Maintenance_list,
-	 int Duration)
+	int Duration)
 {
 	if (CRptr->Check_Maintenance())
 	{
@@ -415,7 +415,7 @@ void MarsStation_Class::Program_Startup()
 		//////////////////////Read the speed of the rover///////////////
 		getline(My_File, Line);                             //To avoid the reminder of the line
 		getline(My_File, Line);
-		
+
 		//////////////////// Bounas case///////////////////
 		int i = 0;
 		for (int j = 0; j < Num_Rovers; j++)
@@ -438,10 +438,10 @@ void MarsStation_Class::Program_Startup()
 			if (Speeds_Str[k] != "")
 				Num_Of_speeds++;
 		}
-	 ///////////////////reading the speeds///////////////////// 
-	if (Num_Of_speeds == Num_Rovers)        //The case of the different speeds
-	{
-		i = 0;
+		///////////////////reading the speeds///////////////////// 
+		if (Num_Of_speeds == Num_Rovers)        //The case of the different speeds
+		{
+			i = 0;
 			for (int j = 0; j < Num_Rovers; j++)
 			{
 				if (Speeds_Str[j] != "")
@@ -449,8 +449,8 @@ void MarsStation_Class::Program_Startup()
 					Speeds[i] = stoi(Speeds_Str[j]);
 					i++;
 				}
-				
-				
+
+
 			}
 
 			///////////////////////////Creating the rovers////////////////////////////
@@ -477,8 +477,8 @@ void MarsStation_Class::Program_Startup()
 
 		}
 		else
-	{
-		i = 0;                     ////////////////the speed is const/////////////   
+		{
+			i = 0;                     ////////////////the speed is const/////////////   
 			for (int j = 0; j < Num_Rovers; j++)
 			{
 				if (Speeds_Str[j] != "")
@@ -688,14 +688,14 @@ void MarsStation_Class::Program_Startup()
 }
 
 
-void MarsStation_Class::General_Check_Up_OR_maintenance_to_Available(int& n,LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list)
+void MarsStation_Class::General_Check_Up_OR_maintenance_to_Available(int& n, LinkedQueue<Rover*>& Check_up_list, PriorityQueue<Rover*>& Available_list)
 {
 	Rover* Gptr = nullptr;
 	Check_up_list.peek(Gptr);
 	n = 0;
 	while (Gptr) {
 
-		if(Gptr->Get_Day_out() == MarsStation_Class::Day_count)
+		if (Gptr->Get_Day_out() == MarsStation_Class::Day_count)
 		{
 			Check_up_list.dequeue(Gptr);
 			Available_list.enqueue(Gptr, Gptr->GetSpeed());
@@ -722,13 +722,13 @@ void MarsStation_Class::Maintenance_to_Available()
 void MarsStation_Class::Check_Up_to_Available_All()
 {
 	int n1 = 0, n2 = 0, n3 = 0;
-	General_Check_Up_OR_maintenance_to_Available(n1,Check_up_MR, Available_MR);
-	General_Check_Up_OR_maintenance_to_Available(n2,Check_up_ER, Available_ER);
-	General_Check_Up_OR_maintenance_to_Available(n3,Check_up_PR, Available_PR);
-	MarsStation_Class::checkup_Rover_count-= (n1+ n2+ n3);
-	MarsStation_Class::availble_Rover_count+= (n1+ n2+ n3);
+	General_Check_Up_OR_maintenance_to_Available(n1, Check_up_MR, Available_MR);
+	General_Check_Up_OR_maintenance_to_Available(n2, Check_up_ER, Available_ER);
+	General_Check_Up_OR_maintenance_to_Available(n3, Check_up_PR, Available_PR);
+	MarsStation_Class::checkup_Rover_count -= (n1 + n2 + n3);
+	MarsStation_Class::availble_Rover_count += (n1 + n2 + n3);
 }
-void MarsStation_Class::print() 
+void MarsStation_Class::print()
 {
 	Terminal_Mode Mode = ui.get_mode();
 
@@ -736,7 +736,7 @@ void MarsStation_Class::print()
 	{
 		cin.get();
 	}
-	else if(Mode == Step_By_Step)
+	else if (Mode == Step_By_Step)
 	{
 		//ui.sleep(1.0);
 	}
@@ -746,13 +746,13 @@ void MarsStation_Class::print()
 	}
 	ui.print_Availble_missions(Day_count, waiting_missions_count, E_Mission,
 		P_Mission, M_Mission);
-	ui.Print_In_Execution_Missions_Rovers(execution_missions_count,Emergency_EX_Mission,
-											Mountainous_EX_Mission,Polar_EX_Mission);
+	ui.Print_In_Execution_Missions_Rovers(execution_missions_count, Emergency_EX_Mission,
+		Mountainous_EX_Mission, Polar_EX_Mission);
 	ui.Print_Available_Rover(availble_Rover_count, Available_ER, Available_PR, Available_MR);
 	ui.Print_In_Checkup_Rovers(checkup_Rover_count, Check_up_ER, Check_up_PR, Check_up_MR);
 	ui.Print_In_Maintenance_Rovers(maintenance_Rover_count, Maintenance_ER, Maintenance_MR, Maintenance_PR);
-	ui.Print_Completed(completed_missions_count,M_ID, P_ID, E_ID);
-	}
+	ui.Print_Completed(completed_missions_count, M_ID, P_ID, E_ID);
+}
 bool MarsStation_Class::Rover_Exists()
 {
 	if ((Available_ER.isEmpty() && Available_MR.isEmpty()) || Available_PR.isEmpty())
@@ -803,7 +803,7 @@ void MarsStation_Class::Out2()
 void MarsStation_Class::Out3()
 {
 	ofstream outF;//variable to deal with output file , declared here for multiple functions
-	int MounSumTotal = Mission::NumOfMMissions + Mission::NumOfAutoPMissions+ Mission::NumOfNoNAutoPMissions ;
+	int MounSumTotal = Mission::NumOfMMissions + Mission::NumOfAutoPMissions + Mission::NumOfNoNAutoPMissions;
 	int Msum = Mission::NumOfMMissions + Mission::NumOfPMissions + Mission::NumOfEMissions;
 
 	outF.open("\Output\\" + ui.Get_Output_File_Name() + ".txt", ios::app);

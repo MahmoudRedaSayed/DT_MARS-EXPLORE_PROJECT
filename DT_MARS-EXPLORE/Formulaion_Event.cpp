@@ -8,7 +8,7 @@ using namespace std;
 
 //////////////////// Exception Handeling /////////////////////////
 
-Formulaion_Event::Formulaion_Event(char type, int Location, int Duration, int sig,int id,int ED)
+Formulaion_Event::Formulaion_Event(char type, int Location, int Duration, int sig, int id, int ED)
 {
 	Set_Event_Day(ED);
 	Set_Mission_ID(id);
@@ -50,7 +50,7 @@ bool Formulaion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueu
 	{
 		//create emergency mission
 		Mission* PTR_MISSION = new Mission(TLOC, MDUR, SIG, Get_Event_Day(), Get_Mission_ID(), Emergency);
-			
+
 		Eme_Missions.enqueue(PTR_MISSION, PTR_MISSION->Calculate_priority());
 		Mission::NumOfEMissions++;
 		return true;

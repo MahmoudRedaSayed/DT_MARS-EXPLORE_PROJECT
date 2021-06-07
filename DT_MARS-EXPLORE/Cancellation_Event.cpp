@@ -10,7 +10,7 @@ bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 {
 	Mission* ITERATOR = NULL;// to make it first in first out
 	Mission* ITERATOR2 = NULL;
-	Mission* TOP=NULL;
+	Mission* TOP = NULL;
 	Mou_Missions.peek(TOP);
 	if (TOP == nullptr)
 	{
@@ -38,10 +38,10 @@ bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 		{
 			break;
 		}
-		
+
 		if (ITERATOR->Get_ID() == Get_Mission_ID())
 		{
-			
+
 			ITERATOR2 = ITERATOR;
 		}                                //And the value of the mission will be stored in pointer iterator 
 		else
@@ -49,7 +49,7 @@ bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 			Mou_Missions.enqueue(ITERATOR);
 		}
 	}
-	if(ITERATOR2)
+	if (ITERATOR2)
 	{
 		delete ITERATOR2;
 		return true;
@@ -58,5 +58,5 @@ bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 }
 
 Cancellation_Event::~Cancellation_Event()
-{	
+{
 }

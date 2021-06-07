@@ -29,7 +29,7 @@ public:
 	int Get_SIG();
 	int Get_FD();
 	const int Get_ID();
-	Type_G Get_type_of_mission( );
+	Type_G Get_type_of_mission();
 	//const int Get_TLOC();
 	//const int Get_MDUR();
 	//const int Get_SIG();

@@ -14,8 +14,8 @@ UI::~UI()
 {
 	if (Mode == Silent)
 	{
-		cout << endl<<"Silent Mode" << endl;
-		cout << "Simulation Starts..." ;
+		cout << endl << "Silent Mode" << endl;
+		cout << "Simulation Starts...";
 	}
 	std::cout << "\nSimulation ends, Output file created\n";
 	for (int i = 0; i < 3; i++)
@@ -52,7 +52,7 @@ void UI::SelectMode()
 	{
 		Mode = Terminal_Mode::Step_By_Step;
 	}
-	
+
 }
 
 void UI::Print_In_Execution_Missions_Rovers(int execution_missions_count, PriorityQueue<Mission*>& Emergency_EX_Mission,
@@ -114,16 +114,16 @@ void UI::Print_PriorityQueue_Mission_Rover(PriorityQueue<Mission*> EX_Mission)
 	}
 }
 
-void UI::Print_Completed_Missions( string brakets,string& M_ID)
+void UI::Print_Completed_Missions(string brakets, string& M_ID)
 {
 	if (M_ID != "")
 	{
-		M_ID = M_ID.substr(0,M_ID.size() - 1);
+		M_ID = M_ID.substr(0, M_ID.size() - 1);
 		cout << "  " << brakets[0] << M_ID << brakets[1];
 	}
 }
 void UI::Print_In_Checkup_Rovers(int Checkup_count_Rover, LinkedQueue<Rover*>& Check_up_ER,
-					LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR)
+	LinkedQueue<Rover*>& Check_up_PR, LinkedQueue<Rover*>& Check_up_MR)
 {
 	cout << Checkup_count_Rover << " In-Checkup Rovers: ";
 	Print_Queue_Rover(Check_up_ER);
@@ -131,10 +131,10 @@ void UI::Print_In_Checkup_Rovers(int Checkup_count_Rover, LinkedQueue<Rover*>& C
 	Print_Queue_Rover(Check_up_MR);
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
-void UI::Print_Completed(int NUM_OF_MISSIONS,string& M_ID, string& P_ID, string& E_ID)
+void UI::Print_Completed(int NUM_OF_MISSIONS, string& M_ID, string& P_ID, string& E_ID)
 {
 	cout << NUM_OF_MISSIONS << " Completed Missions: ";
-	Print_Completed_Missions("{}",M_ID);
+	Print_Completed_Missions("{}", M_ID);
 	Print_Completed_Missions("[]", E_ID);
 	Print_Completed_Missions("()", P_ID);
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
@@ -150,7 +150,7 @@ void UI::Print_In_Maintenance_Rovers(int Maintenance_Count_Rovers, LinkedQueue<R
 }
 void UI::Print_Queue_Rover(LinkedQueue<Rover*>& Check_up_R)
 {
-	
+
 	Rover* PTR = nullptr;
 	Rover* TOP = nullptr;
 	int count = 0;//To avoid the comma
@@ -203,48 +203,48 @@ void UI::Print_Queue_Rover(LinkedQueue<Rover*>& Check_up_R)
 		if (count != 0)
 			if (Rover_type == Emergency)
 			{
-				cout << "]"<<' ';
+				cout << "]" << ' ';
 			}
 			else if (Rover_type == Polar)
 			{
-				cout << ")"<<' ';
+				cout << ")" << ' ';
 			}
 			else
 			{
-				cout << "}"<<' ';
+				cout << "}" << ' ';
 			}
-			
-			
+
+
 	}
 }
-void UI::print_Availble_missions(int day_count,int waiting_missions,PriorityQueue<Mission*>& E_Mission,
+void UI::print_Availble_missions(int day_count, int waiting_missions, PriorityQueue<Mission*>& E_Mission,
 	LinkedQueue<Mission*>& P_Mission, LinkedQueue<Mission*>& M_Mission)
 {
 	cout << "current day:" << day_count << endl;
-	cout << waiting_missions <<" Waiting Missions: ";
+	cout << waiting_missions << " Waiting Missions: ";
 	if (!E_Mission.isEmpty())
 	{
 		cout << "[";
 		Print_PriorityQueue_Mission(E_Mission);
-		cout <<"] ";
+		cout << "] ";
 	}
 	if (!P_Mission.isEmpty())
 	{
 		cout << "(";
 		Print_Queue_Mission(P_Mission);
-		cout <<  ") ";
+		cout << ") ";
 	}
 	if (!M_Mission.isEmpty())
 	{
-		
+
 		cout << "{";
 		Print_Queue_Mission(M_Mission);
-		cout <<  "} ";
+		cout << "} ";
 	}
 	cout << endl << "---------------------------------------------------------------------------------------" << endl;
 }
 void UI::Print_Available_Rover(int Waiting_Rovers, PriorityQueue<Rover*>& Available_ER,
-	PriorityQueue<Rover*>&Available_PR, PriorityQueue<Rover*>& Available_MR)
+	PriorityQueue<Rover*>& Available_PR, PriorityQueue<Rover*>& Available_MR)
 {
 	cout << Waiting_Rovers << " Availble Rovers: ";
 	Print_PriorityQueue_Rover(Available_ER);
@@ -318,29 +318,30 @@ void UI::Print_PriorityQueue_Mission(PriorityQueue<Mission*> PriorityQueue_Missi
 	{
 		cout << "," << mission->Get_ID();
 	}
-	
+
 }
-string UI::read_input_file_name( int i)
-{if(i==1)
+string UI::read_input_file_name(int i)
 {
-	string FName;
-	cout << "\nPlease::enter the name of the file the you want to load \n" << endl;
-	cin >> FName;
-	return FName;
-}
-if (i == 2)
-{
-	string FName;
-	cout << "the file does not exist" << endl;
-	cout << "Please::enter the correct name or if you want to exit enter number 0\n" << endl;
-	cin >> FName;
-	return FName;
-}
-	
+	if (i == 1)
+	{
+		string FName;
+		cout << "\nPlease::enter the name of the file the you want to load \n" << endl;
+		cin >> FName;
+		return FName;
+	}
+	if (i == 2)
+	{
+		string FName;
+		cout << "the file does not exist" << endl;
+		cout << "Please::enter the correct name or if you want to exit enter number 0\n" << endl;
+		cin >> FName;
+		return FName;
+	}
+
 }
 void UI::read_output_file_name()
 {
-	cout << "Please::enter the name of the output file to load the data in" << endl<<endl;
+	cout << "Please::enter the name of the output file to load the data in" << endl << endl;
 	cin >> Output_File_Name;
 	cout << endl;
 }
