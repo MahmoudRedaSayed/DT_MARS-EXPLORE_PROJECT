@@ -60,12 +60,12 @@ private:
 	string E_ID;
 	//Counters
 	static int Day_count,
-			   waiting_missions_count,
-			   execution_missions_count,
-			   completed_missions_count,
-		       availble_Rover_count,
-		       checkup_Rover_count,
-		       maintenance_Rover_count;
+		waiting_missions_count,
+		execution_missions_count,
+		completed_missions_count,
+		availble_Rover_count,
+		checkup_Rover_count,
+		maintenance_Rover_count;
 	int WD_SUM;//variable for waiting sum
 	int ED_SUM;// & execution sum
 	//count of waiting missions & 
@@ -80,8 +80,8 @@ public:
 	void Execute();
 	//////////////////////////////////////////////General Functions////////////////////////////////////////////////
 	//////// assignment operations Functions /////////
-	void Assign_Mission_to_QueueRover(int& Counter,LinkedQueue<Mission*> &availble_Mission_list,
-				PriorityQueue<Mission*> &EX_Mission_list,PriorityQueue<Rover*>& Rover_list);
+	void Assign_Mission_to_QueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
+		PriorityQueue<Mission*>& EX_Mission_list, PriorityQueue<Rover*>& Rover_list);
 	void Assign_Mission_to_PriorityQueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
 		PriorityQueue<Mission*>& EX_Mission_list, LinkedQueue<Rover*>& Rover_list);
 	void Assign_E_M();

@@ -16,7 +16,7 @@ private:
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public:
-	PriorityQueue() 
+	PriorityQueue()
 	{
 		backPtr = nullptr;
 		frontPtr = nullptr;
@@ -27,7 +27,7 @@ public:
 	}
 
 
-	bool enqueue(const T& newEntry, double priority) 
+	bool enqueue(const T& newEntry, double priority)
 	{
 		Node<T>* newNodePtr = new Node<T>(newEntry, priority);
 		// Insert the new node
@@ -59,27 +59,27 @@ public:
 			backPtr = newNodePtr; // New node is the last node now
 		}
 		return true;
-		
+
 	}
 
 
 
 	bool dequeue(T& frntEntry)
 	{
-		if(isEmpty())
-		return false;
+		if (isEmpty())
+			return false;
 
-	Node<T>* nodeToDeletePtr = frontPtr;
-	frntEntry = frontPtr->getItem();
-	frontPtr = frontPtr->getNext();
-	// Queue is not empty; remove front
-	if (nodeToDeletePtr == backPtr)	 // Special case: last node in the queue
-		backPtr = nullptr ;	
-		
-	// Free memory reserved for the dequeued node
-	delete nodeToDeletePtr;
+		Node<T>* nodeToDeletePtr = frontPtr;
+		frntEntry = frontPtr->getItem();
+		frontPtr = frontPtr->getNext();
+		// Queue is not empty; remove front
+		if (nodeToDeletePtr == backPtr)	 // Special case: last node in the queue
+			backPtr = nullptr;
 
-	return true;
+		// Free memory reserved for the dequeued node
+		delete nodeToDeletePtr;
+
+		return true;
 	}
 
 	bool peek(T& frntEntry)  const
@@ -90,7 +90,7 @@ public:
 		frntEntry = frontPtr->getItem();
 		return true;
 	}
-	~PriorityQueue() 
+	~PriorityQueue()
 	{
 		T temp;
 

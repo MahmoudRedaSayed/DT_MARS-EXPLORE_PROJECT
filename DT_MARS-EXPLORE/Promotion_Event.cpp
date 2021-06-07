@@ -12,10 +12,10 @@ Promotion_Event::~Promotion_Event()
 ////////////excaption handling if the id is not found//////////
 bool Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
 {
-	Mission* ITERATOR=NULL;
+	Mission* ITERATOR = NULL;
 	Mission* ITERATOR2 = NULL;
-	Mission* TOP=NULL;
-	Mou_Missions.peek(TOP); 
+	Mission* TOP = NULL;
+	Mou_Missions.peek(TOP);
 	if (TOP == nullptr)
 	{
 		return false;
@@ -56,7 +56,7 @@ bool Promotion_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue
 		}
 	}
 	//Setting the data to the new mission rather than use a copy constructor
-	if (ITERATOR2) 
+	if (ITERATOR2)
 	{
 		Eme_Missions.enqueue(ITERATOR2, ITERATOR2->Calculate_priority()); //Add the Mission to the emergency missions queue 
 		Mission::NumOfEMissions++;
