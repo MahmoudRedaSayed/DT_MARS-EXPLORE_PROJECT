@@ -321,30 +321,6 @@ void MarsStation_Class::print()
 
 bool MarsStation_Class::Rover_Exists() // check at start if there is rovers or not
 {
-	/*
-	if ((!Available_ER.isEmpty() && E_M_found) || (!Available_MR.isEmpty() && E_M_found))
-	{
-		if (!Available_PR.isEmpty())
-		{
-			return true;
-		}
-		else
-		{
-			if (Polar_found)
-			{
-				return false
-			}
-			else
-			{
-				return true;
-			}
-		}
-	}
-	else
-	{
-		return false;
-	}
-	*/
 	if (((Available_ER.isEmpty() && Available_MR.isEmpty()) && M_found)||(Available_PR.isEmpty() && Polar_found))
 	{
 		return false;
