@@ -5,11 +5,10 @@ Cancellation_Event::Cancellation_Event(int id, int ED)
 	Set_Event_Day(ED);
 	Set_Mission_ID(id);
 }
-////////////excaption handling if the id is not found//////////
 bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQueue<Mission*>& Pol_Missions, LinkedQueue<Mission*>& Mou_Missions)
 {
 	Mission* ITERATOR = NULL;// to make it first in first out
-	Mission* ITERATOR2 = NULL;
+	Mission* ITERATOR2 = NULL;// Pointer to carry the mission which will be cancelled
 	Mission* TOP = NULL;
 	Mou_Missions.peek(TOP);
 	if (TOP == nullptr)
@@ -43,13 +42,13 @@ bool Cancellation_Event::Execute(PriorityQueue<Mission*>& Eme_Missions, LinkedQu
 		{
 
 			ITERATOR2 = ITERATOR;
-		}                                //And the value of the mission will be stored in pointer iterator 
+		}                               
 		else
 		{
 			Mou_Missions.enqueue(ITERATOR);
 		}
 	}
-	if (ITERATOR2)
+	if (ITERATOR2)//check if Null or not
 	{
 		delete ITERATOR2;
 		return true;
