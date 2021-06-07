@@ -74,9 +74,9 @@ public:
 	void Execute();
 	//////////////////////////////////////////////General Functions////////////////////////////////////////////////
 	//////// assignment operations Functions /////////
-	void Assign_Mission_to_QueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
-		PriorityQueue<Mission*>& EX_Mission_list, PriorityQueue<Rover*>& Rover_list);
 	void Assign_Mission_to_PriorityQueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
+		PriorityQueue<Mission*>& EX_Mission_list, PriorityQueue<Rover*>& Rover_list);
+	void Assign_Mission_to_QueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
 		PriorityQueue<Mission*>& EX_Mission_list, LinkedQueue<Rover*>& Rover_list);
 	void Assign_E_M();
 	void Assign_M_M();

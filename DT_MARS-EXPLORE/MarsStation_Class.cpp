@@ -55,7 +55,7 @@ void MarsStation_Class::Execute()
 	}
 }
 //////////////// Assign Emergency Missions using Priority Queue (Linked List) //////////////////////////
-void MarsStation_Class::Assign_Mission_to_QueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
+void MarsStation_Class::Assign_Mission_to_PriorityQueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
 	PriorityQueue<Mission*>& EX_Mission_list, PriorityQueue<Rover*>& Rover_list)
 {
 	Counter = 0;
@@ -73,7 +73,7 @@ void MarsStation_Class::Assign_Mission_to_QueueRover(int& Counter, LinkedQueue<M
 		Counter++;
 	}
 }
-void MarsStation_Class::Assign_Mission_to_PriorityQueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
+void MarsStation_Class::Assign_Mission_to_QueueRover(int& Counter, LinkedQueue<Mission*>& availble_Mission_list,
 	PriorityQueue<Mission*>& EX_Mission_list, LinkedQueue<Rover*>& Rover_list)
 {
 	Counter = 0;
@@ -157,9 +157,9 @@ void MarsStation_Class::Assign_E_M()
 void MarsStation_Class::Assign_P_M()
 {
 	int counter1 = 0, counter2 = 0;
-	Assign_Mission_to_QueueRover(counter1, P_Mission, Polar_EX_Mission, Available_PR);;
+	Assign_Mission_to_PriorityQueueRover(counter1, P_Mission, Polar_EX_Mission, Available_PR);;
 	MarsStation_Class::availble_Rover_count -= counter1;
-	Assign_Mission_to_PriorityQueueRover(counter2, P_Mission, Polar_EX_Mission, Maintenance_PR);
+	Assign_Mission_to_QueueRover(counter2, P_Mission, Polar_EX_Mission, Maintenance_PR);
 	MarsStation_Class::waiting_missions_count -= counter2 + counter1;
 	MarsStation_Class::execution_missions_count += counter2 + counter1;
 	MarsStation_Class::maintenance_Rover_count -= counter2;
@@ -168,12 +168,12 @@ void MarsStation_Class::Assign_P_M()
 void MarsStation_Class::Assign_M_M()
 {
 	int counter1 = 0, counter2 = 0, counter3 = 0, counter4 = 0;
-	Assign_Mission_to_QueueRover(counter1, M_Mission, Mountainous_EX_Mission, Available_MR);
-	Assign_Mission_to_QueueRover(counter2, M_Mission, Mountainous_EX_Mission, Available_ER);
+	Assign_Mission_to_PriorityQueueRover(counter1, M_Mission, Mountainous_EX_Mission, Available_MR);
+	Assign_Mission_to_PriorityQueueRover(counter2, M_Mission, Mountainous_EX_Mission, Available_ER);
 
 	MarsStation_Class::availble_Rover_count -= counter2 + counter1;
-	Assign_Mission_to_PriorityQueueRover(counter3, M_Mission, Mountainous_EX_Mission, Maintenance_MR);
-	Assign_Mission_to_PriorityQueueRover(counter4, M_Mission, Mountainous_EX_Mission, Maintenance_ER);
+	Assign_Mission_to_QueueRover(counter3, M_Mission, Mountainous_EX_Mission, Maintenance_MR);
+	Assign_Mission_to_QueueRover(counter4, M_Mission, Mountainous_EX_Mission, Maintenance_ER);
 	MarsStation_Class::waiting_missions_count -= counter2 + counter1 + counter3 + counter4;
 	MarsStation_Class::execution_missions_count += counter2 + counter1 + counter3 + counter4;
 	MarsStation_Class::availble_Rover_count -= counter3 + counter4;
