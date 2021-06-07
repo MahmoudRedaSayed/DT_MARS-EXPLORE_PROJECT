@@ -52,6 +52,7 @@ private:
 	string M_ID;
 	string P_ID;
 	string E_ID;
+
 	//Counters
 	static int Day_count,
 		waiting_missions_count,
@@ -119,5 +120,11 @@ public:
 	void Out1();//prints first line of out file
 	void Out2();//prints each completed missions's info
 	void Out3();//prints rest of statistics , //static counts of missions & rovers ,WDcount,#counter who?(waited missions || all mission)
+	//////////////////////[Rover Deallocation Functions]///////////////////
+	void Delete_Rovers();
+	void Delete_Rovers_Queue(LinkedQueue<Rover*>& R);
+	void Delete_Rovers_PriQueue(PriorityQueue<Rover*>& R);
+	//Destructor
+	~MarsStation_Class();
 };
 
